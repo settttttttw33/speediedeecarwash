@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Check Your Texts | Speedie Rewards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100dvh;
+      background: #1B72E8;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---- STARS ---- */
+    .star {
+      position: absolute;
+      width: 0; height: 0;
+      border-style: solid;
+    }
+    .stars-wrap {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    /* CSS star polygon via clip-path */
+    .star-shape {
+      position: absolute;
+      background: #FFDD00;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+
+    /* ---- MAIN LAYOUT ---- */
+    .page {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100dvh;
+      position: relative;
+    }
+    @media (max-width: 700px) {
+      .page { grid-template-columns: 1fr; }
+      .left-img { height: 38vh; }
+    }
+
+    /* ---- LEFT: photo ---- */
+    .left-img {
+      position: relative;
+      overflow: hidden;
+    }
+    .left-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.85) saturate(1.1);
+    }
+    .left-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(27,114,232,0.08) 0%, rgba(27,114,232,0.45) 100%);
+    }
+
+    /* ---- RIGHT: text ---- */
+    .right-text {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 4rem 5rem 4rem 4rem;
+      z-index: 1;
+    }
+    @media (max-width: 700px) {
+      .right-text { padding: 3rem 2rem; align-items: center; text-align: center; }
+    }
+
+    .word-check {
+      font-size: clamp(4.5rem, 9vw, 7.5rem);
+      font-weight: 900;
+      color: #0A1E5B;
+      line-height: 0.95;
+      letter-spacing: -2px;
+      display: block;
+    }
+    .word-your-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .word-your {
+      font-size: clamp(4.5rem, 9vw, 7.5rem);
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 0.95;
+      letter-spacing: -2px;
+    }
+    .chat-bubble {
+      background: #FFDD00;
+      border-radius: 14px;
+      width: clamp(3.2rem, 7vw, 5.5rem);
+      height: clamp(3.2rem, 7vw, 5.5rem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .chat-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 12px;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 11px solid #FFDD00;
+    }
+    .chat-bubble svg {
+      width: 55%;
+      height: 55%;
+    }
+    .word-texts {
+      font-size: clamp(4.5rem, 9vw, 7.5rem);
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 0.95;
+      letter-spacing: -2px;
+      display: block;
+    }
+    .subtitle {
+      margin-top: 2rem;
+      font-size: clamp(0.75rem, 1.4vw, 1rem);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+    .back-link {
+      margin-top: 2.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Stars layer (right half) -->
+  <div class="stars-wrap" style="left:50%;">
+    <div class="star-shape" style="width:52px;height:52px;top:7%;left:18%;"></div>
+    <div class="star-shape" style="width:38px;height:38px;top:12%;left:62%;"></div>
+    <div class="star-shape" style="width:64px;height:64px;top:5%;left:82%;"></div>
+    <div class="star-shape" style="width:42px;height:42px;top:22%;left:5%;"></div>
+    <div class="star-shape" style="width:30px;height:30px;top:18%;left:46%;"></div>
+    <div class="star-shape" style="width:56px;height:56px;top:72%;left:72%;"></div>
+    <div class="star-shape" style="width:36px;height:36px;top:80%;left:20%;"></div>
+    <div class="star-shape" style="width:48px;height:48px;top:88%;left:52%;"></div>
+    <div class="star-shape" style="width:28px;height:28px;top:55%;left:88%;"></div>
+    <div class="star-shape" style="width:44px;height:44px;top:60%;left:3%;"></div>
+  </div>
+
+  <!-- Left: car wash photo -->
+  <div class="left-img">
+    <img
+      src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=900&h=1200&q=85"
+      alt="Car going through wash"
+    />
+  </div>
+
+  <!-- Right: text -->
+  <div class="right-text">
+    <span class="word-check">CHECK</span>
+    <div class="word-your-row" style="margin-bottom:0.1em;">
+      <span class="word-your">YOUR</span>
+      <div class="chat-bubble">
+        <!-- message icon -->
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.2L4 17.2V4H20V16Z" fill="#0A1E5B"/>
+          <path d="M7 9H17V11H7V9ZM7 6H17V8H7V6ZM7 12H13V14H7V12Z" fill="#0A1E5B"/>
+        </svg>
+      </div>
+    </div>
+    <span class="word-texts">TEXTS</span>
+    <p class="subtitle">Reply "Y" to confirm your subscription</p>
+    <a href="index.html" class="back-link">← Back to Speedie D's</a>
+  </div>
+
+</div>
+
+</body>
+</html>

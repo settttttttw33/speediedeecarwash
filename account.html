@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Account | Speedie D's Car Wash</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { jakarta: ['"Plus Jakarta Sans"', 'sans-serif'] },
+          colors: {
+            blue:  { DEFAULT: '#2563EB', dark: '#1D4ED8', light: '#DBEAFE', xlight: '#EFF6FF' },
+            ink:   { DEFAULT: '#111827' },
+            muted: '#6B7280',
+            orange:{ DEFAULT: '#F47920' },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .btn { transition: all 0.15s cubic-bezier(0.16,1,0.3,1); }
+    .btn:active { transform: scale(0.97) translateY(1px); }
+    input:focus, select:focus { outline: none; border-color: #2563EB !important; box-shadow: 0 0 0 3px #DBEAFE; }
+    #login-view, #dashboard-view { transition: opacity 0.3s; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .dash-tab { transition: all 0.15s; }
+    .dash-tab.active { background: #EFF6FF; color: #2563EB; font-weight: 700; }
+    .wash-row:nth-child(even) { background: #F9FAFB; }
+    .points-bar { transition: width 0.8s cubic-bezier(0.16,1,0.3,1); }
+  </style>
+</head>
+<body class="bg-gray-50 font-jakarta antialiased text-ink min-h-screen">
+
+<!-- NAV -->
+<nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 h-[70px] flex items-center justify-between">
+    <a href="index.html" class="flex items-center shrink-0">
+      <img src="https://assets.cdn.filesafe.space/e4notYo5fJyoxSgPxQkh/media/67408b03d6b97efd8da073c4.png"
+           alt="Speedie D's Car Wash" class="h-11 w-auto object-contain" />
+    </a>
+    <ul class="hidden md:flex items-center gap-7 text-sm font-medium text-gray-500">
+      <li><a href="index.html#plans" class="hover:text-ink transition-colors">Wash Plans</a></li>
+      <li><a href="membership.html" class="hover:text-ink transition-colors">Memberships</a></li>
+      <li><a href="loyalty.html" class="hover:text-ink transition-colors">Rewards</a></li>
+      <li><a href="account.html" class="text-ink font-semibold">My Account</a></li>
+    </ul>
+    <button id="logout-btn" onclick="doLogout()" class="hidden btn border border-gray-200 text-sm font-semibold px-4 py-2 rounded-xl hover:border-red-300 hover:text-red-500 transition-colors">
+      <i class="ph-bold ph-sign-out mr-1"></i> Sign Out
+    </button>
+    <a href="index.html" class="md:hidden text-sm text-gray-500 font-medium">← Home</a>
+  </div>
+</nav>
+
+
+<!-- ============================================================
+     LOGIN VIEW
+     ============================================================ -->
+<div id="login-view" class="min-h-[calc(100dvh-70px)] flex items-center justify-center px-5 py-16">
+  <div class="w-full max-w-md">
+
+    <div class="text-center mb-8">
+      <div class="w-16 h-16 rounded-2xl bg-blue-xlight flex items-center justify-center mx-auto mb-4">
+        <i class="ph-bold ph-user-circle text-blue text-3xl"></i>
+      </div>
+      <h1 class="font-extrabold text-2xl mb-1">Sign In to Your Account</h1>
+      <p class="text-muted text-sm">Enter the phone number linked to your Speedie D's membership.</p>
+    </div>
+
+    <form id="login-form" onsubmit="doLogin(event)" class="bg-white border border-gray-200 rounded-2xl p-7 space-y-5 shadow-sm">
+      <div>
+        <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Mobile Phone Number</label>
+        <input type="tel" id="login-phone" required placeholder="(903) 555-1234"
+          class="w-full border border-gray-200 rounded-xl px-4 py-3.5 text-sm bg-white transition-all text-base" />
+      </div>
+      <div>
+        <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Password</label>
+        <input type="password" id="login-password" required placeholder="Enter your password"
+          class="w-full border border-gray-200 rounded-xl px-4 py-3.5 text-sm bg-white transition-all text-base" />
+      </div>
+      <button type="submit" class="btn w-full bg-blue text-white font-bold py-3.5 rounded-xl hover:bg-blue-dark text-sm">
+        Sign In <i class="ph-bold ph-arrow-right ml-1"></i>
+      </button>
+      <p class="text-center text-xs text-muted">Forgot your password? <a href="tel:+19036806688" class="text-blue font-semibold hover:underline">Call us at (903) 680-6688</a></p>
+    </form>
+
+    <p class="text-center text-xs text-muted mt-6">
+      Not a member yet?
+      <a href="membership.html" class="text-blue font-semibold hover:underline">Join a plan</a> or
+      <a href="loyalty.html" class="text-blue font-semibold hover:underline">sign up for Rewards</a>
+    </p>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     DASHBOARD VIEW  (hidden until login)
+     ============================================================ -->
+<div id="dashboard-view" class="hidden">
+
+  <!-- Member header bar -->
+  <div class="bg-blue text-white px-5 py-5">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+          <i class="ph-bold ph-user text-white text-xl"></i>
+        </div>
+        <div>
+          <p class="font-extrabold text-lg leading-tight">John Smith</p>
+          <p class="text-blue-light text-sm">Member since Jan 2025 &nbsp;·&nbsp; (903) 555-1234</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="bg-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
+          <i class="ph-bold ph-star-four text-yellow-300"></i> Speedie Rewards Member
+        </span>
+        <span class="bg-white text-blue text-xs font-bold px-3 py-1.5 rounded-full">Ultimate Fast Pass</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-8">
+    <div class="grid lg:grid-cols-[240px_1fr] gap-7">
+
+      <!-- Sidebar nav -->
+      <aside>
+        <nav class="bg-white border border-gray-200 rounded-2xl overflow-hidden sticky top-24">
+          <button onclick="showTab('overview')"  class="dash-tab active w-full text-left flex items-center gap-3 px-5 py-4 text-sm text-gray-600 border-b border-gray-100">
+            <i class="ph-bold ph-house-line w-4"></i> Overview
+          </button>
+          <button onclick="showTab('plan')"       class="dash-tab w-full text-left flex items-center gap-3 px-5 py-4 text-sm text-gray-600 border-b border-gray-100">
+            <i class="ph-bold ph-lightning w-4"></i> My Plan
+          </button>
+          <button onclick="showTab('rewards')"   class="dash-tab w-full text-left flex items-center gap-3 px-5 py-4 text-sm text-gray-600 border-b border-gray-100">
+            <i class="ph-bold ph-star-four w-4"></i> Rewards
+          </button>
+          <button onclick="showTab('history')"   class="dash-tab w-full text-left flex items-center gap-3 px-5 py-4 text-sm text-gray-600 border-b border-gray-100">
+            <i class="ph-bold ph-clock-clockwise w-4"></i> Wash History
+          </button>
+          <button onclick="showTab('billing')"   class="dash-tab w-full text-left flex items-center gap-3 px-5 py-4 text-sm text-gray-600 border-b border-gray-100">
+            <i class="ph-bold ph-credit-card w-4"></i> Billing
+          </button>
+          <button onclick="showTab('profile')"   class="dash-tab w-full text-left flex items-center gap-3 px-5 py-4 text-sm text-gray-600 border-b border-gray-100">
+            <i class="ph-bold ph-user-gear w-4"></i> Profile
+          </button>
+          <button onclick="showTab('cancel')"    class="dash-tab w-full text-left flex items-center gap-3 px-5 py-4 text-sm text-red-400">
+            <i class="ph-bold ph-x-circle w-4"></i> Cancel Membership
+          </button>
+        </nav>
+      </aside>
+
+      <!-- Main content area -->
+      <main>
+
+        <!-- ── OVERVIEW ── -->
+        <div id="tab-overview" class="tab-content active space-y-5">
+          <div class="grid sm:grid-cols-3 gap-4">
+            <div class="bg-white border border-gray-200 rounded-2xl p-6">
+              <p class="text-xs font-bold uppercase tracking-widest text-muted mb-2">Current Plan</p>
+              <p class="font-extrabold text-xl">Ultimate Fast Pass</p>
+              <p class="text-muted text-sm mt-0.5">$39/mo · renews Jul 15</p>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-2xl p-6">
+              <p class="text-xs font-bold uppercase tracking-widest text-muted mb-2">Rewards Points</p>
+              <p class="font-extrabold text-xl text-[#F47920]">7 pts</p>
+              <p class="text-muted text-sm mt-0.5">3 more for a free wash</p>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-2xl p-6">
+              <p class="text-xs font-bold uppercase tracking-widest text-muted mb-2">Total Washes</p>
+              <p class="font-extrabold text-xl">23</p>
+              <p class="text-muted text-sm mt-0.5">since January 2025</p>
+            </div>
+          </div>
+
+          <!-- Recent washes -->
+          <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+              <p class="font-bold">Recent Washes</p>
+              <button onclick="showTab('history')" class="text-blue text-xs font-semibold hover:underline">View all</button>
+            </div>
+            <div>
+              <div class="wash-row flex items-center justify-between px-6 py-3.5 text-sm">
+                <span class="text-muted">Jun 18, 2025</span>
+                <span class="font-medium">Ultimate Wash</span>
+                <span class="text-green-600 text-xs font-bold bg-green-50 px-2.5 py-1 rounded-lg">+2 pts</span>
+              </div>
+              <div class="wash-row flex items-center justify-between px-6 py-3.5 text-sm">
+                <span class="text-muted">Jun 12, 2025</span>
+                <span class="font-medium">Ultimate Wash</span>
+                <span class="text-green-600 text-xs font-bold bg-green-50 px-2.5 py-1 rounded-lg">+2 pts</span>
+              </div>
+              <div class="wash-row flex items-center justify-between px-6 py-3.5 text-sm">
+                <span class="text-muted">Jun 5, 2025</span>
+                <span class="font-medium">Ultimate Wash</span>
+                <span class="text-green-600 text-xs font-bold bg-green-50 px-2.5 py-1 rounded-lg">+2 pts</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Free wash banner -->
+          <div class="bg-gradient-to-r from-[#F47920] to-[#C4580A] rounded-2xl p-6 flex items-center justify-between gap-4">
+            <div>
+              <p class="text-white font-extrabold text-lg">Almost there! 3 more points for a free wash.</p>
+              <p class="text-white/70 text-sm mt-0.5">Keep washing to reach 10 points and redeem any Basic wash free.</p>
+            </div>
+            <i class="ph-bold ph-star-four text-white/30 text-5xl shrink-0"></i>
+          </div>
+        </div>
+
+        <!-- ── MY PLAN ── -->
+        <div id="tab-plan" class="tab-content space-y-5">
+          <div class="bg-white border border-gray-200 rounded-2xl p-7">
+            <div class="flex items-start justify-between mb-6">
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-muted mb-1">Active Plan</p>
+                <h2 class="font-extrabold text-2xl">Ultimate Fast Pass</h2>
+                <p class="text-muted text-sm mt-1">$39/month · Next billing: July 15, 2025</p>
+              </div>
+              <span class="bg-blue-xlight text-blue text-xs font-bold px-3 py-1.5 rounded-full">Active</span>
+            </div>
+            <ul class="space-y-2.5 text-sm text-gray-600 mb-7 border-t border-gray-100 pt-5">
+              <li class="flex gap-2.5"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Soft touch wash</li>
+              <li class="flex gap-2.5"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Spot-free rinse · Pre-soak · Free vacuums</li>
+              <li class="flex gap-2.5"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Tire shine · Triple foam · Clear coat · Wheel Brite</li>
+              <li class="flex gap-2.5"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Ceramic coating · Lava shine · Bug prep</li>
+              <li class="flex gap-2.5"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Total shine finish · Undercarriage wash</li>
+            </ul>
+            <div class="flex flex-wrap gap-3">
+              <button onclick="showUpgrade()" class="btn bg-blue text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-dark text-sm">Change Plan</button>
+              <a href="tel:+19036806688" class="btn border border-gray-200 text-ink font-semibold px-5 py-2.5 rounded-xl hover:border-blue hover:text-blue text-sm">Call Us to Change</a>
+            </div>
+          </div>
+
+          <!-- Plan upgrade panel -->
+          <div id="upgrade-panel" class="hidden bg-gray-50 border border-gray-200 rounded-2xl p-6">
+            <p class="font-bold mb-4">Switch to a Different Plan</p>
+            <div class="grid sm:grid-cols-3 gap-4 mb-5">
+              <div class="bg-white border-2 border-gray-200 rounded-xl p-5 cursor-pointer hover:border-blue transition-colors" onclick="selectPlan(this,'Basic Fast Pass','$19')">
+                <p class="font-bold mb-1">Basic</p>
+                <p class="text-2xl font-extrabold">$19<span class="text-sm font-normal text-muted">/mo</span></p>
+                <p class="text-xs text-muted mt-1">Soft touch, spot-free, vacuums</p>
+              </div>
+              <div class="bg-white border-2 border-gray-200 rounded-xl p-5 cursor-pointer hover:border-blue transition-colors" onclick="selectPlan(this,'Deluxe Fast Pass','$29')">
+                <p class="font-bold mb-1">Deluxe</p>
+                <p class="text-2xl font-extrabold">$29<span class="text-sm font-normal text-muted">/mo</span></p>
+                <p class="text-xs text-muted mt-1">Basic + tire shine, triple foam</p>
+              </div>
+              <div class="bg-white border-2 border-blue rounded-xl p-5 cursor-pointer" onclick="selectPlan(this,'Ultimate Fast Pass','$39')">
+                <p class="font-bold mb-1">Ultimate <span class="text-xs text-blue font-bold">(current)</span></p>
+                <p class="text-2xl font-extrabold text-blue">$39<span class="text-sm font-normal text-muted">/mo</span></p>
+                <p class="text-xs text-muted mt-1">Everything + ceramic, undercarriage</p>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <button onclick="confirmPlanChange()" class="btn bg-blue text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-dark text-sm">Confirm Change</button>
+              <button onclick="document.getElementById('upgrade-panel').classList.add('hidden')" class="btn border border-gray-200 text-muted font-semibold px-5 py-2.5 rounded-xl text-sm">Cancel</button>
+            </div>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-2xl p-6">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <p class="font-bold">Vehicles on Account</p>
+                <p class="text-muted text-sm mt-0.5">Up to 4 vehicles per membership. Each gets its own kiosk access code.</p>
+              </div>
+              <span class="text-xs font-bold text-muted bg-gray-100 px-2.5 py-1 rounded-lg">2 / 4 slots</span>
+            </div>
+            <div class="space-y-3 mb-5">
+              <!-- Car 1 -->
+              <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                <div class="w-10 h-10 bg-blue-xlight rounded-xl flex items-center justify-center shrink-0">
+                  <i class="ph-bold ph-car text-blue text-lg"></i>
+                </div>
+                <div class="flex-1">
+                  <p class="font-semibold text-sm">2022 Toyota Tundra</p>
+                  <p class="text-xs text-muted">License: XYZ 1234 · TX · Primary vehicle</p>
+                </div>
+                <button class="text-xs text-blue font-semibold hover:underline">Edit</button>
+              </div>
+              <!-- Car 2 -->
+              <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                <div class="w-10 h-10 bg-blue-xlight rounded-xl flex items-center justify-center shrink-0">
+                  <i class="ph-bold ph-car text-blue text-lg"></i>
+                </div>
+                <div class="flex-1">
+                  <p class="font-semibold text-sm">2020 Ford F-150</p>
+                  <p class="text-xs text-muted">License: ABC 5678 · TX</p>
+                </div>
+                <button class="text-xs text-red-400 font-semibold hover:underline">Remove</button>
+              </div>
+              <!-- Empty slot 3 -->
+              <div class="flex items-center gap-4 p-4 rounded-xl border-2 border-dashed border-gray-200 cursor-pointer hover:border-blue transition-colors" onclick="showAddCar()">
+                <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center shrink-0">
+                  <i class="ph-bold ph-plus text-gray-400 text-lg"></i>
+                </div>
+                <p class="text-sm text-muted font-medium">Add a vehicle (slot 3 of 4)</p>
+              </div>
+              <!-- Empty slot 4 -->
+              <div class="flex items-center gap-4 p-4 rounded-xl border-2 border-dashed border-gray-200 cursor-pointer hover:border-blue transition-colors" onclick="showAddCar()">
+                <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center shrink-0">
+                  <i class="ph-bold ph-plus text-gray-400 text-lg"></i>
+                </div>
+                <p class="text-sm text-muted font-medium">Add a vehicle (slot 4 of 4)</p>
+              </div>
+            </div>
+
+            <!-- Add car form (hidden) -->
+            <div id="add-car-form" class="hidden bg-blue-xlight border border-blue-light rounded-xl p-5 space-y-3">
+              <p class="font-bold text-sm text-blue">Add New Vehicle</p>
+              <div class="grid sm:grid-cols-2 gap-3">
+                <input type="text" placeholder="Year, Make, Model (e.g. 2021 Honda CR-V)"
+                  class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white col-span-2" />
+                <input type="text" placeholder="License Plate"
+                  class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white" />
+                <select class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white appearance-none">
+                  <option>TX</option><option>LA</option><option>AR</option><option>OK</option>
+                </select>
+              </div>
+              <div class="flex gap-3">
+                <button onclick="showToast('Vehicle added!')" class="btn bg-blue text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-dark text-sm">Add Vehicle</button>
+                <button onclick="document.getElementById('add-car-form').classList.add('hidden')" class="btn border border-gray-200 bg-white text-muted font-semibold px-5 py-2.5 rounded-xl text-sm">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── REWARDS ── -->
+        <div id="tab-rewards" class="tab-content space-y-5">
+          <div class="bg-white border border-gray-200 rounded-2xl p-7">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-14 h-14 rounded-2xl bg-orange/10 flex items-center justify-center">
+                <i class="ph-bold ph-star-four text-[#F47920] text-2xl"></i>
+              </div>
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-muted">Speedie Rewards</p>
+                <p class="font-extrabold text-3xl text-[#F47920]">7 <span class="text-lg font-semibold text-muted">/ 10 points</span></p>
+              </div>
+            </div>
+            <!-- Progress bar -->
+            <div class="h-3 bg-gray-100 rounded-full overflow-hidden mb-2">
+              <div class="points-bar h-full rounded-full" style="width:70%; background:#F47920;"></div>
+            </div>
+            <p class="text-xs text-muted mb-6">3 more washes to earn a free Basic wash</p>
+            <div class="flex flex-wrap gap-3">
+              <button class="btn bg-[#F47920] text-white font-semibold px-5 py-2.5 rounded-xl text-sm opacity-50 cursor-not-allowed">Redeem Free Wash (need 10 pts)</button>
+            </div>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-100"><p class="font-bold">Points History</p></div>
+            <div>
+              <div class="wash-row flex items-center justify-between px-6 py-3.5 text-sm">
+                <div><p class="font-medium">Ultimate wash</p><p class="text-xs text-muted">Jun 18, 2025</p></div>
+                <span class="text-green-600 font-bold">+2 pts</span>
+              </div>
+              <div class="wash-row flex items-center justify-between px-6 py-3.5 text-sm">
+                <div><p class="font-medium">Ultimate wash</p><p class="text-xs text-muted">Jun 12, 2025</p></div>
+                <span class="text-green-600 font-bold">+2 pts</span>
+              </div>
+              <div class="wash-row flex items-center justify-between px-6 py-3.5 text-sm">
+                <div><p class="font-medium">Sign-up bonus</p><p class="text-xs text-muted">Jan 5, 2025</p></div>
+                <span class="text-green-600 font-bold">+2 pts</span>
+              </div>
+              <div class="wash-row flex items-center justify-between px-6 py-3.5 text-sm">
+                <div><p class="font-medium">Referral — Mike J.</p><p class="text-xs text-muted">Feb 3, 2025</p></div>
+                <span class="text-green-600 font-bold">+1 pt</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Referral code -->
+          <div class="bg-white border border-gray-200 rounded-2xl p-6">
+            <p class="font-bold mb-1">Your Referral Code</p>
+            <p class="text-muted text-sm mb-4">Share this code with friends. When they join, you both get a free wash.</p>
+            <div class="flex items-center gap-3">
+              <div class="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 font-bold tracking-widest text-lg text-center">SPEEDIE-JSM7</div>
+              <button onclick="copyCode()" class="btn bg-ink text-white font-semibold px-4 py-3 rounded-xl hover:bg-gray-800 text-sm shrink-0">
+                <i class="ph-bold ph-copy mr-1"></i> Copy
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── WASH HISTORY ── -->
+        <div id="tab-history" class="tab-content">
+          <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-100"><p class="font-bold">All Washes (23 total)</p></div>
+            <div class="divide-y divide-gray-100 text-sm">
+              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">Jun 18, 2025</span><span class="flex-1 font-medium">Ultimate Wash</span><span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-lg">Member</span></div>
+              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">Jun 12, 2025</span><span class="flex-1 font-medium">Ultimate Wash</span><span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-lg">Member</span></div>
+              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">Jun 5, 2025</span><span class="flex-1 font-medium">Ultimate Wash</span><span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-lg">Member</span></div>
+              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">May 28, 2025</span><span class="flex-1 font-medium">Ultimate Wash</span><span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-lg">Member</span></div>
+              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">May 20, 2025</span><span class="flex-1 font-medium">Ultimate Wash</span><span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-lg">Member</span></div>
+              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">May 11, 2025</span><span class="flex-1 font-medium">Ultimate Wash</span><span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-lg">Member</span></div>
+              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">May 2, 2025</span><span class="flex-1 font-medium">Ultimate Wash</span><span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-lg">Member</span></div>
+              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">Apr 25, 2025</span><span class="flex-1 font-medium">Deluxe Wash</span><span class="text-blue font-bold text-xs bg-blue-xlight px-2.5 py-1 rounded-lg">Upgrade</span></div>
+              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">Apr 15, 2025</span><span class="flex-1 font-medium">Ultimate Wash</span><span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-lg">Member</span></div>
+              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">Apr 6, 2025</span><span class="flex-1 font-medium">Free Wash (Rewards)</span><span class="text-[#F47920] font-bold text-xs bg-orange-50 px-2.5 py-1 rounded-lg">Reward</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── BILLING ── -->
+        <div id="tab-billing" class="tab-content space-y-5">
+          <div class="bg-white border border-gray-200 rounded-2xl p-7">
+            <p class="font-bold mb-1">Payment Method</p>
+            <p class="text-muted text-sm mb-5">Used for your monthly membership billing.</p>
+            <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200 mb-5">
+              <div class="w-10 h-7 bg-blue rounded flex items-center justify-center shrink-0">
+                <i class="ph-bold ph-credit-card text-white text-sm"></i>
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold text-sm">•••• •••• •••• 4242</p>
+                <p class="text-xs text-muted">Visa · Expires 09/27</p>
+              </div>
+              <span class="text-green-600 text-xs font-bold bg-green-50 px-2.5 py-1 rounded-lg">Active</span>
+            </div>
+            <button class="btn border border-gray-200 text-sm font-semibold px-5 py-2.5 rounded-xl hover:border-blue hover:text-blue transition-colors">
+              <i class="ph-bold ph-credit-card mr-1"></i> Update Card
+            </button>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-100"><p class="font-bold">Billing History</p></div>
+            <div class="divide-y divide-gray-100 text-sm">
+              <div class="flex items-center justify-between px-6 py-3.5"><span class="text-muted">Jun 15, 2025</span><span class="font-medium">Ultimate Fast Pass</span><span class="font-bold">$39.00</span></div>
+              <div class="flex items-center justify-between px-6 py-3.5"><span class="text-muted">May 15, 2025</span><span class="font-medium">Ultimate Fast Pass</span><span class="font-bold">$39.00</span></div>
+              <div class="flex items-center justify-between px-6 py-3.5"><span class="text-muted">Apr 15, 2025</span><span class="font-medium">Ultimate Fast Pass</span><span class="font-bold">$39.00</span></div>
+              <div class="flex items-center justify-between px-6 py-3.5"><span class="text-muted">Mar 15, 2025</span><span class="font-medium">Deluxe → Ultimate upgrade</span><span class="font-bold">$39.00</span></div>
+              <div class="flex items-center justify-between px-6 py-3.5"><span class="text-muted">Feb 15, 2025</span><span class="font-medium">Deluxe Fast Pass</span><span class="font-bold">$29.00</span></div>
+              <div class="flex items-center justify-between px-6 py-3.5"><span class="text-muted">Jan 15, 2025</span><span class="font-medium">Deluxe Fast Pass · First month</span><span class="font-bold text-green-600">$14.50</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── PROFILE ── -->
+        <div id="tab-profile" class="tab-content">
+          <div class="bg-white border border-gray-200 rounded-2xl p-7 space-y-5">
+            <p class="font-bold text-lg">Your Information</p>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">First Name</label>
+                <input type="text" value="John" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Last Name</label>
+                <input type="text" value="Smith" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Mobile Phone</label>
+              <input type="tel" value="(903) 555-1234" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Email Address</label>
+              <input type="email" value="john.smith@email.com" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Birthday Month</label>
+              <select class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white appearance-none transition-all">
+                <option>January</option><option>February</option><option>March</option><option>April</option>
+                <option>May</option><option selected>June</option><option>July</option><option>August</option>
+                <option>September</option><option>October</option><option>November</option><option>December</option>
+              </select>
+            </div>
+            <button onclick="showToast('Profile updated!')" class="btn bg-blue text-white font-semibold px-6 py-2.5 rounded-xl hover:bg-blue-dark text-sm">Save Changes</button>
+          </div>
+        </div>
+
+        <!-- ── CANCEL ── -->
+        <div id="tab-cancel" class="tab-content">
+          <div class="bg-white border border-red-100 rounded-2xl p-7">
+            <div class="flex items-center gap-3 mb-5">
+              <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center shrink-0">
+                <i class="ph-bold ph-warning text-red-500 text-lg"></i>
+              </div>
+              <h2 class="font-extrabold text-xl">Cancel Membership</h2>
+            </div>
+            <p class="text-muted text-sm leading-relaxed mb-2">Before you go — you can also <strong class="text-ink">pause your membership</strong> if you're away for a while or call us at <a href="tel:+19036806688" class="text-blue font-semibold">(903) 680-6688</a> and we'll help.</p>
+            <p class="text-muted text-sm leading-relaxed mb-6">If you cancel, your <strong class="text-ink">Ultimate Fast Pass</strong> remains active through <strong class="text-ink">July 15, 2025</strong>. No refunds for unused days.</p>
+            <div class="bg-red-50 border border-red-100 rounded-xl p-5 mb-6">
+              <p class="text-red-700 text-sm font-semibold mb-1">You'll lose:</p>
+              <ul class="text-red-600 text-sm space-y-1">
+                <li>· Unlimited washes through your billing period end</li>
+                <li>· Your 7 Speedie Rewards points</li>
+                <li>· Your referral link and member perks</li>
+              </ul>
+            </div>
+            <div class="flex flex-wrap gap-3">
+              <button onclick="showTab('overview')" class="btn bg-blue text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-dark text-sm">Keep My Membership</button>
+              <a href="tel:+19036806688" class="btn border border-gray-200 text-ink font-semibold px-5 py-2.5 rounded-xl hover:border-blue hover:text-blue text-sm">Call to Cancel</a>
+              <a href="mailto:speediedscarwash@gmail.com?subject=Cancel%20Membership&body=Hi%2C%20I%20would%20like%20to%20cancel%20my%20membership.%20My%20name%20is%20%5Byour%20name%5D%20and%20my%20phone%20number%20is%20%5Byour%20phone%5D." class="btn border border-gray-200 text-ink font-semibold px-5 py-2.5 rounded-xl hover:border-blue hover:text-blue text-sm">Email to Cancel</a>
+              <button onclick="confirmCancel()" class="btn border border-red-200 text-red-500 font-semibold px-5 py-2.5 rounded-xl hover:bg-red-50 text-sm">Confirm Cancellation</button>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-ink text-white text-sm font-semibold px-5 py-3 rounded-xl shadow-xl opacity-0 transition-opacity pointer-events-none z-50">
+  ✓ Changes saved
+</div>
+
+<script>
+  // ─── Login with phone + password ───
+  function doLogin(e) {
+    e.preventDefault();
+    document.getElementById('login-view').classList.add('hidden');
+    document.getElementById('dashboard-view').classList.remove('hidden');
+    document.getElementById('logout-btn').classList.remove('hidden');
+    window.scrollTo({ top: 0 });
+  }
+
+  // ─── Logout ───
+  function doLogout() {
+    document.getElementById('dashboard-view').classList.add('hidden');
+    document.getElementById('login-view').classList.remove('hidden');
+    document.getElementById('logout-btn').classList.add('hidden');
+    document.getElementById('login-phone').value = '';
+    document.getElementById('login-password').value = '';
+  }
+
+  // ─── Add car form toggle ───
+  function showAddCar() {
+    document.getElementById('add-car-form').classList.remove('hidden');
+  }
+
+  // ─── Sidebar tabs ───
+  function showTab(name) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.dash-tab').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  // ─── Plan upgrade ───
+  function showUpgrade() {
+    document.getElementById('upgrade-panel').classList.remove('hidden');
+  }
+  function selectPlan(el, name, price) {
+    document.querySelectorAll('#upgrade-panel [onclick^="selectPlan"]').forEach(c => {
+      c.classList.remove('border-blue');
+      c.classList.add('border-gray-200');
+    });
+    el.classList.remove('border-gray-200');
+    el.classList.add('border-blue');
+  }
+  function confirmPlanChange() {
+    document.getElementById('upgrade-panel').classList.add('hidden');
+    showToast('Plan change requested! We\'ll confirm by text.');
+  }
+
+  // ─── Copy referral code ───
+  function copyCode() {
+    navigator.clipboard.writeText('SPEEDIE-JSM7').catch(() => {});
+    showToast('Referral code copied!');
+  }
+
+  // ─── Toast ───
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = '✓ ' + msg;
+    t.style.opacity = '1';
+    setTimeout(() => t.style.opacity = '0', 3000);
+  }
+
+  // ─── Cancel confirm ───
+  function confirmCancel() {
+    if (confirm('Are you sure? Your membership will end July 15, 2025.')) {
+      showToast('Membership cancelled. Sorry to see you go!');
+      setTimeout(() => { doLogout(); }, 2000);
+    }
+  }
+</script>
+
+</body>
+</html>

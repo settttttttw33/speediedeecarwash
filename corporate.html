@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corporate Accounts | Speedie D's Car Wash - Gilmer, TX</title>
+  <meta name="description" content="Speedie D's Corporate Accounts. Unlimited washes for your entire vehicle fleet. Centralized billing, no per-vehicle hassle. Serving East Texas businesses." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { jakarta: ['"Plus Jakarta Sans"', 'sans-serif'] },
+          colors: {
+            blue: { DEFAULT: '#2563EB', dark: '#1D4ED8', light: '#DBEAFE', xlight: '#EFF6FF' },
+            ink:  { DEFAULT: '#111827' },
+            muted:'#6B7280',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .btn { transition: all 0.15s cubic-bezier(0.16,1,0.3,1); }
+    .btn:active { transform: scale(0.97) translateY(1px); }
+    .fleet-bg {
+      background-image: url('https://images.pexels.com/photos/18029642/pexels-photo-18029642.jpeg?auto=compress&cs=tinysrgb&w=1920&h=700&fit=crop');
+      background-size: cover; background-position: center 40%;
+    }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: #2563EB !important; box-shadow: 0 0 0 3px #DBEAFE; }
+  </style>
+</head>
+<body class="bg-white font-jakarta antialiased text-ink">
+
+<!-- NAV -->
+<nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 h-[70px] flex items-center justify-between">
+    <a href="index.html" class="flex items-center shrink-0">
+      <img src="https://assets.cdn.filesafe.space/e4notYo5fJyoxSgPxQkh/media/67408b03d6b97efd8da073c4.png"
+           alt="Speedie D's Car Wash" class="h-11 w-auto object-contain" />
+    </a>
+    <ul class="hidden md:flex items-center gap-7 text-sm font-medium text-gray-500">
+      <li><a href="index.html#plans" class="hover:text-ink transition-colors">Wash Plans</a></li>
+      <li><a href="membership.html" class="hover:text-ink transition-colors">Memberships</a></li>
+      <li><a href="corporate.html" class="text-ink font-semibold">Corporate</a></li>
+      <li><a href="index.html#specials" class="hover:text-ink transition-colors">Specials</a></li>
+      <li><a href="index.html#contact" class="hover:text-ink transition-colors">Contact</a></li>
+      <li><a href="tel:+19036806688" class="text-blue font-semibold flex items-center gap-1.5"><i class="ph-bold ph-phone"></i>(903) 680-6688</a></li>
+    </ul>
+    <a href="membership.html" class="btn hidden md:inline-flex bg-blue text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-dark">
+      Manage My Plan
+    </a>
+    <a href="index.html" class="md:hidden text-sm text-gray-500 font-medium">← Home</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative fleet-bg min-h-[420px] flex items-end overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/50 to-ink/10"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-8 pb-16 w-full">
+    <p class="text-blue text-xs font-bold uppercase tracking-widest mb-3">For Businesses</p>
+    <h1 class="text-white font-extrabold leading-none tracking-tight mb-4" style="font-size:clamp(2.5rem,5vw,4rem)">
+      Corporate Accounts.
+    </h1>
+    <p class="text-white/75 text-lg max-w-lg leading-relaxed">
+      Keep your entire fleet clean with one simple account. Unlimited washes, centralized billing, no per-vehicle paperwork.
+    </p>
+  </div>
+</section>
+
+
+<!-- WHO IT'S FOR -->
+<section class="py-20 px-5 bg-white">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+    <div>
+      <h2 class="font-extrabold tracking-tight leading-none mb-6" style="font-size:clamp(2rem,3.5vw,2.75rem)">
+        Built for East Texas Businesses.
+      </h2>
+      <p class="text-muted leading-relaxed mb-8">Whether you run a two-truck plumbing operation or a 20-vehicle delivery service, a Speedie D's corporate account keeps every vehicle road-ready without the hassle of individual memberships.</p>
+      <div class="space-y-4">
+        <div class="flex gap-3 items-center text-sm">
+          <i class="ph-bold ph-check-circle text-blue text-lg shrink-0"></i>
+          <span>Construction and contracting companies</span>
+        </div>
+        <div class="flex gap-3 items-center text-sm">
+          <i class="ph-bold ph-check-circle text-blue text-lg shrink-0"></i>
+          <span>Delivery and logistics fleets</span>
+        </div>
+        <div class="flex gap-3 items-center text-sm">
+          <i class="ph-bold ph-check-circle text-blue text-lg shrink-0"></i>
+          <span>Service companies (HVAC, plumbing, electrical)</span>
+        </div>
+        <div class="flex gap-3 items-center text-sm">
+          <i class="ph-bold ph-check-circle text-blue text-lg shrink-0"></i>
+          <span>Car dealerships and auto groups</span>
+        </div>
+        <div class="flex gap-3 items-center text-sm">
+          <i class="ph-bold ph-check-circle text-blue text-lg shrink-0"></i>
+          <span>Government and municipal vehicles</span>
+        </div>
+        <div class="flex gap-3 items-center text-sm">
+          <i class="ph-bold ph-check-circle text-blue text-lg shrink-0"></i>
+          <span>Real estate and property management companies</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative">
+      <img
+        src="https://images.pexels.com/photos/164634/pexels-photo-164634.jpeg?auto=compress&cs=tinysrgb&w=700&h=500&fit=crop"
+        alt="Fleet of luxury vehicles"
+        class="w-full h-[420px] object-cover rounded-2xl"
+        loading="lazy"
+      />
+      <div class="absolute -bottom-5 -right-5 bg-blue rounded-2xl px-6 py-4 shadow-xl hidden md:block">
+        <p class="text-white font-extrabold text-3xl">$19<span class="text-lg font-normal opacity-75">/mo</span></p>
+        <p class="text-blue-light text-xs mt-0.5">per vehicle, starting price</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="py-20 px-5 bg-gray-50">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-10">
+      <h2 class="font-extrabold tracking-tight leading-none mb-2" style="font-size:clamp(2rem,3.5vw,2.75rem)">Corporate Pricing.</h2>
+      <p class="text-muted">Per-vehicle monthly pricing. Fleets of 10+ vehicles automatically receive 25% off every plan.</p>
+    </div>
+
+    <!-- Volume discount banner -->
+    <div class="bg-gradient-to-r from-[#0D2B5E] to-blue rounded-2xl p-6 mb-8 flex flex-col sm:flex-row items-center gap-4">
+      <div class="flex-1">
+        <p class="text-orange-300 text-xs font-bold uppercase tracking-widest mb-1">Volume Discount — 10+ Vehicles</p>
+        <h3 class="text-white font-extrabold text-xl">25% off all plans automatically applied</h3>
+        <p class="text-blue-light text-sm mt-1">Add your fleet to the form below and we'll apply the discount when we set up your account.</p>
+      </div>
+      <div class="shrink-0 flex gap-4 text-center">
+        <div><p class="text-white/50 text-xs line-through">$19</p><p class="text-white font-extrabold text-2xl">$14<span class="text-sm font-normal text-white/60">/mo</span></p><p class="text-blue-light text-xs">Basic</p></div>
+        <div><p class="text-white/50 text-xs line-through">$29</p><p class="text-white font-extrabold text-2xl">$22<span class="text-sm font-normal text-white/60">/mo</span></p><p class="text-blue-light text-xs">Deluxe</p></div>
+        <div><p class="text-white/50 text-xs line-through">$39</p><p class="text-white font-extrabold text-2xl">$29<span class="text-sm font-normal text-white/60">/mo</span></p><p class="text-blue-light text-xs">Ultimate</p></div>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5 mb-8">
+      <div class="bg-white rounded-2xl border border-gray-200 p-7">
+        <p class="text-xs font-bold uppercase tracking-widest text-muted mb-4">Basic Fast Pass</p>
+        <p class="font-extrabold text-4xl mb-1">$19<span class="text-lg font-normal text-muted">/mo</span></p>
+        <p class="text-muted text-xs mb-5">per vehicle</p>
+        <ul class="space-y-2 text-sm text-gray-600 mb-6">
+          <li class="flex gap-2"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Soft touch wash</li>
+          <li class="flex gap-2"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Spot-free rinse</li>
+          <li class="flex gap-2"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Pre-soak treatment</li>
+          <li class="flex gap-2"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Free vacuums</li>
+          <li class="flex gap-2"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Unlimited washes</li>
+        </ul>
+      </div>
+
+      <div class="bg-ink rounded-2xl p-7 relative">
+        <span class="absolute top-5 right-5 bg-blue text-white text-xs font-bold px-3 py-1 rounded-full">Most Popular</span>
+        <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">Deluxe Fast Pass</p>
+        <p class="font-extrabold text-4xl text-white mb-1">$29<span class="text-lg font-normal text-gray-400">/mo</span></p>
+        <p class="text-gray-500 text-xs mb-5">per vehicle</p>
+        <ul class="space-y-2 text-sm text-gray-300 mb-6">
+          <li class="flex gap-2"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Everything in Basic</li>
+          <li class="flex gap-2"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Tire shine</li>
+          <li class="flex gap-2"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Triple foam polish</li>
+          <li class="flex gap-2"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Clear coat protectant</li>
+          <li class="flex gap-2"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Wheel Brite treatment</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray-200 p-7">
+        <p class="text-xs font-bold uppercase tracking-widest text-muted mb-4">Ultimate Fast Pass</p>
+        <p class="font-extrabold text-4xl mb-1">$39<span class="text-lg font-normal text-muted">/mo</span></p>
+        <p class="text-muted text-xs mb-5">per vehicle</p>
+        <ul class="space-y-2 text-sm text-gray-600 mb-6">
+          <li class="flex gap-2"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Everything in Deluxe</li>
+          <li class="flex gap-2"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Ceramic coating</li>
+          <li class="flex gap-2"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Lava shine</li>
+          <li class="flex gap-2"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Bug prep solution</li>
+          <li class="flex gap-2"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Total shine finish</li>
+          <li class="flex gap-2"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Undercarriage wash</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="text-center text-muted text-sm">
+      <i class="ph-bold ph-info text-blue mr-1"></i>
+      25% fleet discount applied automatically for accounts with 10 or more vehicles.
+    </p>
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="py-20 px-5 bg-white">
+  <div class="max-w-3xl mx-auto">
+    <div class="mb-10 text-center">
+      <h2 class="font-extrabold tracking-tight leading-none mb-3" style="font-size:clamp(2rem,3.5vw,2.75rem)">Get Your Corporate Account Set Up.</h2>
+      <p class="text-muted">Fill out the form and we'll reach out within one business day to get your account started.</p>
+    </div>
+
+    <form id="fleet-form" onsubmit="submitFleet(event)" class="bg-gray-50 border border-gray-200 rounded-2xl p-8 space-y-5">
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">First Name</label>
+          <input type="text" id="fl-first" required placeholder="John"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Last Name</label>
+          <input type="text" id="fl-last" required placeholder="Smith"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
+        </div>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Business Name</label>
+          <input type="text" id="fl-biz" required placeholder="Smith Contracting LLC"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Number of Vehicles</label>
+          <select id="fl-vehicles" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white appearance-none transition-all">
+            <option value="5-9">5 - 9 vehicles</option>
+            <option value="10-24" selected>10 - 24 vehicles (25% off)</option>
+            <option value="25-49">25 - 49 vehicles (25% off)</option>
+            <option value="50+">50+ vehicles (25% off)</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Phone</label>
+          <input type="tel" id="fl-phone" required placeholder="(903) 555-1234"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Email</label>
+          <input type="email" id="fl-email" required placeholder="john@smithcontracting.com"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
+        </div>
+      </div>
+      <div>
+        <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Preferred Plan</label>
+        <select id="fl-plan" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white appearance-none transition-all">
+          <option value="basic">Basic Fast Pass ($19/vehicle/mo)</option>
+          <option value="deluxe" selected>Deluxe Fast Pass ($29/vehicle/mo)</option>
+          <option value="ultimate">Ultimate Fast Pass ($39/vehicle/mo)</option>
+          <option value="unsure">Not sure yet - want to discuss</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Additional Notes</label>
+        <textarea id="fl-notes" rows="3" placeholder="Tell us about your fleet, vehicle types, or any questions..."
+          class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white resize-none transition-all"></textarea>
+      </div>
+
+      <button type="submit" class="btn w-full bg-blue text-white font-bold py-4 rounded-xl hover:bg-blue-dark text-base">
+        Submit Corporate Inquiry <i class="ph-bold ph-paper-plane-right ml-2"></i>
+      </button>
+      <p class="text-center text-xs text-muted">Or call us directly at <a href="tel:+19036806688" class="text-blue hover:underline">(903) 680-6688</a></p>
+
+      <div id="fl-success" class="hidden text-center py-3 bg-green-50 border border-green-100 rounded-xl text-green-700 text-sm font-semibold">
+        <i class="ph-bold ph-check-circle mr-1"></i>Inquiry submitted! We'll reach out within one business day.
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-ink text-gray-400 py-12 px-5">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-sm">
+    <a href="index.html" class="flex items-center gap-2 font-bold text-white text-lg">
+      <svg width="24" height="24" viewBox="0 0 30 30" fill="none"><path d="M15 2C15 2 4 12 4 19a11 11 0 0022 0C26 12 15 2 15 2z" fill="#2563EB"/></svg>
+      Speedie D's
+    </a>
+    <p class="text-gray-500 text-xs text-center">657 US HWY 271 N, Gilmer TX 75644 &nbsp;|&nbsp; (903) 680-6688 &nbsp;|&nbsp; Mon-Sat 8am-7pm, Sun 9am-6pm</p>
+    <div class="flex gap-5 text-xs">
+      <a href="index.html" class="hover:text-white">Home</a>
+      <a href="privacy.html" class="hover:text-white">Privacy</a>
+      <a href="terms.html" class="hover:text-white">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function submitFleet(e) {
+    e.preventDefault();
+    const first = document.getElementById('fl-first').value;
+    const last  = document.getElementById('fl-last').value;
+    const biz   = document.getElementById('fl-biz').value;
+    const veh   = document.getElementById('fl-vehicles').value;
+    const phone = document.getElementById('fl-phone').value;
+    const email = document.getElementById('fl-email').value;
+    const plan  = document.getElementById('fl-plan').value;
+    const notes = document.getElementById('fl-notes').value;
+    const body  = `Corporate Inquiry\n\nName: ${first} ${last}\nBusiness: ${biz}\nVehicles: ${veh}\nPhone: ${phone}\nEmail: ${email}\nPlan: ${plan}\n\nNotes: ${notes}`;
+    window.location.href = `mailto:speediedscarwash@gmail.com?subject=Fleet%20Account%20Inquiry%20-%20${encodeURIComponent(biz)}&body=${encodeURIComponent(body)}`;
+    document.getElementById('fleet-form').reset();
+    document.getElementById('fl-success').classList.remove('hidden');
+  }
+</script>
+
+</body>
+</html>

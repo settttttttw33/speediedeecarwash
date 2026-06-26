@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join Speedie D's | Monthly Car Wash Membership - Gilmer, TX</title>
+  <meta name="description" content="Sign up for an unlimited car wash membership at Speedie D's in Gilmer, TX. Plans from $19/month. 50% off your first month." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { jakarta: ['"Plus Jakarta Sans"', 'sans-serif'] },
+          colors: {
+            blue:  { DEFAULT: '#2563EB', dark: '#1D4ED8', light: '#DBEAFE', xlight: '#EFF6FF' },
+            ink:   { DEFAULT: '#111827', 2: '#1F2937', 3: '#374151' },
+            muted: '#6B7280',
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .btn { transition: all 0.15s cubic-bezier(0.16,1,0.3,1); }
+    .btn:active { transform: scale(0.97) translateY(1px); }
+    .plan-card { border: 2px solid #E5E7EB; transition: border-color 0.15s, box-shadow 0.15s; cursor: pointer; }
+    .plan-card:hover { border-color: #93C5FD; }
+    .plan-card.selected { border-color: #2563EB; box-shadow: 0 0 0 4px #DBEAFE; }
+    input, select { transition: border-color 0.15s, box-shadow 0.15s; outline: none; }
+    input:focus, select:focus { border-color: #2563EB !important; box-shadow: 0 0 0 3px #DBEAFE; }
+    .step-num { width: 32px; height: 32px; border-radius: 50%; font-weight: 700; font-size: 0.875rem; display: flex; align-items: center; justify-content: center; }
+    .step-num.done   { background: #2563EB; color: #fff; }
+    .step-num.active { background: #111827; color: #fff; }
+    .step-num.idle   { background: #E5E7EB; color: #9CA3AF; }
+    .form-step { display: none; }
+    .form-step.active { display: block; }
+  </style>
+</head>
+<body class="bg-gray-50 text-ink font-jakarta antialiased min-h-screen">
+
+<!-- NAV -->
+<nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 h-[64px] flex items-center justify-between">
+    <a href="index.html" class="flex items-center shrink-0">
+      <img src="https://assets.cdn.filesafe.space/e4notYo5fJyoxSgPxQkh/media/67408b03d6b97efd8da073c4.png"
+           alt="Speedie D's Car Wash" class="h-11 w-auto object-contain" />
+    </a>
+    <a href="index.html" class="flex items-center gap-1.5 text-sm font-medium text-muted hover:text-ink transition-colors">
+      <i class="ph-bold ph-arrow-left text-sm"></i>
+      Back to site
+    </a>
+  </div>
+</nav>
+
+<!-- MAIN LAYOUT -->
+<main class="max-w-7xl mx-auto px-4 lg:px-8 py-10 lg:py-16 grid lg:grid-cols-[5fr_7fr] gap-10 lg:gap-16 items-start">
+
+  <!-- LEFT PANEL -->
+  <aside class="hidden lg:block sticky top-24">
+    <div class="bg-blue rounded-2xl overflow-hidden">
+      <div class="px-8 pt-8 pb-8">
+        <h2 class="text-white font-extrabold text-2xl leading-tight mb-3">Join Speedie D's Fast Pass</h2>
+        <p class="text-white/60 text-sm leading-relaxed mb-7">East Texas's unlimited car wash club. Wash as much as you want, cancel any time.</p>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex gap-3 items-start">
+            <div class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
+              <i class="ph-bold ph-infinity text-white text-sm"></i>
+            </div>
+            <div>
+              <p class="text-white text-sm font-semibold">Unlimited washes</p>
+              <p class="text-white/60 text-xs mt-0.5">Every day if you want. No limits, no per-wash charges.</p>
+            </div>
+          </div>
+          <div class="flex gap-3 items-start">
+            <div class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
+              <i class="ph-bold ph-tag text-white text-sm"></i>
+            </div>
+            <div>
+              <p class="text-white text-sm font-semibold">50% off your first month</p>
+              <p class="text-white/60 text-xs mt-0.5">Automatically applied at checkout, no promo code needed.</p>
+            </div>
+          </div>
+          <div class="flex gap-3 items-start">
+            <div class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
+              <i class="ph-bold ph-lock-open text-white text-sm"></i>
+            </div>
+            <div>
+              <p class="text-white text-sm font-semibold">No contract, cancel anytime</p>
+              <p class="text-white/60 text-xs mt-0.5">Month to month. Cancel by text, call, or email — effective immediately.</p>
+            </div>
+          </div>
+          <div class="flex gap-3 items-start">
+            <div class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
+              <i class="ph-bold ph-wind text-white text-sm"></i>
+            </div>
+            <div>
+              <p class="text-white text-sm font-semibold">Free vacuums every visit</p>
+              <p class="text-white/60 text-xs mt-0.5">Wide bays, no timer, always free for members.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-white/20 pt-6 space-y-3">
+          <div class="flex justify-between text-sm">
+            <span class="text-white/60">Basic Fast Pass</span>
+            <span class="text-white font-semibold">$19/mo</span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-white/60">Deluxe Fast Pass</span>
+            <span class="text-white font-semibold">$29/mo</span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-white/60">Ultimate Fast Pass</span>
+            <span class="text-white font-bold">$39/mo</span>
+          </div>
+          <p class="text-white/50 text-xs pt-1">First-month prices are 50% off. Cancel any time.</p>
+        </div>
+      </div>
+    </div>
+    <p class="mt-6 text-center text-xs text-muted">
+      <i class="ph-bold ph-shield-check text-green-500 mr-1"></i>
+      SSL encrypted. We never store card data.
+    </p>
+  </aside>
+
+  <!-- RIGHT: FORM -->
+  <div>
+    <!-- Step indicator -->
+    <div class="flex items-center gap-3 mb-8">
+      <div class="flex items-center gap-2">
+        <div class="step-num active" id="step-dot-1">1</div>
+        <span class="text-sm font-medium" id="step-label-1">Choose Plan</span>
+      </div>
+      <div class="flex-1 h-px bg-gray-200"></div>
+      <div class="flex items-center gap-2">
+        <div class="step-num idle" id="step-dot-2">2</div>
+        <span class="text-sm text-muted font-medium" id="step-label-2">Your Info</span>
+      </div>
+      <div class="flex-1 h-px bg-gray-200"></div>
+      <div class="flex items-center gap-2">
+        <div class="step-num idle" id="step-dot-3">3</div>
+        <span class="text-sm text-muted font-medium" id="step-label-3">Payment</span>
+      </div>
+    </div>
+
+    <!-- STEP 1: Plan -->
+    <div class="form-step active" id="step1">
+      <h1 class="font-extrabold text-2xl mb-1">Pick your plan.</h1>
+      <p class="text-muted text-sm mb-6">All plans include free vacuums and spot-free rinse. First month 50% off.</p>
+
+      <div class="space-y-3" id="plan-cards">
+        <!-- Basic — teal/cyan accent -->
+        <div class="plan-card rounded-2xl p-5 border-l-4 border-l-teal-400" data-plan="basic" data-price="19" data-first="9.50" onclick="selectPlan(this)">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="font-bold plan-name">Basic Fast Pass</p>
+              <p class="text-muted text-xs mt-1">Soft touch wash, spot-free rinse, free vacuums</p>
+            </div>
+            <div class="text-right shrink-0 ml-4">
+              <p class="font-extrabold text-2xl text-teal-600">$19</p>
+              <p class="text-muted text-xs">/month</p>
+            </div>
+          </div>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <span class="bg-teal-50 text-teal-700 text-xs px-2.5 py-1 rounded-lg">Soft touch</span>
+            <span class="bg-teal-50 text-teal-700 text-xs px-2.5 py-1 rounded-lg">Spot-free rinse</span>
+            <span class="bg-teal-50 text-teal-700 text-xs px-2.5 py-1 rounded-lg">Pre-soak</span>
+            <span class="bg-teal-50 text-teal-700 text-xs px-2.5 py-1 rounded-lg">Free vacuums</span>
+          </div>
+        </div>
+
+        <!-- Deluxe — purple/indigo accent -->
+        <div class="plan-card rounded-2xl p-5 border-l-4 border-l-violet-500" data-plan="deluxe" data-price="29" data-first="14.50" onclick="selectPlan(this)">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="font-bold plan-name">Deluxe Fast Pass</p>
+              <p class="text-muted text-xs mt-1">Adds tire shine, triple foam, clear coat, Wheel Brite</p>
+            </div>
+            <div class="text-right shrink-0 ml-4">
+              <p class="font-extrabold text-2xl text-violet-600">$29</p>
+              <p class="text-muted text-xs">/month</p>
+            </div>
+          </div>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <span class="bg-violet-50 text-violet-700 text-xs px-2.5 py-1 rounded-lg">All Basic perks</span>
+            <span class="bg-violet-50 text-violet-700 text-xs px-2.5 py-1 rounded-lg">Tire shine</span>
+            <span class="bg-violet-50 text-violet-700 text-xs px-2.5 py-1 rounded-lg">Triple foam</span>
+            <span class="bg-violet-50 text-violet-700 text-xs px-2.5 py-1 rounded-lg">Wheel Brite</span>
+          </div>
+        </div>
+
+        <!-- Ultimate — gold/amber accent -->
+        <div class="plan-card selected rounded-2xl p-5 border-l-4 border-l-amber-500" data-plan="ultimate" data-price="39" data-first="19.50" onclick="selectPlan(this)">
+          <div class="flex justify-between items-start">
+            <div>
+              <div class="flex items-center gap-2 mb-0.5">
+                <p class="font-bold plan-name">Ultimate Fast Pass</p>
+                <span class="bg-amber-500 text-white text-xs font-bold px-2.5 py-0.5 rounded-full">Best Value</span>
+              </div>
+              <p class="text-muted text-xs mt-1">Ceramic coating, lava shine, undercarriage wash</p>
+            </div>
+            <div class="text-right shrink-0 ml-4">
+              <p class="font-extrabold text-2xl text-amber-600">$39</p>
+              <p class="text-muted text-xs">/month</p>
+            </div>
+          </div>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <span class="bg-amber-50 text-amber-700 text-xs px-2.5 py-1 rounded-lg font-medium">All Deluxe perks</span>
+            <span class="bg-amber-50 text-amber-700 text-xs px-2.5 py-1 rounded-lg font-medium">Ceramic coat</span>
+            <span class="bg-amber-50 text-amber-700 text-xs px-2.5 py-1 rounded-lg font-medium">Lava shine</span>
+            <span class="bg-amber-50 text-amber-700 text-xs px-2.5 py-1 rounded-lg font-medium">Undercarriage</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 bg-green-50 border border-green-100 rounded-xl px-4 py-3 flex items-center gap-3">
+        <i class="ph-bold ph-tag text-green-600 text-lg shrink-0"></i>
+        <p class="text-green-700 text-sm">First month is 50% off. <strong>Start today for $<span id="first-price">19.50</span>.</strong> Then $<span id="recur-price">39</span>/month.</p>
+      </div>
+
+      <button onclick="goStep(2)" class="btn w-full mt-6 bg-blue text-white font-semibold py-4 rounded-xl hover:bg-blue-dark text-base">
+        Continue <i class="ph-bold ph-arrow-right ml-1"></i>
+      </button>
+    </div>
+
+    <!-- STEP 2: Contact + vehicle -->
+    <div class="form-step" id="step2">
+      <h2 class="font-extrabold text-2xl mb-1">Tell us about yourself.</h2>
+      <p class="text-muted text-sm mb-6">We'll set up your account and tie your membership to your vehicle's license plate.</p>
+
+      <div class="space-y-4">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-semibold mb-1.5">First Name</label>
+            <input id="f-first" type="text" placeholder="John" autocomplete="given-name"
+              class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm bg-white" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold mb-1.5">Last Name</label>
+            <input id="f-last" type="text" placeholder="Smith" autocomplete="family-name"
+              class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm bg-white" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1.5">Email Address</label>
+          <input id="f-email" type="email" placeholder="you@example.com" autocomplete="email"
+            class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm bg-white" />
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1.5">Phone Number</label>
+          <input id="f-phone" type="tel" placeholder="(903) 555-1234" autocomplete="tel"
+            class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm bg-white" />
+          <p class="text-muted text-xs mt-1.5">We'll send wash reminders and membership updates by text.</p>
+        </div>
+        <div class="border-t border-gray-100 pt-4">
+          <p class="text-sm font-bold mb-4">Vehicle Information</p>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-semibold mb-1.5">License Plate</label>
+              <input id="f-plate" type="text" placeholder="ABC 1234" style="text-transform:uppercase"
+                class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm bg-white" />
+            </div>
+            <div>
+              <label class="block text-sm font-semibold mb-1.5">State</label>
+              <select id="f-state" class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm bg-white appearance-none">
+                <option value="TX" selected>Texas</option>
+                <option value="AR">Arkansas</option>
+                <option value="LA">Louisiana</option>
+                <option value="OK">Oklahoma</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-sm font-semibold mb-1.5">Year</label>
+            <input id="f-year" type="text" placeholder="2020"
+              class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm bg-white" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold mb-1.5">Make</label>
+            <input id="f-make" type="text" placeholder="Chevy"
+              class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm bg-white" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold mb-1.5">Model</label>
+            <input id="f-model" type="text" placeholder="Silverado"
+              class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm bg-white" />
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-3 mt-6">
+        <button onclick="goStep(1)" class="btn flex-1 border-2 border-gray-200 text-ink font-semibold py-3.5 rounded-xl hover:border-gray-300">
+          <i class="ph-bold ph-arrow-left mr-1"></i> Back
+        </button>
+        <button onclick="validateStep2()" class="btn flex-[2] bg-blue text-white font-semibold py-3.5 rounded-xl hover:bg-blue-dark">
+          Continue <i class="ph-bold ph-arrow-right ml-1"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Payment -->
+    <div class="form-step" id="step3">
+      <h2 class="font-extrabold text-2xl mb-1">Payment Details.</h2>
+      <p class="text-muted text-sm mb-6">Your card is charged today for the first month, then monthly until you cancel.</p>
+
+      <!-- Order summary -->
+      <div class="bg-gray-100 rounded-2xl p-5 mb-6">
+        <p class="text-xs font-bold uppercase tracking-wider text-muted mb-3">Order Summary</p>
+        <div class="flex justify-between text-sm mb-2">
+          <span class="text-gray-700" id="summary-plan-name">Ultimate Fast Pass</span>
+          <span class="font-semibold line-through text-muted" id="summary-full-price">$39/mo</span>
+        </div>
+        <div class="flex justify-between text-sm mb-1">
+          <span class="text-green-600 font-medium">50% first month discount</span>
+          <span class="text-green-600 font-medium" id="summary-discount">-$19.50</span>
+        </div>
+        <div class="border-t border-gray-200 mt-3 pt-3 flex justify-between font-bold">
+          <span>Due today</span>
+          <span class="text-blue text-lg" id="summary-due">$19.50</span>
+        </div>
+        <p class="text-xs text-muted mt-2">Then $<span id="summary-recur">39</span>/month. Cancel any time.</p>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-semibold mb-1.5">Name on Card</label>
+          <input id="f-card-name" type="text" placeholder="John Smith" autocomplete="cc-name"
+            class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm bg-white" />
+        </div>
+        <!--
+          STRIPE INTEGRATION POINT:
+          1. Add <script src="https://js.stripe.com/v3/"></script> in <head>
+          2. const stripe = Stripe('pk_live_YOUR_PUBLISHABLE_KEY');
+          3. const card = stripe.elements().create('card');
+          4. card.mount('#stripe-card-element');
+          5. On submit: stripe.createPaymentMethod({ type:'card', card })
+             POST result to backend -> create Stripe subscription w/ 50% coupon on first invoice
+          6. GHL: POST to contacts API to create contact + tag with plan
+        -->
+        <div>
+          <label class="block text-sm font-semibold mb-1.5">Card Details</label>
+          <div id="stripe-card-element" class="w-full border-2 border-gray-200 rounded-xl px-4 py-3.5 text-sm bg-white text-gray-400 flex items-center gap-2">
+            <i class="ph-bold ph-credit-card text-gray-300 text-lg"></i>
+            <span>Stripe payment form loads here</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-semibold mb-1.5">Expiry</label>
+            <input type="text" placeholder="MM / YY" autocomplete="cc-exp"
+              class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm bg-white" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold mb-1.5">CVV</label>
+            <input type="text" placeholder="123" autocomplete="cc-csc"
+              class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm bg-white" />
+          </div>
+        </div>
+      </div>
+
+      <p class="flex items-center gap-2 text-xs text-muted mt-4">
+        <i class="ph-bold ph-shield-check text-green-500"></i>
+        SSL secured. Powered by Stripe. We never store your card number.
+      </p>
+
+      <div class="flex gap-3 mt-6">
+        <button onclick="goStep(2)" class="btn border-2 border-gray-200 text-ink font-semibold py-3.5 px-5 rounded-xl hover:border-gray-300">
+          <i class="ph-bold ph-arrow-left"></i>
+        </button>
+        <button onclick="submitForm()" class="btn flex-1 bg-blue text-white font-bold py-3.5 rounded-xl hover:bg-blue-dark text-base">
+          Start Membership for $<span id="pay-btn-price">19.50</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="form-step" id="step-success">
+      <div class="text-center py-8">
+        <div class="w-20 h-20 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-6">
+          <i class="ph-bold ph-check-circle text-green-500 text-4xl"></i>
+        </div>
+        <h2 class="font-extrabold text-2xl mb-2">You're In!</h2>
+        <p class="text-muted max-w-sm mx-auto mb-8">Your <span id="success-plan" class="text-blue font-semibold">Ultimate Fast Pass</span> is active. Welcome to Speedie D's.</p>
+
+        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 text-left max-w-sm mx-auto space-y-3 mb-8">
+          <p class="text-sm font-bold mb-1">What's next:</p>
+          <div class="flex gap-2.5 text-sm">
+            <i class="ph-bold ph-envelope text-blue mt-0.5 shrink-0"></i>
+            <span class="text-gray-600">Check your email for your membership QR code and instructions.</span>
+          </div>
+          <div class="flex gap-2.5 text-sm">
+            <i class="ph-bold ph-map-pin text-blue mt-0.5 shrink-0"></i>
+            <span class="text-gray-600">Drive to 657 US HWY 271 N, Gilmer TX. Scan your code at the kiosk.</span>
+          </div>
+          <div class="flex gap-2.5 text-sm">
+            <i class="ph-bold ph-wind text-blue mt-0.5 shrink-0"></i>
+            <span class="text-gray-600">Free vacuums are available anytime, no code needed.</span>
+          </div>
+          <div class="flex gap-2.5 text-sm">
+            <i class="ph-bold ph-chat-circle text-blue mt-0.5 shrink-0"></i>
+            <span class="text-gray-600">Questions? Call or text us at (903) 680-6688.</span>
+          </div>
+        </div>
+
+        <a href="index.html" class="btn inline-flex items-center gap-2 bg-blue text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-blue-dark">
+          Back to Home
+        </a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+  let currentStep = 1;
+  let selectedPlan = { name: 'Ultimate Fast Pass', price: '39', first: '19.50', key: 'ultimate' };
+
+  // Read plan from URL param
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramPlan = urlParams.get('plan');
+  if (paramPlan) {
+    const target = document.querySelector(`[data-plan="${paramPlan}"]`);
+    if (target) {
+      document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+      target.classList.add('selected');
+      updatePlanDisplay(target);
+    }
+  }
+
+  function selectPlan(card) {
+    document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    updatePlanDisplay(card);
+  }
+
+  function updatePlanDisplay(card) {
+    const price = card.dataset.price;
+    const first = card.dataset.first;
+    const nameEl = card.querySelector('.plan-name');
+    const name = nameEl ? nameEl.textContent.trim() : '';
+    selectedPlan = { name, price, first, key: card.dataset.plan };
+
+    document.getElementById('first-price').textContent = first;
+    document.getElementById('recur-price').textContent = price;
+    document.getElementById('summary-plan-name').textContent = name;
+    document.getElementById('summary-full-price').textContent = `$${price}/mo`;
+    document.getElementById('summary-discount').textContent = `-$${(parseFloat(price)/2).toFixed(2)}`;
+    document.getElementById('summary-due').textContent = `$${first}`;
+    document.getElementById('summary-recur').textContent = price;
+    document.getElementById('pay-btn-price').textContent = first;
+    document.getElementById('success-plan').textContent = name;
+  }
+
+  function goStep(n) {
+    if (currentStep <= 3) {
+      document.getElementById(`step${currentStep}`).classList.remove('active');
+    }
+    [1,2,3].forEach(i => {
+      const dot = document.getElementById(`step-dot-${i}`);
+      const lbl = document.getElementById(`step-label-${i}`);
+      if (i < n)      { dot.className = 'step-num done';   lbl.className = 'text-sm font-medium'; }
+      else if (i === n){ dot.className = 'step-num active'; lbl.className = 'text-sm font-medium'; }
+      else             { dot.className = 'step-num idle';   lbl.className = 'text-sm text-muted font-medium'; }
+    });
+    currentStep = n;
+    document.getElementById(`step${n}`).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function validateStep2() {
+    const required = ['f-first','f-last','f-email','f-phone','f-plate'];
+    let ok = true;
+    required.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) { el.style.borderColor = '#EF4444'; ok = false; }
+      else { el.style.borderColor = ''; }
+    });
+    if (!ok) { alert('Please fill in all required fields.'); return; }
+    goStep(3);
+  }
+
+  function submitForm() {
+    // Stripe: createPaymentMethod then POST to backend to create subscription
+    // GHL: POST to /contacts/ API to create contact with plan tag
+    document.getElementById('step3').classList.remove('active');
+    document.getElementById('step-success').classList.add('active');
+    [1,2,3].forEach(i => {
+      document.getElementById(`step-dot-${i}`).className = 'step-num done';
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Init display with default selected card
+  const initialCard = document.querySelector('.plan-card.selected');
+  if (initialCard) updatePlanDisplay(initialCard);
+</script>
+</body>
+</html>

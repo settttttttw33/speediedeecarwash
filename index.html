@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speedie D's Car Wash | Gilmer, TX - Unlimited Memberships from $19/mo</title>
+  <meta name="description" content="East Texas's favorite car wash. Unlimited memberships from $19/month. No contracts. Free vacuums. 657 US HWY 271 N, Gilmer TX." />
+
+  <!-- Plus Jakarta Sans: clean, distinctive, not generic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { jakarta: ['"Plus Jakarta Sans"', 'sans-serif'] },
+          colors: {
+            blue:   { DEFAULT: '#2563EB', dark: '#1D4ED8', light: '#DBEAFE', xlight: '#EFF6FF' },
+            ink:    { DEFAULT: '#111827', 2: '#1F2937', 3: '#374151' },
+            muted:  '#6B7280',
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+    /* Scroll reveal */
+    .sr { opacity: 0; transform: translateY(24px); transition: opacity 0.55s cubic-bezier(0.16,1,0.3,1), transform 0.55s cubic-bezier(0.16,1,0.3,1); }
+    .sr.d1 { transition-delay: 0.08s; }
+    .sr.d2 { transition-delay: 0.16s; }
+    .sr.d3 { transition-delay: 0.24s; }
+    .sr.in  { opacity: 1; transform: none; }
+
+    /* Nav transition */
+    #nav { transition: background 0.25s, box-shadow 0.25s; }
+    #nav.solid { background: rgba(255,255,255,0.97) !important; box-shadow: 0 1px 0 #E5E7EB; }
+    #nav .nav-link-light { color: rgba(255,255,255,0.85); }
+    #nav.solid .nav-link-light { color: #374151; }
+    #nav .logo-light { color: #fff; }
+    #nav.solid .logo-light { color: #111827; }
+    #nav.solid .menu-icon { color: #111827; }
+
+    /* Hero photo */
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1611239179213-d972da54091a?auto=format&fit=crop&w=1920&h=1080&q=85');
+      background-size: cover; background-position: center center;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(5,13,26,0.94) 0%, rgba(5,13,26,0.55) 45%, rgba(5,13,26,0.20) 100%);
+    }
+
+    /* Btn press */
+    .btn { transition: all 0.15s cubic-bezier(0.16,1,0.3,1); }
+    .btn:active { transform: scale(0.97) translateY(1px); }
+
+    /* Plan row */
+    .plan-row { transition: background 0.15s; }
+    .plan-row:hover { background: #EFF6FF; }
+    .plan-row.active { background: #DBEAFE; border-color: #2563EB !important; }
+
+    /* Feature card hover */
+    .feat-card { transition: box-shadow 0.2s, transform 0.2s; }
+    .feat-card:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(17,24,39,0.1); }
+
+    /* Tab underline */
+    .tab-btn { position: relative; padding-bottom: 14px; color: #6B7280; font-weight: 600; font-size: 0.95rem; transition: color 0.15s; }
+    .tab-btn::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; border-radius:2px; background:#2563EB; transform:scaleX(0); transition:transform 0.2s; }
+    .tab-btn.active { color: #111827; }
+    .tab-btn.active::after { transform:scaleX(1); }
+
+    /* Quote card */
+    .quote-mark { font-size: 5rem; line-height: 1; color: #DBEAFE; font-weight: 800; }
+
+  </style>
+</head>
+<body class="bg-white text-ink font-jakarta antialiased">
+
+<!-- ================================================================
+     NAV: transparent over hero, turns white on scroll
+     ================================================================ -->
+<nav id="nav" class="fixed top-0 inset-x-0 z-50 bg-transparent">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 h-[70px] flex items-center justify-between">
+
+    <a href="/" class="logo-light flex items-center shrink-0">
+      <img src="https://assets.cdn.filesafe.space/e4notYo5fJyoxSgPxQkh/media/67408b03d6b97efd8da073c4.png"
+           alt="Speedie D's Car Wash" class="h-12 w-auto object-contain" />
+    </a>
+
+    <ul class="hidden md:flex items-center gap-7">
+      <li><a href="#plans"       class="nav-link-light text-sm font-medium hover:text-white transition-colors">Wash Plans</a></li>
+      <li><a href="membership.html" class="nav-link-light text-sm font-medium hover:text-white transition-colors">Memberships</a></li>
+      <li><a href="corporate.html" class="nav-link-light text-sm font-medium hover:text-white transition-colors">Corporate</a></li>
+      <li><a href="loyalty.html" class="nav-link-light text-sm font-medium hover:text-white transition-colors">Rewards</a></li>
+      <li><a href="#specials"    class="nav-link-light text-sm font-medium hover:text-white transition-colors">Specials</a></li>
+      <li><a href="#contact"     class="nav-link-light text-sm font-medium hover:text-white transition-colors">Contact</a></li>
+      <li>
+        <a href="tel:+19036806688" class="nav-link-light text-sm font-semibold hover:text-white transition-colors flex items-center gap-1.5">
+          <i class="ph-bold ph-phone text-blue"></i>(903) 680-6688
+        </a>
+      </li>
+    </ul>
+
+    <a href="account.html" class="btn hidden md:inline-flex items-center gap-2 bg-blue text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-dark shrink-0">
+      Manage My Plan <i class="ph-bold ph-arrow-right text-sm"></i>
+    </a>
+
+    <button id="menu-btn" class="md:hidden menu-icon text-white p-2" aria-label="Menu">
+      <i class="ph-bold ph-list text-2xl"></i>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mob-menu" class="hidden border-t border-white/10 bg-ink/95 backdrop-blur px-5 py-5 flex-col gap-4 text-sm font-medium">
+    <a href="#plans" class="text-gray-200">Wash Plans</a>
+    <a href="membership.html" class="text-gray-200">Memberships</a>
+    <a href="corporate.html" class="text-gray-200">Corporate</a>
+    <a href="loyalty.html" class="text-[#F47920] font-semibold flex items-center gap-1.5"><i class="ph-bold ph-star-four"></i> Rewards</a>
+    <a href="#specials" class="text-gray-200">Specials</a>
+    <a href="#contact" class="text-gray-200">Contact</a>
+    <a href="tel:+19036806688" class="text-blue font-semibold">(903) 680-6688</a>
+    <a href="account.html" class="btn bg-blue text-white font-semibold px-4 py-3 rounded-xl text-center mt-1">Manage My Plan</a>
+  </div>
+</nav>
+
+
+<!-- ================================================================
+     HERO: Full-bleed photo, overlay gradient, large text at bottom
+     ================================================================ -->
+<section class="relative min-h-[100dvh] flex flex-col justify-end overflow-hidden">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <!-- Content sits above overlay -->
+  <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-8 pb-16 md:pb-24 w-full">
+    <div class="max-w-2xl">
+      <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 mb-6 sr">
+        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0"></span>
+        <span class="text-white/90 text-xs font-semibold tracking-wide">Gilmer, TX - East Texas</span>
+      </div>
+
+      <h1 class="text-white font-extrabold leading-none tracking-tight mb-5 sr d1" style="font-size:clamp(3rem,7vw,5.5rem)">
+        Your Car<br/>Deserves Better.
+      </h1>
+
+      <p class="text-white/75 text-lg leading-relaxed max-w-md mb-8 sr d2">
+        Unlimited washes from $19 a month. No contracts, cancel anytime. Free vacuums with every visit.
+      </p>
+
+      <div class="flex flex-wrap gap-3 sr d3">
+        <a href="#plans" class="btn bg-blue text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-blue-dark text-base">
+          See Wash Plans
+        </a>
+        <a href="corporate.html" class="btn bg-white/10 backdrop-blur border border-white/30 text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-white/20 text-base">
+          Corporate Accounts
+        </a>
+        <a href="loyalty.html" class="btn bg-white/10 backdrop-blur border border-white/30 text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-white/20 text-base flex items-center gap-2">
+          <i class="ph-bold ph-star-four text-[#F47920]"></i> Get a Free Wash
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom fade -->
+  <div class="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-white to-transparent z-10"></div>
+</section>
+
+
+<!-- ================================================================
+     LOCATION CARD (WhiteWater-style: practical info first)
+     ================================================================ -->
+<div class="bg-gray-50 border-b border-gray-100 px-5 py-10">
+  <div class="max-w-7xl mx-auto">
+    <div class="bg-white rounded-2xl border border-gray-200 px-8 py-7 grid md:grid-cols-[1fr_auto] gap-6 items-center sr">
+      <div class="grid sm:grid-cols-3 gap-6">
+        <div class="flex items-start gap-3">
+          <i class="ph-bold ph-map-pin text-blue text-xl mt-0.5 shrink-0"></i>
+          <div>
+            <p class="text-xs font-bold uppercase tracking-widest text-muted mb-1">Address</p>
+            <p class="font-semibold text-sm leading-snug">657 US HWY 271 N<br/>Gilmer, TX 75644</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <i class="ph-bold ph-clock text-blue text-xl mt-0.5 shrink-0"></i>
+          <div>
+            <p class="text-xs font-bold uppercase tracking-widest text-muted mb-1">Hours</p>
+            <p class="font-semibold text-sm">Mon-Sat &nbsp;8:00am - 7:00pm</p>
+            <p class="font-semibold text-sm">Sunday &nbsp;&nbsp;9:00am - 6:00pm</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <i class="ph-bold ph-phone text-blue text-xl mt-0.5 shrink-0"></i>
+          <div>
+            <p class="text-xs font-bold uppercase tracking-widest text-muted mb-1">Phone</p>
+            <a href="tel:+19036806688" class="font-semibold text-sm text-blue hover:underline">(903) 680-6688</a>
+            <p class="text-xs text-muted mt-1">Call or text anytime</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex gap-3 shrink-0">
+        <a href="https://maps.google.com/?q=657+US+HWY+271+N+Gilmer+TX+75644" target="_blank" rel="noopener"
+           class="btn border border-gray-200 text-ink font-semibold text-sm px-5 py-2.5 rounded-xl hover:border-blue hover:text-blue">
+          Directions
+        </a>
+        <a href="#plans" class="btn bg-blue text-white font-semibold text-sm px-5 py-2.5 rounded-xl hover:bg-blue-dark">
+          Pricing
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     PRICING: Tabs - Single Wash / Monthly Membership
+     ================================================================ -->
+<section id="plans" class="py-24 px-5 bg-white">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="sr mb-12">
+      <h2 class="font-extrabold tracking-tight leading-none mb-3" style="font-size:clamp(2rem,4vw,3rem)">
+        Simple, Honest Pricing.
+      </h2>
+      <p class="text-muted max-w-md">One-time washes or unlimited monthly plans. All of them include free vacuums and spot-free rinse.</p>
+    </div>
+
+    <!-- Tab bar -->
+    <div class="flex gap-8 border-b border-gray-200 mb-10 sr">
+      <button class="tab-btn active" onclick="setTab(this,'single')" data-tab="single"><strong>One Time Washes</strong></button>
+      <button class="tab-btn"        onclick="setTab(this,'monthly')" data-tab="monthly">Monthly Membership</button>
+    </div>
+
+    <!-- SINGLE WASH: Feature card + 2 standard cards -->
+    <div id="tab-single">
+      <div class="grid md:grid-cols-3 gap-5">
+
+        <!-- Basic -->
+        <div class="feat-card bg-white border border-gray-200 rounded-2xl p-7 flex flex-col sr">
+          <p class="font-extrabold text-2xl mb-1">Basic</p>
+          <p class="font-extrabold leading-none mb-1 text-blue" style="font-size:3.25rem">$8</p>
+          <p class="text-muted text-sm mb-6">per wash</p>
+          <ul class="space-y-2.5 flex-1 mb-7">
+            <li class="flex gap-2.5 text-sm text-gray-600"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Soft touch wash</li>
+            <li class="flex gap-2.5 text-sm text-gray-600"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Spot-free rinse</li>
+            <li class="flex gap-2.5 text-sm text-gray-600"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Pre-soak treatment</li>
+            <li class="flex gap-2.5 text-sm text-gray-600"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Free vacuums</li>
+            <li class="border-t border-gray-100 pt-3 mt-1">
+              <p class="text-[10px] font-extrabold uppercase tracking-widest text-muted mb-2">Add-on available</p>
+              <div class="flex items-center gap-2 text-sm font-bold text-gray-700">
+                <i class="ph-bold ph-plus-circle text-orange-400 shrink-0"></i>
+                Tire shine <span class="ml-auto font-bold text-gray-600">+$3</span>
+              </div>
+            </li>
+          </ul>
+          <a href="membership.html?plan=basic-single" class="btn block text-center border border-gray-200 text-ink font-semibold py-3 rounded-xl hover:border-blue hover:text-blue text-sm">Pay Once</a>
+        </div>
+
+        <!-- Deluxe: Featured -->
+        <div class="feat-card rounded-2xl p-7 flex flex-col relative sr d1" style="background:#1a2f4e;">
+          <span class="absolute top-5 right-5 bg-blue text-white text-xs font-bold px-3 py-1 rounded-full">Most Popular</span>
+          <p class="font-extrabold text-2xl text-white mb-1">Deluxe</p>
+          <p class="font-extrabold leading-none text-white mb-1" style="font-size:3.25rem">$15</p>
+          <p class="text-gray-400 text-sm mb-6">per wash</p>
+          <ul class="space-y-2.5 flex-1 mb-7">
+            <li class="flex gap-2.5 text-sm text-gray-300"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Everything in Basic</li>
+            <li class="flex gap-2.5 text-sm text-gray-300"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Tire shine</li>
+            <li class="flex gap-2.5 text-sm text-gray-300"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Clear coat protectant</li>
+            <li class="flex gap-2.5 text-sm text-gray-300"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Wheel Brite treatment</li>
+            <li class="flex gap-2.5 text-sm text-gray-300"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Triple foam polish</li>
+            <li class="border-t border-white/10 pt-3 mt-1">
+              <p class="text-[10px] font-extrabold uppercase tracking-widest text-white/50 mb-2">Add-on available</p>
+              <div class="flex items-center gap-2 text-sm font-bold text-white">
+                <i class="ph-bold ph-plus-circle text-orange-400 shrink-0"></i>
+                Carnauba wax <span class="ml-auto font-bold text-white/70">+$3</span>
+              </div>
+            </li>
+          </ul>
+          <a href="membership.html?plan=deluxe-single" class="btn block text-center bg-blue text-white font-semibold py-3 rounded-xl hover:bg-blue-dark text-sm">Pay Once</a>
+        </div>
+
+        <!-- Ultimate -->
+        <div class="feat-card bg-white border border-gray-200 rounded-2xl p-7 flex flex-col sr d2">
+          <p class="font-extrabold text-2xl mb-1">Ultimate</p>
+          <p class="font-extrabold leading-none mb-1 text-blue" style="font-size:3.25rem">$24</p>
+          <p class="text-muted text-sm mb-6">per wash</p>
+          <ul class="space-y-2.5 flex-1 mb-7">
+            <li class="flex gap-2.5 text-sm text-gray-600"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Everything in Deluxe</li>
+            <li class="flex gap-2.5 text-sm text-gray-600"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Ceramic coating</li>
+            <li class="flex gap-2.5 text-sm text-gray-600"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Lava shine treatment</li>
+            <li class="flex gap-2.5 text-sm text-gray-600"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Bug prep solution</li>
+            <li class="flex gap-2.5 text-sm text-gray-600"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Total shine finish</li>
+            <li class="flex gap-2.5 text-sm text-gray-600"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Undercarriage wash</li>
+          </ul>
+          <a href="membership.html?plan=ultimate-single" class="btn block text-center border border-gray-200 text-ink font-semibold py-3 rounded-xl hover:border-blue hover:text-blue text-sm">Pay Once</a>
+        </div>
+      </div>
+
+      <!-- Extras -->
+      <div class="mt-5 bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 flex flex-wrap items-center gap-x-8 gap-y-3">
+        <p class="text-xs font-extrabold uppercase tracking-widest text-muted">Available Extras</p>
+        <div class="flex items-center gap-2 text-sm font-bold text-gray-700">
+          <i class="ph-bold ph-plus-circle text-orange-400"></i>
+          Mat Cleaning <span class="ml-2 font-bold text-gray-500">$5 per mat</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MONTHLY MEMBERSHIP: Horizontal comparison rows -->
+    <div id="tab-monthly" class="hidden">
+      <div class="border border-gray-200 rounded-2xl overflow-hidden sr">
+
+        <div class="grid grid-cols-[1fr_auto] md:grid-cols-[1fr_1fr_auto] px-6 py-3.5 bg-gray-50 border-b border-gray-200 text-xs font-bold uppercase tracking-wider text-muted">
+          <span>Plan</span>
+          <span class="hidden md:block">Includes</span>
+          <span class="text-right">Price / Month</span>
+        </div>
+
+        <!-- Basic -->
+        <div class="plan-row grid grid-cols-[1fr_auto] md:grid-cols-[1fr_1fr_auto] px-6 py-5 border-b border-gray-100 items-center cursor-pointer" onclick="pickPlan(this,'basic','19','9.50','Basic Fast Pass')">
+          <div>
+            <p class="font-semibold">Basic Fast Pass</p>
+            <p class="text-xs text-muted mt-0.5">Soft touch wash, spot-free rinse, pre-soak, free vacuums</p>
+          </div>
+          <div class="hidden md:flex flex-wrap gap-2">
+            <span class="bg-gray-100 text-gray-600 text-xs px-2.5 py-1 rounded-lg">Soft touch wash</span>
+            <span class="bg-gray-100 text-gray-600 text-xs px-2.5 py-1 rounded-lg">Spot-free rinse</span>
+            <span class="bg-gray-100 text-gray-600 text-xs px-2.5 py-1 rounded-lg">Pre-soak</span>
+            <span class="bg-gray-100 text-gray-600 text-xs px-2.5 py-1 rounded-lg">Free vacuums</span>
+          </div>
+          <div class="text-right">
+            <p class="font-bold text-lg">$19<span class="text-xs font-normal text-muted">/mo</span></p>
+          </div>
+        </div>
+
+        <!-- Deluxe -->
+        <div class="plan-row grid grid-cols-[1fr_auto] md:grid-cols-[1fr_1fr_auto] px-6 py-5 border-b border-gray-100 items-center cursor-pointer" onclick="pickPlan(this,'deluxe','29','14.50','Deluxe Fast Pass')">
+          <div>
+            <p class="font-semibold">Deluxe Fast Pass</p>
+            <p class="text-xs text-muted mt-0.5">Basic + tire shine, triple foam, clear coat, Wheel Brite</p>
+          </div>
+          <div class="hidden md:flex flex-wrap gap-2">
+            <span class="bg-gray-100 text-gray-600 text-xs px-2.5 py-1 rounded-lg">All Basic perks</span>
+            <span class="bg-gray-100 text-gray-600 text-xs px-2.5 py-1 rounded-lg">Tire shine</span>
+            <span class="bg-gray-100 text-gray-600 text-xs px-2.5 py-1 rounded-lg">Triple foam</span>
+            <span class="bg-gray-100 text-gray-600 text-xs px-2.5 py-1 rounded-lg">Wheel Brite</span>
+          </div>
+          <div class="text-right">
+            <p class="font-bold text-lg">$29<span class="text-xs font-normal text-muted">/mo</span></p>
+          </div>
+        </div>
+
+        <!-- Ultimate: highlighted -->
+        <div class="plan-row active grid grid-cols-[1fr_auto] md:grid-cols-[1fr_1fr_auto] px-6 py-5 border-b border-2 border-blue items-center cursor-pointer" onclick="pickPlan(this,'ultimate','39','19.50','Ultimate Fast Pass')">
+          <div>
+            <div class="flex items-center gap-2.5 mb-0.5">
+              <p class="font-semibold">Ultimate Fast Pass</p>
+              <span class="bg-blue text-white text-xs font-bold px-2.5 py-0.5 rounded-full">Best Value</span>
+            </div>
+            <p class="text-xs text-muted">Deluxe + ceramic coating, lava shine, bug prep, total shine, undercarriage</p>
+          </div>
+          <div class="hidden md:flex flex-wrap gap-2">
+            <span class="bg-blue-light text-blue text-xs px-2.5 py-1 rounded-lg font-medium">All Deluxe perks</span>
+            <span class="bg-blue-light text-blue text-xs px-2.5 py-1 rounded-lg font-medium">Ceramic coating</span>
+            <span class="bg-blue-light text-blue text-xs px-2.5 py-1 rounded-lg font-medium">Lava shine</span>
+            <span class="bg-blue-light text-blue text-xs px-2.5 py-1 rounded-lg font-medium">Undercarriage</span>
+          </div>
+          <div class="text-right">
+            <p class="font-bold text-xl text-blue">$39<span class="text-xs font-normal text-muted">/mo</span></p>
+          </div>
+        </div>
+
+        <!-- Checkout strip -->
+        <div class="bg-gray-50 px-6 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <p class="font-semibold text-sm">Selected: <span id="sel-name" class="text-blue">Ultimate Fast Pass</span></p>
+            <p class="text-xs text-muted mt-0.5">50% off your first month. No contract, cancel anytime.</p>
+          </div>
+          <a id="sel-cta" href="membership.html?plan=ultimate" class="btn bg-blue text-white font-semibold px-8 py-3 rounded-xl hover:bg-blue-dark text-sm shrink-0 text-center">
+            Start for $19.50 Today
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================================================================
+     WHAT'S INCLUDED (WhiteWater-style services grid)
+     ================================================================ -->
+<section class="py-20 px-5 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-10 sr">
+      <h2 class="font-extrabold tracking-tight leading-none" style="font-size:clamp(1.75rem,3.5vw,2.5rem)">
+        What's Included with Every Wash.
+      </h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div class="feat-card bg-gray-50 rounded-2xl p-5 flex flex-col items-center text-center gap-3 sr">
+        <div class="w-12 h-12 rounded-xl bg-blue-xlight flex items-center justify-center">
+          <i class="ph-bold ph-wind text-blue text-xl"></i>
+        </div>
+        <div>
+          <p class="font-bold text-sm">High-Power Vacuums</p>
+          <p class="text-muted text-xs mt-1">Free, always on, no timer</p>
+        </div>
+      </div>
+      <div class="feat-card bg-gray-50 rounded-2xl p-5 flex flex-col items-center text-center gap-3 sr d1">
+        <div class="w-12 h-12 rounded-xl bg-blue-xlight flex items-center justify-center">
+          <i class="ph-bold ph-drop-half text-blue text-xl"></i>
+        </div>
+        <div>
+          <p class="font-bold text-sm">Spot-Free Rinse</p>
+          <p class="text-muted text-xs mt-1">No water spots, ever</p>
+        </div>
+      </div>
+      <div class="feat-card bg-gray-50 rounded-2xl p-5 flex flex-col items-center text-center gap-3 sr d2">
+        <div class="w-12 h-12 rounded-xl bg-blue-xlight flex items-center justify-center">
+          <i class="ph-bold ph-spray-bottle text-blue text-xl"></i>
+        </div>
+        <div>
+          <p class="font-bold text-sm">Pre-Soak Treatment</p>
+          <p class="text-muted text-xs mt-1">Loosens dirt before the tunnel</p>
+        </div>
+      </div>
+      <div class="feat-card bg-gray-50 rounded-2xl p-5 flex flex-col items-center text-center gap-3 sr d3">
+        <div class="w-12 h-12 rounded-xl bg-blue-xlight flex items-center justify-center">
+          <i class="ph-bold ph-towel text-blue text-xl"></i>
+        </div>
+        <div>
+          <p class="font-bold text-sm">Microfiber Towels</p>
+          <p class="text-muted text-xs mt-1">Available in drying area</p>
+        </div>
+      </div>
+      <div class="feat-card bg-gray-50 rounded-2xl p-5 flex flex-col items-center text-center gap-3 sr d1">
+        <div class="w-12 h-12 rounded-xl bg-blue-xlight flex items-center justify-center">
+          <i class="ph-bold ph-magic-wand text-blue text-xl"></i>
+        </div>
+        <div>
+          <p class="font-bold text-sm">Air Detail Guns</p>
+          <p class="text-muted text-xs mt-1">Blast out cracks and vents</p>
+        </div>
+      </div>
+      <div class="feat-card bg-gray-50 rounded-2xl p-5 flex flex-col items-center text-center gap-3 sr d2">
+        <div class="w-12 h-12 rounded-xl bg-blue-xlight flex items-center justify-center">
+          <i class="ph-bold ph-sun text-blue text-xl"></i>
+        </div>
+        <div>
+          <p class="font-bold text-sm">Drying Area</p>
+          <p class="text-muted text-xs mt-1">Covered, spacious finish area</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     PHOTO CAROUSEL: Speedie D's real photos, stacked slide style
+     ================================================================ -->
+<section class="py-20 bg-gray-50 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="flex items-end justify-between mb-10 sr">
+      <div>
+        <h2 class="font-extrabold tracking-tight leading-none" style="font-size:clamp(1.75rem,3.5vw,2.5rem)">
+          See Speedie D's.
+        </h2>
+        <p class="text-muted text-sm mt-1">Real photos from our location in Gilmer, TX.</p>
+      </div>
+      <!-- Arrow controls -->
+      <div class="flex gap-2 shrink-0">
+        <button onclick="slideGallery(-1)" class="w-11 h-11 rounded-full border border-gray-200 bg-white flex items-center justify-center hover:border-blue hover:text-blue transition-colors" aria-label="Previous">
+          <i class="ph-bold ph-caret-left"></i>
+        </button>
+        <button onclick="slideGallery(1)" class="w-11 h-11 rounded-full border border-gray-200 bg-white flex items-center justify-center hover:border-blue hover:text-blue transition-colors" aria-label="Next">
+          <i class="ph-bold ph-caret-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stacked carousel - peek at adjacent slides -->
+  <div class="relative" style="height: 480px;">
+    <div id="gallery-track" class="absolute inset-0 flex items-center" style="touch-action: pan-y;">
+
+      <!-- Each slide is absolutely positioned and transformed by JS -->
+      <div class="gallery-slide absolute left-1/2 rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
+           style="width:min(680px,85vw); height:420px; top:30px; transform:translateX(-50%);"
+           onclick="galleryClick(0)">
+        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/e4notYo5fJyoxSgPxQkh/media/67d36b84cb0f93472a5276db.jpeg"
+             alt="Speedie D's Car Wash" class="w-full h-full object-cover" loading="lazy"/>
+      </div>
+      <div class="gallery-slide absolute left-1/2 rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
+           style="width:min(680px,85vw); height:420px; top:30px; transform:translateX(-50%);"
+           onclick="galleryClick(1)">
+        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/e4notYo5fJyoxSgPxQkh/media/67d36b8417fbc3dbdd5ad095.jpeg"
+             alt="Speedie D's Car Wash" class="w-full h-full object-cover" loading="lazy"/>
+      </div>
+      <div class="gallery-slide absolute left-1/2 rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
+           style="width:min(680px,85vw); height:420px; top:30px; transform:translateX(-50%);"
+           onclick="galleryClick(2)">
+        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/e4notYo5fJyoxSgPxQkh/media/67d36b84a8b39b7c879914d3.jpeg"
+             alt="Speedie D's Car Wash" class="w-full h-full object-cover" loading="lazy"/>
+      </div>
+      <div class="gallery-slide absolute left-1/2 rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
+           style="width:min(680px,85vw); height:420px; top:30px; transform:translateX(-50%);"
+           onclick="galleryClick(3)">
+        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/e4notYo5fJyoxSgPxQkh/media/67d36b845106d553d32ed6b6.jpeg"
+             alt="Speedie D's Car Wash" class="w-full h-full object-cover" loading="lazy"/>
+      </div>
+      <div class="gallery-slide absolute left-1/2 rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
+           style="width:min(680px,85vw); height:420px; top:30px; transform:translateX(-50%);"
+           onclick="galleryClick(4)">
+        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/e4notYo5fJyoxSgPxQkh/media/67d36b84a8b39bfb5a9914cf.jpeg"
+             alt="Speedie D's Car Wash" class="w-full h-full object-cover" loading="lazy"/>
+      </div>
+      <div class="gallery-slide absolute left-1/2 rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
+           style="width:min(680px,85vw); height:420px; top:30px; transform:translateX(-50%);"
+           onclick="galleryClick(5)">
+        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/e4notYo5fJyoxSgPxQkh/media/67d36b84f6feb055daf6624a.jpeg"
+             alt="Speedie D's Car Wash" class="w-full h-full object-cover" loading="lazy"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dot indicators -->
+  <div class="flex justify-center gap-2 mt-6" id="gallery-dots">
+    <button onclick="gotoSlide(0)" class="gallery-dot w-2 h-2 rounded-full bg-blue transition-all"></button>
+    <button onclick="gotoSlide(1)" class="gallery-dot w-2 h-2 rounded-full bg-gray-300 transition-all"></button>
+    <button onclick="gotoSlide(2)" class="gallery-dot w-2 h-2 rounded-full bg-gray-300 transition-all"></button>
+    <button onclick="gotoSlide(3)" class="gallery-dot w-2 h-2 rounded-full bg-gray-300 transition-all"></button>
+    <button onclick="gotoSlide(4)" class="gallery-dot w-2 h-2 rounded-full bg-gray-300 transition-all"></button>
+    <button onclick="gotoSlide(5)" class="gallery-dot w-2 h-2 rounded-full bg-gray-300 transition-all"></button>
+  </div>
+</section>
+
+<!-- Lightbox (opened when clicking active slide) -->
+<div id="lightbox" class="fixed inset-0 z-[100] bg-ink/95 hidden items-center justify-center p-4" onclick="closeLightbox()">
+  <button class="absolute top-5 right-5 text-white/70 hover:text-white" onclick="closeLightbox()">
+    <i class="ph-bold ph-x text-3xl"></i>
+  </button>
+  <button class="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white" onclick="shiftLightbox(-1,event)">
+    <i class="ph-bold ph-caret-left text-4xl"></i>
+  </button>
+  <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[90vh] rounded-xl object-contain" onclick="event.stopPropagation()"/>
+  <button class="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white" onclick="shiftLightbox(1,event)">
+    <i class="ph-bold ph-caret-right text-4xl"></i>
+  </button>
+  <p id="lightbox-count" class="absolute bottom-5 left-1/2 -translate-x-1/2 text-white/50 text-sm"></p>
+</div>
+
+
+<!-- ================================================================
+     REWARDS PROMO BANNER
+     ================================================================ -->
+<section class="py-16 px-5 bg-ink">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+    <div class="flex items-center gap-5">
+      <div class="w-16 h-16 rounded-2xl bg-[#F47920]/15 flex items-center justify-center shrink-0">
+        <i class="ph-bold ph-star-four text-[#F47920] text-3xl"></i>
+      </div>
+      <div>
+        <p class="text-[#F47920] text-xs font-bold uppercase tracking-widest mb-1">Speedie Rewards</p>
+        <h2 class="text-white font-extrabold text-2xl leading-tight">Join for free. Get 2 washes instantly.</h2>
+        <p class="text-gray-400 text-sm mt-1">Earn points every visit, unlock birthday washes, and refer friends for bonuses.</p>
+      </div>
+    </div>
+    <a href="loyalty.html" class="btn shrink-0 text-white font-bold px-7 py-3.5 rounded-xl text-sm whitespace-nowrap" style="background:#F47920;">
+      Join Speedie Rewards <i class="ph-bold ph-arrow-right ml-1"></i>
+    </a>
+  </div>
+</section>
+
+<!-- ================================================================
+     SPECIALS: Photo-background promo cards
+     ================================================================ -->
+<section id="specials" class="py-24 px-5 bg-gray-50">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="max-w-lg mb-12 sr">
+      <h2 class="font-extrabold tracking-tight leading-none mb-3" style="font-size:clamp(2rem,4vw,3rem)">
+        Current Deals.
+      </h2>
+      <p class="text-muted">Real offers, no gimmicks.</p>
+    </div>
+
+    <div class="grid md:grid-cols-[5fr_3fr] gap-5">
+
+      <!-- 50% off first month -->
+      <div class="relative rounded-2xl overflow-hidden min-h-[320px] sr" style="background: linear-gradient(140deg, #C4580A 0%, #F47920 55%, #F9A048 100%);">
+        <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.05) 100%);"></div>
+        <div class="relative p-8 md:p-10 h-full flex flex-col justify-end">
+          <p class="text-white/60 text-xs font-bold uppercase tracking-widest mb-3">New Members</p>
+          <h3 class="text-white font-extrabold leading-tight mb-3" style="font-size:clamp(1.8rem,3vw,2.8rem)">
+            50% Off Your First Month
+          </h3>
+          <p class="text-white/80 text-sm max-w-sm mb-6">Sign up for any plan and pay half price the first month. Applied automatically at checkout, no code needed.</p>
+          <a href="membership.html" class="btn self-start bg-white text-orange-700 font-semibold px-6 py-2.5 rounded-xl hover:bg-orange-50 transition-colors text-sm">
+            Claim Offer
+          </a>
+        </div>
+      </div>
+
+      <!-- Right column: 2 stacked -->
+      <div class="flex flex-col gap-5">
+        <div class="bg-ink rounded-2xl p-7 flex-1 sr d1">
+          <p class="text-[#F47920] text-xs font-bold uppercase tracking-widest mb-3">July 4th Special</p>
+          <h3 class="text-white font-extrabold text-3xl mb-2">Details Coming Soon</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Stay tuned — we've got something special planned for Independence Day. Check back here or follow us for the announcement.</p>
+          <p class="text-gray-500 text-xs mt-4 font-medium">July 4th only · While supplies last</p>
+        </div>
+        <div class="bg-blue rounded-2xl p-7 flex-1 sr d2">
+          <h3 class="text-white font-extrabold text-2xl mb-2">Free Wash on Us</h3>
+          <p class="text-blue-light text-sm leading-relaxed">Sign up for Speedie Rewards and get your first wash completely free. New members only.</p>
+          <a href="loyalty.html" class="btn inline-flex items-center gap-2 mt-5 bg-white text-blue font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-xlight text-sm">
+            <i class="ph-bold ph-star-four"></i>
+            Join Now to Get a Free Wash
+          </a>
+          <p class="text-white/40 text-xs mt-4 leading-relaxed">By texting FREE you consent to receive SMS messages from Speedie D's Car Wash. Msg &amp; data rates may apply. Message frequency varies. Text HELP for help, STOP to unsubscribe at any time. See <a href="terms.html" class="underline hover:text-white/70">Terms</a> and <a href="privacy.html" class="underline hover:text-white/70">Privacy Policy</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     REVIEWS
+     ================================================================ -->
+<section class="py-24 px-5 bg-white">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="max-w-lg mb-14 sr">
+      <h2 class="font-extrabold tracking-tight leading-none mb-3" style="font-size:clamp(2rem,4vw,3rem)">
+        Customer Reviews.
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-gray-50 rounded-2xl p-7 sr">
+        <div class="flex gap-1 mb-4">
+          <i class="ph-fill ph-star text-yellow-400"></i><i class="ph-fill ph-star text-yellow-400"></i><i class="ph-fill ph-star text-yellow-400"></i><i class="ph-fill ph-star text-yellow-400"></i><i class="ph-fill ph-star text-yellow-400"></i>
+        </div>
+        <p class="text-gray-700 text-sm leading-relaxed mb-5">"Been coming here for months. The Ultimate pass is worth every dollar - my truck looks brand new every time I pull out."</p>
+        <div class="flex items-center gap-3">
+          <img src="https://picsum.photos/seed/texan-man-40s/48/48" alt="" class="w-10 h-10 rounded-full object-cover" aria-hidden="true"/>
+          <div>
+            <p class="font-semibold text-sm">Mike R.</p>
+            <p class="text-xs text-muted">Gilmer, TX</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 rounded-2xl p-7 sr d1">
+        <div class="flex gap-1 mb-4">
+          <i class="ph-fill ph-star text-yellow-400"></i><i class="ph-fill ph-star text-yellow-400"></i><i class="ph-fill ph-star text-yellow-400"></i><i class="ph-fill ph-star text-yellow-400"></i><i class="ph-fill ph-star text-yellow-400"></i>
+        </div>
+        <p class="text-gray-700 text-sm leading-relaxed mb-5">"Canceled my old membership at another place and switched here. Cheaper, faster, and the free vacuums have tons of room."</p>
+        <div class="flex items-center gap-3">
+          <img src="https://picsum.photos/seed/woman-texas-50s/48/48" alt="" class="w-10 h-10 rounded-full object-cover" aria-hidden="true"/>
+          <div>
+            <p class="font-semibold text-sm">Sandra K.</p>
+            <p class="text-xs text-muted">Gilmer, TX</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 rounded-2xl p-7 sr d2">
+        <div class="flex gap-1 mb-4">
+          <i class="ph-fill ph-star text-yellow-400"></i><i class="ph-fill ph-star text-yellow-400"></i><i class="ph-fill ph-star text-yellow-400"></i><i class="ph-fill ph-star text-yellow-400"></i><i class="ph-fill ph-star text-yellow-400"></i>
+        </div>
+        <p class="text-gray-700 text-sm leading-relaxed mb-5">"The kiosk is super fast and the staff is always friendly. Monday $6 wash is a great deal. I take both my cars here."</p>
+        <div class="flex items-center gap-3">
+          <img src="https://picsum.photos/seed/man-cars-texas-30s/48/48" alt="" class="w-10 h-10 rounded-full object-cover" aria-hidden="true"/>
+          <div>
+            <p class="font-semibold text-sm">James T.</p>
+            <p class="text-xs text-muted">Gilmer, TX</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ================================================================
+     CONTACT + HOURS
+     ================================================================ -->
+<section id="contact" class="py-24 px-5 bg-white">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-start">
+
+    <div class="sr">
+      <h2 class="font-extrabold tracking-tight leading-none mb-10" style="font-size:clamp(2rem,4vw,3rem)">Find Us.</h2>
+
+      <div class="space-y-7">
+        <div class="flex gap-4 items-start">
+          <div class="w-10 h-10 rounded-xl bg-blue-xlight flex items-center justify-center shrink-0">
+            <i class="ph-bold ph-map-pin text-blue"></i>
+          </div>
+          <div>
+            <p class="font-semibold text-sm mb-0.5">Address</p>
+            <p class="text-muted text-sm">657 US HWY 271 N, Gilmer, TX 75644</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 items-start">
+          <div class="w-10 h-10 rounded-xl bg-blue-xlight flex items-center justify-center shrink-0">
+            <i class="ph-bold ph-phone text-blue"></i>
+          </div>
+          <div>
+            <p class="font-semibold text-sm mb-0.5">Phone</p>
+            <a href="tel:+19036806688" class="text-blue text-sm hover:underline">(903) 680-6688</a>
+          </div>
+        </div>
+
+        <div class="flex gap-4 items-start">
+          <div class="w-10 h-10 rounded-xl bg-blue-xlight flex items-center justify-center shrink-0">
+            <i class="ph-bold ph-clock text-blue"></i>
+          </div>
+          <div>
+            <p class="font-semibold text-sm mb-2">Hours</p>
+            <div class="space-y-1.5 text-sm">
+              <div class="flex justify-between gap-10">
+                <span class="text-muted">Mon - Sat</span>
+                <span class="font-medium">8:00am - 7:00pm</span>
+              </div>
+              <div class="flex justify-between gap-10">
+                <span class="text-muted">Sunday</span>
+                <span class="font-medium">9:00am - 6:00pm</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex gap-4 items-start">
+          <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center shrink-0">
+            <i class="ph-bold ph-warning text-amber-500"></i>
+          </div>
+          <div>
+            <p class="font-semibold text-sm mb-0.5">Vehicle Limits</p>
+            <p class="text-muted text-sm">Max height 7'2" - Max tire width 13" - No dual-wheel trucks</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact form + Map -->
+    <div class="sr d1 space-y-5">
+      <!-- Contact form -->
+      <form id="contact-form" onsubmit="submitContact(event)" class="bg-gray-50 border border-gray-200 rounded-2xl p-6 space-y-4">
+        <h3 class="font-bold text-lg mb-1">Send Us a Message</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-muted uppercase tracking-wide mb-1.5">Name</label>
+            <input type="text" id="c-name" required placeholder="Your name"
+              class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:border-blue focus:ring-2 focus:ring-blue/20" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-muted uppercase tracking-wide mb-1.5">Phone</label>
+            <input type="tel" id="c-phone" placeholder="(903) 555-1234"
+              class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:border-blue focus:ring-2 focus:ring-blue/20" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-muted uppercase tracking-wide mb-1.5">Email</label>
+          <input type="email" id="c-email" required placeholder="you@example.com"
+            class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:border-blue focus:ring-2 focus:ring-blue/20" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-muted uppercase tracking-wide mb-1.5">Message</label>
+          <textarea id="c-msg" required rows="3" placeholder="How can we help you?"
+            class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:border-blue focus:ring-2 focus:ring-blue/20 resize-none"></textarea>
+        </div>
+        <button type="submit" class="btn w-full bg-blue text-white font-semibold py-3 rounded-xl hover:bg-blue-dark text-sm">
+          Send Message <i class="ph-bold ph-paper-plane-right ml-1"></i>
+        </button>
+        <div id="c-success" class="hidden text-center py-2 text-green-600 text-sm font-semibold">
+          <i class="ph-bold ph-check-circle mr-1"></i>Message sent! We'll get back to you soon.
+        </div>
+      </form>
+
+      <!-- Map -->
+      <div class="rounded-2xl overflow-hidden border border-gray-200 h-[260px]">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3316.1234!2d-94.9637!3d32.7345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDQ0JzA0LjIiTiA5NMKwNTcnNDkuMyJX!5e0!3m2!1sen!2sus!4v1"
+          width="100%" height="100%" style="border:0" allowfullscreen loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Speedie D's Car Wash - 657 US HWY 271 N, Gilmer TX"
+        ></iframe>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <a href="https://maps.google.com/?q=657+US+HWY+271+N+Gilmer+TX+75644" target="_blank" rel="noopener" class="btn text-center border border-gray-200 text-ink font-medium py-3 rounded-xl hover:border-blue hover:text-blue transition-colors text-sm">
+          Get Directions
+        </a>
+        <a href="tel:+19036806688" class="btn text-center bg-blue text-white font-medium py-3 rounded-xl hover:bg-blue-dark transition-colors text-sm">
+          Call Us
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================================================================
+     FOOTER
+     ================================================================ -->
+<footer class="bg-ink text-gray-400 py-14 px-5">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-[2fr_1fr_1fr] gap-10 mb-12">
+
+      <div>
+        <a href="/" class="inline-block mb-4">
+          <img src="https://assets.cdn.filesafe.space/e4notYo5fJyoxSgPxQkh/media/67408b03d6b97efd8da073c4.png"
+               alt="Speedie D's Car Wash" class="h-12 w-auto object-contain brightness-0 invert" />
+        </a>
+        <p class="text-sm leading-relaxed max-w-xs">East Texas's car wash. Unlimited memberships from $19/month. Gilmer, TX.</p>
+      </div>
+
+      <div>
+        <p class="text-white text-sm font-semibold mb-4">Quick Links</p>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="#plans" class="hover:text-white transition-colors">Wash Plans</a></li>
+          <li><a href="membership.html" class="hover:text-white transition-colors">Memberships</a></li>
+          <li><a href="loyalty.html" class="hover:text-white transition-colors">Speedie Rewards</a></li>
+          <li><a href="corporate.html" class="hover:text-white transition-colors">Corporate Accounts</a></li>
+          <li><a href="#specials" class="hover:text-white transition-colors">Specials</a></li>
+          <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-white text-sm font-semibold mb-4">Contact</p>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="tel:+19036806688" class="hover:text-white transition-colors">(903) 680-6688</a></li>
+          <li class="text-gray-500 leading-relaxed">657 US HWY 271 N<br/>Gilmer, TX 75644</li>
+          <li class="text-gray-500 text-xs mt-1">Mon-Sat 8am-7pm<br/>Sun 9am-6pm</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+      <p>2025 Speedie D's East Texas Car Wash. All rights reserved.</p>
+      <div class="flex gap-5">
+        <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ================================================================
+     JS
+     ================================================================ -->
+<script>
+  // ── Photo carousel ──
+  const galleryImgs = [
+    'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/e4notYo5fJyoxSgPxQkh/media/67d36b84cb0f93472a5276db.jpeg',
+    'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/e4notYo5fJyoxSgPxQkh/media/67d36b8417fbc3dbdd5ad095.jpeg',
+    'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/e4notYo5fJyoxSgPxQkh/media/67d36b84a8b39b7c879914d3.jpeg',
+    'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/e4notYo5fJyoxSgPxQkh/media/67d36b845106d553d32ed6b6.jpeg',
+    'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/e4notYo5fJyoxSgPxQkh/media/67d36b84a8b39bfb5a9914cf.jpeg',
+    'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/e4notYo5fJyoxSgPxQkh/media/67d36b84f6feb055daf6624a.jpeg',
+  ];
+  let gIdx = 0;
+  const slides = document.querySelectorAll('.gallery-slide');
+  const dots   = document.querySelectorAll('.gallery-dot');
+
+  function renderGallery() {
+    const total  = slides.length;
+    const ww     = window.innerWidth;
+    const gap    = Math.min(340, ww * 0.55); // offset per position from center
+
+    slides.forEach((slide, i) => {
+      const offset = ((i - gIdx + total) % total);
+      // Map offset: 0=active, 1=right, 2=far-right, last=left, etc
+      const pos = offset > total / 2 ? offset - total : offset;
+
+      const tx     = pos * gap;
+      const scale  = pos === 0 ? 1 : Math.max(0.82, 1 - Math.abs(pos) * 0.09);
+      const z      = 10 - Math.abs(pos);
+      const bright = pos === 0 ? 1 : Math.max(0.45, 1 - Math.abs(pos) * 0.28);
+
+      slide.style.transition = 'transform 0.45s cubic-bezier(0.16,1,0.3,1), filter 0.45s, z-index 0s';
+      slide.style.transform  = `translateX(calc(-50% + ${tx}px)) scale(${scale})`;
+      slide.style.zIndex     = z;
+      slide.style.filter     = `brightness(${bright})`;
+    });
+
+    dots.forEach((d, i) => {
+      d.style.background = i === gIdx ? '#2563EB' : '#D1D5DB';
+      d.style.width      = i === gIdx ? '24px' : '8px';
+      d.style.borderRadius = '9999px';
+    });
+  }
+
+  function gotoSlide(i) { gIdx = i; renderGallery(); }
+  function slideGallery(dir) { gIdx = (gIdx + dir + slides.length) % slides.length; renderGallery(); }
+  function galleryClick(i) {
+    if (i !== gIdx) { gotoSlide(i); return; }
+    openLightbox(i);
+  }
+
+  renderGallery();
+  window.addEventListener('resize', renderGallery);
+
+  // Touch swipe on carousel
+  const track = document.getElementById('gallery-track');
+  let tsX = null;
+  track.addEventListener('touchstart', e => { tsX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    if (tsX === null) return;
+    const dx = e.changedTouches[0].clientX - tsX;
+    if (Math.abs(dx) > 40) slideGallery(dx < 0 ? 1 : -1);
+    tsX = null;
+  });
+
+  // Lightbox
+  let lbIdx = 0;
+  function openLightbox(i) {
+    lbIdx = i;
+    document.getElementById('lightbox-img').src = galleryImgs[i];
+    document.getElementById('lightbox-count').textContent = `${i+1} / ${galleryImgs.length}`;
+    const lb = document.getElementById('lightbox');
+    lb.classList.remove('hidden'); lb.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    const lb = document.getElementById('lightbox');
+    lb.classList.add('hidden'); lb.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+  function shiftLightbox(dir, e) {
+    e.stopPropagation();
+    lbIdx = (lbIdx + dir + galleryImgs.length) % galleryImgs.length;
+    document.getElementById('lightbox-img').src = galleryImgs[lbIdx];
+    document.getElementById('lightbox-count').textContent = `${lbIdx+1} / ${galleryImgs.length}`;
+  }
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('lightbox');
+    if (lb.classList.contains('hidden')) return;
+    if (e.key === 'ArrowRight') shiftLightbox(1, { stopPropagation: ()=>{} });
+    if (e.key === 'ArrowLeft')  shiftLightbox(-1, { stopPropagation: ()=>{} });
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // Contact form
+  function submitContact(e) {
+    e.preventDefault();
+    // Wire to GHL API: POST /contacts/ with name, email, phone, message
+    // Or mailto fallback:
+    const name  = document.getElementById('c-name').value;
+    const email = document.getElementById('c-email').value;
+    const phone = document.getElementById('c-phone').value;
+    const msg   = document.getElementById('c-msg').value;
+    const mailto = `mailto:speediedscarwash@gmail.com?subject=Website%20Message%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(`Name: ${name}\nPhone: ${phone}\nEmail: ${email}\n\n${msg}`)}`;
+    window.location.href = mailto;
+    document.getElementById('contact-form').reset();
+    document.getElementById('c-success').classList.remove('hidden');
+  }
+
+  // Nav: transparent over hero, solid on scroll
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('solid', window.scrollY > 40);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Mobile menu
+  document.getElementById('menu-btn').addEventListener('click', () => {
+    const m = document.getElementById('mob-menu');
+    m.classList.toggle('hidden');
+    m.classList.toggle('flex');
+  });
+  document.querySelectorAll('#mob-menu a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('mob-menu').classList.add('hidden');
+      document.getElementById('mob-menu').classList.remove('flex');
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }});
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.sr').forEach(el => observer.observe(el));
+
+  // Pricing tabs
+  function setTab(btn, tab) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const single  = document.getElementById('tab-single');
+    const monthly = document.getElementById('tab-monthly');
+    if (tab === 'single')  { single.classList.remove('hidden'); monthly.classList.add('hidden'); }
+    else                   { monthly.classList.remove('hidden'); single.classList.add('hidden'); }
+  }
+
+  // Plan picker in monthly tab
+  const plans = {
+    basic:   { name:'Basic Fast Pass',   price:'19', first:'9.50',  key:'basic' },
+    deluxe:  { name:'Deluxe Fast Pass',  price:'29', first:'14.50', key:'deluxe' },
+    ultimate:{ name:'Ultimate Fast Pass', price:'39', first:'19.50', key:'ultimate' },
+  };
+  function pickPlan(row, key) {
+    document.querySelectorAll('.plan-row').forEach(r => r.classList.remove('active'));
+    row.classList.add('active');
+    const p = plans[key];
+    document.getElementById('sel-name').textContent = p.name;
+    document.getElementById('sel-cta').textContent  = `Start for $${p.first} Today`;
+    document.getElementById('sel-cta').href         = `membership.html?plan=${p.key}`;
+  }
+</script>
+
+</body>
+</html>
