@@ -346,9 +346,56 @@
 </footer>
 
 <script>
-  function submitRewards(e) {
+  const API = 'https://speediedeecarwash.saket-golf.workers.dev';
+
+  async function submitRewards(e) {
     e.preventDefault();
-    window.location.href = 'confirm.html';
+    const btn = e.submitter;
+    btn.disabled = true;
+    btn.textContent = 'Creating account…';
+
+    const body = {
+      firstName:     document.getElementById('r-first').value.trim(),
+      lastName:      document.getElementById('r-last').value.trim(),
+      phone:         document.getElementById('r-phone').value.trim(),
+      email:         document.getElementById('r-email').value.trim(),
+      birthdayMonth: document.getElementById('r-bday').value || null,
+      referralCode:  document.getElementById('r-ref').value.trim() || null,
+    };
+
+    let errEl = document.getElementById('signup-error');
+    if (!errEl) {
+      errEl = document.createElement('p');
+      errEl.id = 'signup-error';
+      errEl.className = 'text-red-500 text-sm font-semibold text-center';
+      btn.parentNode.insertBefore(errEl, btn);
+    }
+    errEl.textContent = '';
+
+    try {
+      const res  = await fetch(`${API}/api/members/register`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+
+      if (data.ok) {
+        document.getElementById('success-name').textContent = body.firstName;
+        document.getElementById('form-panel').classList.add('hide');
+        document.getElementById('success-panel').classList.add('show');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        errEl.textContent = data.error || 'Something went wrong. Please try again.';
+        btn.disabled = false;
+        btn.textContent = 'Join Speedie Rewards — Get Your 1st Wash Free';
+      }
+    } catch (_) {
+      errEl.textContent = 'Network error. Please try again.';
+      btn.disabled = false;
+      btn.textContent = 'Join Speedie Rewards — Get Your 1st Wash Free';
+    }
   }
 </script>
 

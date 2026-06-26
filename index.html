@@ -961,18 +961,42 @@
   });
 
   // Contact form
-  function submitContact(e) {
+  const _API = 'https://speediedeecarwash.saket-golf.workers.dev';
+  async function submitContact(e) {
     e.preventDefault();
-    // Wire to GHL API: POST /contacts/ with name, email, phone, message
-    // Or mailto fallback:
-    const name  = document.getElementById('c-name').value;
-    const email = document.getElementById('c-email').value;
-    const phone = document.getElementById('c-phone').value;
-    const msg   = document.getElementById('c-msg').value;
-    const mailto = `mailto:speediedscarwash@gmail.com?subject=Website%20Message%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(`Name: ${name}\nPhone: ${phone}\nEmail: ${email}\n\n${msg}`)}`;
-    window.location.href = mailto;
-    document.getElementById('contact-form').reset();
-    document.getElementById('c-success').classList.remove('hidden');
+    const btn = e.submitter;
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    const body = {
+      name:    document.getElementById('c-name').value.trim(),
+      phone:   document.getElementById('c-phone').value.trim(),
+      email:   document.getElementById('c-email').value.trim(),
+      message: document.getElementById('c-msg').value.trim(),
+    };
+
+    try {
+      const res = await fetch(`${_API}/api/contact`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        document.getElementById('contact-form').reset();
+        document.getElementById('c-success').classList.remove('hidden');
+      } else {
+        btn.disabled = false;
+        btn.innerHTML = 'Send Message <i class="ph-bold ph-paper-plane-right ml-1"></i>';
+      }
+    } catch (_) {
+      // Fallback: open mailto so the message is never lost
+      const { name, phone, email, message } = body;
+      window.location.href = `mailto:speediedscarwash@gmail.com?subject=Website%20Message%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(`Name: ${name}\nPhone: ${phone}\nEmail: ${email}\n\n${message}`)}`;
+      btn.disabled = false;
+      btn.innerHTML = 'Send Message <i class="ph-bold ph-paper-plane-right ml-1"></i>';
+    }
   }
 
   // Nav: transparent over hero, solid on scroll

@@ -90,8 +90,20 @@
       <button type="submit" class="btn w-full bg-blue text-white font-bold py-3.5 rounded-xl hover:bg-blue-dark text-sm">
         Sign In <i class="ph-bold ph-arrow-right ml-1"></i>
       </button>
-      <p class="text-center text-xs text-muted">Forgot your password? <a href="tel:+19036806688" class="text-blue font-semibold hover:underline">Call us at (903) 680-6688</a></p>
+      <p class="text-center text-xs text-muted">Forgot your password? <a href="#" onclick="showForgotPassword(event)" class="text-blue font-semibold hover:underline">Reset via SMS</a></p>
     </form>
+
+    <!-- Forgot password inline form -->
+    <div id="forgot-panel" class="hidden bg-white border border-gray-200 rounded-2xl p-7 space-y-4 shadow-sm mt-4">
+      <p class="font-semibold text-sm">Enter your phone number and we'll text you a reset link.</p>
+      <input type="tel" id="forgot-phone" placeholder="(903) 555-1234"
+        class="w-full border border-gray-200 rounded-xl px-4 py-3.5 text-sm bg-white transition-all" />
+      <p id="forgot-msg" class="hidden text-sm"></p>
+      <div class="flex gap-3">
+        <button onclick="doForgotPassword()" class="btn bg-blue text-white font-bold px-5 py-3 rounded-xl hover:bg-blue-dark text-sm">Send Reset Link</button>
+        <button onclick="hideForgotPassword()" class="btn border border-gray-200 text-muted font-semibold px-5 py-3 rounded-xl text-sm">Cancel</button>
+      </div>
+    </div>
 
     <p class="text-center text-xs text-muted mt-6">
       Not a member yet?
@@ -115,15 +127,15 @@
           <i class="ph-bold ph-user text-white text-xl"></i>
         </div>
         <div>
-          <p class="font-extrabold text-lg leading-tight">John Smith</p>
-          <p class="text-blue-light text-sm">Member since Jan 2025 &nbsp;·&nbsp; (903) 555-1234</p>
+          <p class="font-extrabold text-lg leading-tight" id="dash-member-name">—</p>
+          <p class="text-blue-light text-sm" id="dash-member-meta">—</p>
         </div>
       </div>
       <div class="flex items-center gap-3">
         <span class="bg-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
           <i class="ph-bold ph-star-four text-yellow-300"></i> Speedie Rewards Member
         </span>
-        <span class="bg-white text-blue text-xs font-bold px-3 py-1.5 rounded-full">Ultimate Fast Pass</span>
+        <span id="dash-plan-badge" class="bg-white text-blue text-xs font-bold px-3 py-1.5 rounded-full">—</span>
       </div>
     </div>
   </div>
@@ -166,18 +178,18 @@
           <div class="grid sm:grid-cols-3 gap-4">
             <div class="bg-white border border-gray-200 rounded-2xl p-6">
               <p class="text-xs font-bold uppercase tracking-widest text-muted mb-2">Current Plan</p>
-              <p class="font-extrabold text-xl">Ultimate Fast Pass</p>
-              <p class="text-muted text-sm mt-0.5">$39/mo · renews Jul 15</p>
+              <p class="font-extrabold text-xl" id="ov-plan">—</p>
+              <p class="text-muted text-sm mt-0.5" id="ov-billing">—</p>
             </div>
             <div class="bg-white border border-gray-200 rounded-2xl p-6">
               <p class="text-xs font-bold uppercase tracking-widest text-muted mb-2">Rewards Points</p>
-              <p class="font-extrabold text-xl text-[#F47920]">7 pts</p>
-              <p class="text-muted text-sm mt-0.5">3 more for a free wash</p>
+              <p class="font-extrabold text-xl text-[#F47920]" id="ov-points">— pts</p>
+              <p class="text-muted text-sm mt-0.5" id="ov-points-sub">—</p>
             </div>
             <div class="bg-white border border-gray-200 rounded-2xl p-6">
               <p class="text-xs font-bold uppercase tracking-widest text-muted mb-2">Total Washes</p>
-              <p class="font-extrabold text-xl">23</p>
-              <p class="text-muted text-sm mt-0.5">since January 2025</p>
+              <p class="font-extrabold text-xl" id="ov-washes">—</p>
+              <p class="text-muted text-sm mt-0.5" id="ov-washes-sub">—</p>
             </div>
           </div>
 
@@ -187,30 +199,16 @@
               <p class="font-bold">Recent Washes</p>
               <button onclick="showTab('history')" class="text-blue text-xs font-semibold hover:underline">View all</button>
             </div>
-            <div>
-              <div class="wash-row flex items-center justify-between px-6 py-3.5 text-sm">
-                <span class="text-muted">Jun 18, 2025</span>
-                <span class="font-medium">Ultimate Wash</span>
-                <span class="text-green-600 text-xs font-bold bg-green-50 px-2.5 py-1 rounded-lg">+2 pts</span>
-              </div>
-              <div class="wash-row flex items-center justify-between px-6 py-3.5 text-sm">
-                <span class="text-muted">Jun 12, 2025</span>
-                <span class="font-medium">Ultimate Wash</span>
-                <span class="text-green-600 text-xs font-bold bg-green-50 px-2.5 py-1 rounded-lg">+2 pts</span>
-              </div>
-              <div class="wash-row flex items-center justify-between px-6 py-3.5 text-sm">
-                <span class="text-muted">Jun 5, 2025</span>
-                <span class="font-medium">Ultimate Wash</span>
-                <span class="text-green-600 text-xs font-bold bg-green-50 px-2.5 py-1 rounded-lg">+2 pts</span>
-              </div>
+            <div id="recent-washes">
+              <p class="px-6 py-4 text-sm text-muted">Loading…</p>
             </div>
           </div>
 
           <!-- Free wash banner -->
-          <div class="bg-gradient-to-r from-[#F47920] to-[#C4580A] rounded-2xl p-6 flex items-center justify-between gap-4">
+          <div id="fw-banner" class="bg-gradient-to-r from-[#F47920] to-[#C4580A] rounded-2xl p-6 flex items-center justify-between gap-4">
             <div>
-              <p class="text-white font-extrabold text-lg">Almost there! 3 more points for a free wash.</p>
-              <p class="text-white/70 text-sm mt-0.5">Keep washing to reach 10 points and redeem any Basic wash free.</p>
+              <p class="text-white font-extrabold text-lg" id="fw-banner-text">Almost there!</p>
+              <p class="text-white/70 text-sm mt-0.5" id="fw-banner-sub">Keep washing to earn a free wash.</p>
             </div>
             <i class="ph-bold ph-star-four text-white/30 text-5xl shrink-0"></i>
           </div>
@@ -222,8 +220,8 @@
             <div class="flex items-start justify-between mb-6">
               <div>
                 <p class="text-xs font-bold uppercase tracking-widest text-muted mb-1">Active Plan</p>
-                <h2 class="font-extrabold text-2xl">Ultimate Fast Pass</h2>
-                <p class="text-muted text-sm mt-1">$39/month · Next billing: July 15, 2025</p>
+                <h2 class="font-extrabold text-2xl" id="plan-name">—</h2>
+                <p class="text-muted text-sm mt-1" id="plan-billing">—</p>
               </div>
               <span class="bg-blue-xlight text-blue text-xs font-bold px-3 py-1.5 rounded-full">Active</span>
             </div>
@@ -272,61 +270,26 @@
                 <p class="font-bold">Vehicles on Account</p>
                 <p class="text-muted text-sm mt-0.5">Up to 4 vehicles per membership. Each gets its own kiosk access code.</p>
               </div>
-              <span class="text-xs font-bold text-muted bg-gray-100 px-2.5 py-1 rounded-lg">2 / 4 slots</span>
+              <span id="vehicle-slot" class="text-xs font-bold text-muted bg-gray-100 px-2.5 py-1 rounded-lg">— / 4 slots</span>
             </div>
-            <div class="space-y-3 mb-5">
-              <!-- Car 1 -->
-              <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
-                <div class="w-10 h-10 bg-blue-xlight rounded-xl flex items-center justify-center shrink-0">
-                  <i class="ph-bold ph-car text-blue text-lg"></i>
-                </div>
-                <div class="flex-1">
-                  <p class="font-semibold text-sm">2022 Toyota Tundra</p>
-                  <p class="text-xs text-muted">License: XYZ 1234 · TX · Primary vehicle</p>
-                </div>
-                <button class="text-xs text-blue font-semibold hover:underline">Edit</button>
-              </div>
-              <!-- Car 2 -->
-              <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
-                <div class="w-10 h-10 bg-blue-xlight rounded-xl flex items-center justify-center shrink-0">
-                  <i class="ph-bold ph-car text-blue text-lg"></i>
-                </div>
-                <div class="flex-1">
-                  <p class="font-semibold text-sm">2020 Ford F-150</p>
-                  <p class="text-xs text-muted">License: ABC 5678 · TX</p>
-                </div>
-                <button class="text-xs text-red-400 font-semibold hover:underline">Remove</button>
-              </div>
-              <!-- Empty slot 3 -->
-              <div class="flex items-center gap-4 p-4 rounded-xl border-2 border-dashed border-gray-200 cursor-pointer hover:border-blue transition-colors" onclick="showAddCar()">
-                <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center shrink-0">
-                  <i class="ph-bold ph-plus text-gray-400 text-lg"></i>
-                </div>
-                <p class="text-sm text-muted font-medium">Add a vehicle (slot 3 of 4)</p>
-              </div>
-              <!-- Empty slot 4 -->
-              <div class="flex items-center gap-4 p-4 rounded-xl border-2 border-dashed border-gray-200 cursor-pointer hover:border-blue transition-colors" onclick="showAddCar()">
-                <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center shrink-0">
-                  <i class="ph-bold ph-plus text-gray-400 text-lg"></i>
-                </div>
-                <p class="text-sm text-muted font-medium">Add a vehicle (slot 4 of 4)</p>
-              </div>
+            <div id="vehicles-container" class="space-y-3 mb-5">
+              <p class="text-sm text-muted">Loading…</p>
             </div>
 
             <!-- Add car form (hidden) -->
             <div id="add-car-form" class="hidden bg-blue-xlight border border-blue-light rounded-xl p-5 space-y-3">
               <p class="font-bold text-sm text-blue">Add New Vehicle</p>
               <div class="grid sm:grid-cols-2 gap-3">
-                <input type="text" placeholder="Year, Make, Model (e.g. 2021 Honda CR-V)"
+                <input type="text" id="car-ymm" placeholder="Year, Make, Model (e.g. 2021 Honda CR-V)"
                   class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white col-span-2" />
-                <input type="text" placeholder="License Plate"
+                <input type="text" id="car-plate" placeholder="License Plate"
                   class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white" />
-                <select class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white appearance-none">
+                <select id="car-state" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white appearance-none">
                   <option>TX</option><option>LA</option><option>AR</option><option>OK</option>
                 </select>
               </div>
               <div class="flex gap-3">
-                <button onclick="showToast('Vehicle added!')" class="btn bg-blue text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-dark text-sm">Add Vehicle</button>
+                <button onclick="submitAddCar()" class="btn bg-blue text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-dark text-sm">Add Vehicle</button>
                 <button onclick="document.getElementById('add-car-form').classList.add('hidden')" class="btn border border-gray-200 bg-white text-muted font-semibold px-5 py-2.5 rounded-xl text-sm">Cancel</button>
               </div>
             </div>
@@ -342,38 +305,28 @@
               </div>
               <div>
                 <p class="text-xs font-bold uppercase tracking-widest text-muted">Speedie Rewards</p>
-                <p class="font-extrabold text-3xl text-[#F47920]">7 <span class="text-lg font-semibold text-muted">/ 10 points</span></p>
+                <p class="font-extrabold text-3xl text-[#F47920]" id="rw-points">— <span class="text-lg font-semibold text-muted">/ 10 points</span></p>
               </div>
             </div>
             <!-- Progress bar -->
             <div class="h-3 bg-gray-100 rounded-full overflow-hidden mb-2">
-              <div class="points-bar h-full rounded-full" style="width:70%; background:#F47920;"></div>
+              <div id="rw-bar" class="points-bar h-full rounded-full" style="width:0%; background:#F47920;"></div>
             </div>
-            <p class="text-xs text-muted mb-6">3 more washes to earn a free Basic wash</p>
+            <p class="text-xs text-muted mb-6" id="rw-points-sub">— more washes to earn a free Basic wash</p>
             <div class="flex flex-wrap gap-3">
-              <button class="btn bg-[#F47920] text-white font-semibold px-5 py-2.5 rounded-xl text-sm opacity-50 cursor-not-allowed">Redeem Free Wash (need 10 pts)</button>
+              <button id="rw-redeem-btn" onclick="doRedeem()" class="btn bg-[#F47920] text-white font-semibold px-5 py-2.5 rounded-xl text-sm opacity-50 cursor-not-allowed">Redeem Free Wash (need 10 pts)</button>
+            </div>
+            <div id="rw-code-box" class="hidden mt-4 bg-green-50 border border-green-200 rounded-xl p-4">
+              <p class="text-green-700 font-bold text-sm mb-1">Free wash code generated!</p>
+              <p class="text-green-900 font-extrabold text-xl tracking-widest" id="rw-code"></p>
+              <p class="text-green-600 text-xs mt-1">Show this code at the kiosk to redeem your free Basic wash.</p>
             </div>
           </div>
 
           <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
             <div class="px-6 py-4 border-b border-gray-100"><p class="font-bold">Points History</p></div>
-            <div>
-              <div class="wash-row flex items-center justify-between px-6 py-3.5 text-sm">
-                <div><p class="font-medium">Ultimate wash</p><p class="text-xs text-muted">Jun 18, 2025</p></div>
-                <span class="text-green-600 font-bold">+2 pts</span>
-              </div>
-              <div class="wash-row flex items-center justify-between px-6 py-3.5 text-sm">
-                <div><p class="font-medium">Ultimate wash</p><p class="text-xs text-muted">Jun 12, 2025</p></div>
-                <span class="text-green-600 font-bold">+2 pts</span>
-              </div>
-              <div class="wash-row flex items-center justify-between px-6 py-3.5 text-sm">
-                <div><p class="font-medium">Sign-up bonus</p><p class="text-xs text-muted">Jan 5, 2025</p></div>
-                <span class="text-green-600 font-bold">+2 pts</span>
-              </div>
-              <div class="wash-row flex items-center justify-between px-6 py-3.5 text-sm">
-                <div><p class="font-medium">Referral — Mike J.</p><p class="text-xs text-muted">Feb 3, 2025</p></div>
-                <span class="text-green-600 font-bold">+1 pt</span>
-              </div>
+            <div id="points-history-list">
+              <p class="px-6 py-4 text-sm text-muted">Loading…</p>
             </div>
           </div>
 
@@ -382,7 +335,7 @@
             <p class="font-bold mb-1">Your Referral Code</p>
             <p class="text-muted text-sm mb-4">Share this code with friends. When they join, you both get a free wash.</p>
             <div class="flex items-center gap-3">
-              <div class="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 font-bold tracking-widest text-lg text-center">SPEEDIE-JSM7</div>
+              <div id="rw-referral-code" class="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 font-bold tracking-widest text-lg text-center">—</div>
               <button onclick="copyCode()" class="btn bg-ink text-white font-semibold px-4 py-3 rounded-xl hover:bg-gray-800 text-sm shrink-0">
                 <i class="ph-bold ph-copy mr-1"></i> Copy
               </button>
@@ -393,18 +346,9 @@
         <!-- ── WASH HISTORY ── -->
         <div id="tab-history" class="tab-content">
           <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
-            <div class="px-6 py-4 border-b border-gray-100"><p class="font-bold">All Washes (23 total)</p></div>
-            <div class="divide-y divide-gray-100 text-sm">
-              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">Jun 18, 2025</span><span class="flex-1 font-medium">Ultimate Wash</span><span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-lg">Member</span></div>
-              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">Jun 12, 2025</span><span class="flex-1 font-medium">Ultimate Wash</span><span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-lg">Member</span></div>
-              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">Jun 5, 2025</span><span class="flex-1 font-medium">Ultimate Wash</span><span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-lg">Member</span></div>
-              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">May 28, 2025</span><span class="flex-1 font-medium">Ultimate Wash</span><span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-lg">Member</span></div>
-              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">May 20, 2025</span><span class="flex-1 font-medium">Ultimate Wash</span><span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-lg">Member</span></div>
-              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">May 11, 2025</span><span class="flex-1 font-medium">Ultimate Wash</span><span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-lg">Member</span></div>
-              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">May 2, 2025</span><span class="flex-1 font-medium">Ultimate Wash</span><span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-lg">Member</span></div>
-              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">Apr 25, 2025</span><span class="flex-1 font-medium">Deluxe Wash</span><span class="text-blue font-bold text-xs bg-blue-xlight px-2.5 py-1 rounded-lg">Upgrade</span></div>
-              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">Apr 15, 2025</span><span class="flex-1 font-medium">Ultimate Wash</span><span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-lg">Member</span></div>
-              <div class="wash-row flex items-center justify-between px-6 py-3.5"><span class="text-muted w-32">Apr 6, 2025</span><span class="flex-1 font-medium">Free Wash (Rewards)</span><span class="text-[#F47920] font-bold text-xs bg-orange-50 px-2.5 py-1 rounded-lg">Reward</span></div>
+            <div class="px-6 py-4 border-b border-gray-100"><p class="font-bold" id="wh-header">All Washes</p></div>
+            <div id="wash-history-rows" class="divide-y divide-gray-100 text-sm">
+              <p class="px-6 py-4 text-sm text-muted">Loading…</p>
             </div>
           </div>
         </div>
@@ -449,30 +393,31 @@
             <div class="grid sm:grid-cols-2 gap-4">
               <div>
                 <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">First Name</label>
-                <input type="text" value="John" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
+                <input type="text" id="prof-first" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
               </div>
               <div>
                 <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Last Name</label>
-                <input type="text" value="Smith" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
+                <input type="text" id="prof-last" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
               </div>
             </div>
             <div>
               <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Mobile Phone</label>
-              <input type="tel" value="(903) 555-1234" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
+              <input type="tel" id="prof-phone" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
             </div>
             <div>
               <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Email Address</label>
-              <input type="email" value="john.smith@email.com" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
+              <input type="email" id="prof-email" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
             </div>
             <div>
               <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Birthday Month</label>
-              <select class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white appearance-none transition-all">
+              <select id="prof-bday" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white appearance-none transition-all">
+                <option value="">— Select month —</option>
                 <option>January</option><option>February</option><option>March</option><option>April</option>
-                <option>May</option><option selected>June</option><option>July</option><option>August</option>
+                <option>May</option><option>June</option><option>July</option><option>August</option>
                 <option>September</option><option>October</option><option>November</option><option>December</option>
               </select>
             </div>
-            <button onclick="showToast('Profile updated!')" class="btn bg-blue text-white font-semibold px-6 py-2.5 rounded-xl hover:bg-blue-dark text-sm">Save Changes</button>
+            <button onclick="saveProfile()" class="btn bg-blue text-white font-semibold px-6 py-2.5 rounded-xl hover:bg-blue-dark text-sm">Save Changes</button>
           </div>
         </div>
 
@@ -515,38 +460,374 @@
 </div>
 
 <script>
-  // ─── Login with phone + password ───
-  function doLogin(e) {
+  const API = 'https://speediedeecarwash.saket-golf.workers.dev';
+  let _member = null;
+
+  // ── Boot: check existing session ────────────────────────────────────────────
+  (async () => {
+    try {
+      const res  = await fetch(`${API}/api/auth/me`, { credentials: 'include' });
+      const data = await res.json();
+      if (data.ok && data.member) {
+        _member = data.member;
+        await showDashboard();
+      }
+    } catch (_) {}
+  })();
+
+  // ── Login ────────────────────────────────────────────────────────────────────
+  async function doLogin(e) {
     e.preventDefault();
+    const btn = e.submitter;
+    btn.disabled = true;
+    btn.textContent = 'Signing in…';
+
+    try {
+      const res  = await fetch(`${API}/api/auth/login`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          phone:    document.getElementById('login-phone').value,
+          password: document.getElementById('login-password').value,
+        }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        _member = data.member;
+        await showDashboard();
+      } else {
+        btn.disabled = false;
+        btn.innerHTML = 'Sign In <i class="ph-bold ph-arrow-right ml-1"></i>';
+        showLoginError(data.error || 'Sign in failed. Please try again.');
+      }
+    } catch (_) {
+      btn.disabled = false;
+      btn.innerHTML = 'Sign In <i class="ph-bold ph-arrow-right ml-1"></i>';
+      showLoginError('Network error. Please try again.');
+    }
+  }
+
+  function showLoginError(msg) {
+    let el = document.getElementById('login-error');
+    if (!el) {
+      el = document.createElement('p');
+      el.id = 'login-error';
+      el.className = 'text-center text-xs text-red-500 font-semibold';
+      document.getElementById('login-form').appendChild(el);
+    }
+    el.textContent = msg;
+  }
+
+  // ── Logout ───────────────────────────────────────────────────────────────────
+  async function doLogout() {
+    await fetch(`${API}/api/auth/logout`, { method: 'POST', credentials: 'include' }).catch(() => {});
+    _member = null;
+    document.getElementById('dashboard-view').classList.add('hidden');
+    document.getElementById('login-view').classList.remove('hidden');
+    document.getElementById('logout-btn').classList.add('hidden');
+    document.getElementById('login-phone').value    = '';
+    document.getElementById('login-password').value = '';
+    window.scrollTo({ top: 0 });
+  }
+
+  // ── Show dashboard & populate data ───────────────────────────────────────────
+  async function showDashboard() {
     document.getElementById('login-view').classList.add('hidden');
     document.getElementById('dashboard-view').classList.remove('hidden');
     document.getElementById('logout-btn').classList.remove('hidden');
     window.scrollTo({ top: 0 });
+    populateHeader(_member);
+    populateOverview(_member);
+    populateRewards(_member);
+    populatePlanTab(_member);
+    populateProfile(_member);
+
+    // Load full account data in parallel
+    const [acct, history, ptHistory] = await Promise.all([
+      fetch(`${API}/api/account`, { credentials: 'include' }).then(r => r.json()).catch(() => ({})),
+      fetch(`${API}/api/account/history`, { credentials: 'include' }).then(r => r.json()).catch(() => ({})),
+      fetch(`${API}/api/account/points-history`, { credentials: 'include' }).then(r => r.json()).catch(() => ({})),
+    ]);
+
+    if (acct.ok) {
+      _member = acct.member;
+      populateHeader(_member);
+      populateOverview(_member);
+      populateRewards(_member);
+      renderRecentWashes(acct.recentWashes || []);
+      renderVehicles();
+    }
+    if (history.ok) renderWashHistory(history.washes || []);
+    if (ptHistory.ok) renderPointsHistory(ptHistory.history || []);
   }
 
-  // ─── Logout ───
-  function doLogout() {
-    document.getElementById('dashboard-view').classList.add('hidden');
-    document.getElementById('login-view').classList.remove('hidden');
-    document.getElementById('logout-btn').classList.add('hidden');
-    document.getElementById('login-phone').value = '';
-    document.getElementById('login-password').value = '';
+  // ── Header ───────────────────────────────────────────────────────────────────
+  function populateHeader(m) {
+    const since = m.memberSince ? new Date(m.memberSince).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '';
+    document.getElementById('dash-member-name').textContent = `${m.firstName} ${m.lastName}`;
+    document.getElementById('dash-member-meta').textContent = `Member since ${since} · ${m.phone}`;
+    document.getElementById('dash-plan-badge').textContent  = planLabel(m.plan);
   }
 
-  // ─── Add car form toggle ───
+  // ── Overview tab ─────────────────────────────────────────────────────────────
+  function populateOverview(m) {
+    const pts      = m.points || 0;
+    const needed   = Math.max(0, 10 - (pts % 10));
+    const since    = m.memberSince ? new Date(m.memberSince).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : '—';
+
+    document.getElementById('ov-plan').textContent       = planLabel(m.plan);
+    document.getElementById('ov-billing').textContent    = m.plan === 'rewards' ? 'Free rewards membership' : `${planPrice(m.plan)}/mo`;
+    document.getElementById('ov-points').textContent     = `${pts} pts`;
+    document.getElementById('ov-points-sub').textContent = pts >= 10 ? 'You have a free wash ready!' : `${needed} more for a free wash`;
+    document.getElementById('ov-washes').textContent     = m.washCount || 0;
+    document.getElementById('ov-washes-sub').textContent = `since ${since}`;
+
+    const bannerText = pts >= 10
+      ? `You have a free wash! ${pts} points — click Rewards to redeem.`
+      : `Almost there! ${needed} more wash${needed === 1 ? '' : 'es'} for a free Basic wash.`;
+    const bannerSub  = pts >= 10
+      ? 'Head to the Rewards tab to generate your wash code.'
+      : 'Keep washing to reach 10 points and redeem any Basic wash free.';
+    document.getElementById('fw-banner-text').textContent = bannerText;
+    document.getElementById('fw-banner-sub').textContent  = bannerSub;
+  }
+
+  // ── Recent washes (overview) ──────────────────────────────────────────────────
+  function renderRecentWashes(washes) {
+    const el = document.getElementById('recent-washes');
+    if (!washes.length) { el.innerHTML = '<p class="px-6 py-4 text-sm text-muted">No washes on record yet.</p>'; return; }
+    el.innerHTML = washes.slice(0, 5).map(w => `
+      <div class="wash-row flex items-center justify-between px-6 py-3.5 text-sm">
+        <span class="text-muted">${fmtDate(w.created_at)}</span>
+        <span class="font-medium">${w.wash_type}</span>
+        ${w.points_earned > 0 ? `<span class="text-green-600 text-xs font-bold bg-green-50 px-2.5 py-1 rounded-lg">+${w.points_earned} pts</span>` : '<span class="text-xs text-muted">—</span>'}
+      </div>`).join('');
+  }
+
+  // ── Rewards tab ───────────────────────────────────────────────────────────────
+  function populateRewards(m) {
+    const pts    = m.points || 0;
+    const needed = Math.max(0, 10 - (pts % 10));
+    const pct    = Math.min(100, (pts % 10) / 10 * 100);
+
+    const rwPts = document.getElementById('rw-points');
+    rwPts.innerHTML = `${pts} <span class="text-lg font-semibold text-muted">/ 10 points</span>`;
+    document.getElementById('rw-bar').style.width        = `${pct}%`;
+    document.getElementById('rw-points-sub').textContent = pts >= 10 ? 'You can redeem a free wash now!' : `${needed} more wash${needed === 1 ? '' : 'es'} to earn a free Basic wash`;
+    document.getElementById('rw-referral-code').textContent = m.referralCode || '—';
+
+    const btn = document.getElementById('rw-redeem-btn');
+    if (pts >= 10) {
+      btn.textContent = 'Redeem Free Wash';
+      btn.classList.remove('opacity-50', 'cursor-not-allowed');
+    } else {
+      btn.textContent = `Redeem Free Wash (need 10 pts, you have ${pts})`;
+      btn.classList.add('opacity-50', 'cursor-not-allowed');
+    }
+  }
+
+  function renderPointsHistory(history) {
+    const el = document.getElementById('points-history-list');
+    if (!history.length) { el.innerHTML = '<p class="px-6 py-4 text-sm text-muted">No points history yet.</p>'; return; }
+    el.innerHTML = history.map(h => `
+      <div class="wash-row flex items-center justify-between px-6 py-3.5 text-sm">
+        <div><p class="font-medium">${h.description}</p><p class="text-xs text-muted">${fmtDate(h.created_at)}</p></div>
+        <span class="${h.points > 0 ? 'text-green-600' : 'text-red-400'} font-bold">${h.points > 0 ? '+' : ''}${h.points} pt${Math.abs(h.points) !== 1 ? 's' : ''}</span>
+      </div>`).join('');
+  }
+
+  // ── Wash history tab ──────────────────────────────────────────────────────────
+  function renderWashHistory(washes) {
+    document.getElementById('wh-header').textContent = `All Washes (${washes.length} total)`;
+    const el = document.getElementById('wash-history-rows');
+    if (!washes.length) { el.innerHTML = '<p class="px-6 py-4 text-sm text-muted">No washes on record yet.</p>'; return; }
+    el.innerHTML = washes.map(w => `
+      <div class="wash-row flex items-center justify-between px-6 py-3.5">
+        <span class="text-muted w-32">${fmtDate(w.created_at)}</span>
+        <span class="flex-1 font-medium">${w.wash_type}</span>
+        <span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-lg">Member</span>
+      </div>`).join('');
+  }
+
+  // ── Plan tab ──────────────────────────────────────────────────────────────────
+  function populatePlanTab(m) {
+    document.getElementById('plan-name').textContent    = planLabel(m.plan);
+    document.getElementById('plan-billing').textContent = m.plan === 'rewards' ? 'Free membership' : `${planPrice(m.plan)}/month · Contact us to change`;
+  }
+
+  // ── Vehicles ──────────────────────────────────────────────────────────────────
+  async function renderVehicles() {
+    try {
+      const res  = await fetch(`${API}/api/account/vehicles`, { credentials: 'include' });
+      const data = await res.json();
+      if (!data.ok) return;
+      const vehicles = data.vehicles || [];
+      const cnt = vehicles.length;
+      document.getElementById('vehicle-slot').textContent = `${cnt} / 4 slots`;
+      const container = document.getElementById('vehicles-container');
+      const slots = [];
+      vehicles.forEach(v => {
+        slots.push(`
+          <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
+            <div class="w-10 h-10 bg-blue-xlight rounded-xl flex items-center justify-center shrink-0">
+              <i class="ph-bold ph-car text-blue text-lg"></i>
+            </div>
+            <div class="flex-1">
+              <p class="font-semibold text-sm">${v.year_make_model}</p>
+              <p class="text-xs text-muted">License: ${v.license_plate} · ${v.state}${v.is_primary ? ' · Primary vehicle' : ''}</p>
+            </div>
+            <button onclick="removeVehicle(${v.id})" class="text-xs text-red-400 font-semibold hover:underline">Remove</button>
+          </div>`);
+      });
+      for (let i = cnt; i < 4; i++) {
+        slots.push(`
+          <div class="flex items-center gap-4 p-4 rounded-xl border-2 border-dashed border-gray-200 cursor-pointer hover:border-blue transition-colors" onclick="showAddCar()">
+            <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center shrink-0">
+              <i class="ph-bold ph-plus text-gray-400 text-lg"></i>
+            </div>
+            <p class="text-sm text-muted font-medium">Add a vehicle (slot ${i + 1} of 4)</p>
+          </div>`);
+      }
+      container.innerHTML = slots.join('');
+    } catch (_) {}
+  }
+
+  async function removeVehicle(vid) {
+    if (!confirm('Remove this vehicle from your account?')) return;
+    const res  = await fetch(`${API}/api/account/vehicles/${vid}`, { method: 'DELETE', credentials: 'include' });
+    const data = await res.json();
+    if (data.ok) { showToast('Vehicle removed.'); renderVehicles(); }
+    else showToast(data.error || 'Could not remove vehicle.');
+  }
+
+  async function submitAddCar() {
+    const ymm   = document.getElementById('car-ymm').value.trim();
+    const plate = document.getElementById('car-plate').value.trim();
+    const state = document.getElementById('car-state').value;
+    if (!ymm || !plate) { showToast('Please fill in all vehicle fields.'); return; }
+    const res  = await fetch(`${API}/api/account/vehicles`, {
+      method: 'POST', credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ yearMakeModel: ymm, licensePlate: plate, state }),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      showToast('Vehicle added!');
+      document.getElementById('add-car-form').classList.add('hidden');
+      renderVehicles();
+    } else {
+      showToast(data.error || 'Could not add vehicle.');
+    }
+  }
+
+  // ── Profile save ──────────────────────────────────────────────────────────────
+  async function saveProfile() {
+    const body = {
+      firstName:     document.getElementById('prof-first').value.trim(),
+      lastName:      document.getElementById('prof-last').value.trim(),
+      phone:         document.getElementById('prof-phone').value.trim(),
+      email:         document.getElementById('prof-email').value.trim(),
+      birthdayMonth: document.getElementById('prof-bday').value,
+    };
+    if (!body.firstName || !body.lastName || !body.phone || !body.email) {
+      showToast('Please fill in all fields.'); return;
+    }
+    const res  = await fetch(`${API}/api/account/profile`, {
+      method: 'PATCH', credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      _member = data.member;
+      populateHeader(_member);
+      showToast('Profile updated!');
+    } else {
+      showToast(data.error || 'Could not save profile.');
+    }
+  }
+
+  function populateProfile(m) {
+    document.getElementById('prof-first').value  = m.firstName  || '';
+    document.getElementById('prof-last').value   = m.lastName   || '';
+    document.getElementById('prof-phone').value  = m.phone      || '';
+    document.getElementById('prof-email').value  = m.email      || '';
+    const bdaySel = document.getElementById('prof-bday');
+    if (m.birthdayMonth) {
+      for (const opt of bdaySel.options) {
+        if (opt.value === m.birthdayMonth || opt.text === m.birthdayMonth) { opt.selected = true; break; }
+      }
+    }
+  }
+
+  // ── Rewards redemption ────────────────────────────────────────────────────────
+  async function doRedeem() {
+    if (!_member || _member.points < 10) return;
+    const res  = await fetch(`${API}/api/rewards/redeem`, { method: 'POST', credentials: 'include' });
+    const data = await res.json();
+    if (data.ok) {
+      _member.points -= 10;
+      populateRewards(_member);
+      populateOverview(_member);
+      document.getElementById('rw-code').textContent = data.code;
+      document.getElementById('rw-code-box').classList.remove('hidden');
+      showToast('Free wash code generated!');
+    } else {
+      showToast(data.error || 'Could not redeem.');
+    }
+  }
+
+  // ── Forgot password ───────────────────────────────────────────────────────────
+  function showForgotPassword(e) {
+    e.preventDefault();
+    document.getElementById('forgot-panel').classList.remove('hidden');
+    document.getElementById('forgot-phone').focus();
+  }
+  function hideForgotPassword() {
+    document.getElementById('forgot-panel').classList.add('hidden');
+    const msg = document.getElementById('forgot-msg');
+    msg.textContent = '';
+    msg.classList.add('hidden');
+  }
+  async function doForgotPassword() {
+    const phone = document.getElementById('forgot-phone').value.trim();
+    const msg   = document.getElementById('forgot-msg');
+    if (!phone) { msg.textContent = 'Please enter your phone number.'; msg.className = 'text-sm text-red-500'; msg.classList.remove('hidden'); return; }
+    const res  = await fetch(`${API}/api/auth/forgot-password`, {
+      method: 'POST', credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone }),
+    });
+    const data = await res.json();
+    msg.textContent = data.message || 'If that number is on file, a reset link is on its way via SMS.';
+    msg.className   = 'text-sm text-green-600 font-semibold';
+    msg.classList.remove('hidden');
+  }
+
+  // ── Copy referral code ────────────────────────────────────────────────────────
+  function copyCode() {
+    const code = document.getElementById('rw-referral-code').textContent;
+    navigator.clipboard.writeText(code).catch(() => {});
+    showToast('Referral code copied!');
+  }
+
+  // ── Add car form toggle ───────────────────────────────────────────────────────
   function showAddCar() {
     document.getElementById('add-car-form').classList.remove('hidden');
   }
 
-  // ─── Sidebar tabs ───
+  // ── Sidebar tabs ──────────────────────────────────────────────────────────────
   function showTab(name) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.dash-tab').forEach(el => el.classList.remove('active'));
     document.getElementById('tab-' + name).classList.add('active');
     event.currentTarget.classList.add('active');
+    // Lazy-load vehicles when plan tab opens
+    if (name === 'plan') renderVehicles();
   }
 
-  // ─── Plan upgrade ───
+  // ── Plan upgrade ──────────────────────────────────────────────────────────────
   function showUpgrade() {
     document.getElementById('upgrade-panel').classList.remove('hidden');
   }
@@ -560,29 +841,35 @@
   }
   function confirmPlanChange() {
     document.getElementById('upgrade-panel').classList.add('hidden');
-    showToast('Plan change requested! We\'ll confirm by text.');
+    showToast("Plan change requested! We'll confirm by text.");
   }
 
-  // ─── Copy referral code ───
-  function copyCode() {
-    navigator.clipboard.writeText('SPEEDIE-JSM7').catch(() => {});
-    showToast('Referral code copied!');
+  // ── Cancel ────────────────────────────────────────────────────────────────────
+  function confirmCancel() {
+    if (confirm('Are you sure you want to cancel? Your plan stays active until the end of the billing period.')) {
+      showToast('Cancellation request sent. Sorry to see you go!');
+      setTimeout(() => doLogout(), 2000);
+    }
   }
 
-  // ─── Toast ───
+  // ── Toast ─────────────────────────────────────────────────────────────────────
   function showToast(msg) {
     const t = document.getElementById('toast');
     t.textContent = '✓ ' + msg;
     t.style.opacity = '1';
-    setTimeout(() => t.style.opacity = '0', 3000);
+    setTimeout(() => { t.style.opacity = '0'; }, 3500);
   }
 
-  // ─── Cancel confirm ───
-  function confirmCancel() {
-    if (confirm('Are you sure? Your membership will end July 15, 2025.')) {
-      showToast('Membership cancelled. Sorry to see you go!');
-      setTimeout(() => { doLogout(); }, 2000);
-    }
+  // ── Helpers ───────────────────────────────────────────────────────────────────
+  function planLabel(plan) {
+    return { rewards: 'Speedie Rewards', basic: 'Basic Fast Pass', deluxe: 'Deluxe Fast Pass', ultimate: 'Ultimate Fast Pass' }[plan] || plan || '—';
+  }
+  function planPrice(plan) {
+    return { basic: '$19', deluxe: '$29', ultimate: '$39' }[plan] || '';
+  }
+  function fmtDate(iso) {
+    if (!iso) return '—';
+    return new Date(iso + (iso.endsWith('Z') ? '' : 'Z')).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   }
 </script>
 
