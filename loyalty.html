@@ -1,428 +1,151 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Speedie Rewards | Free Washes & Member Perks - Speedie D's Car Wash</title>
-  <meta name="description" content="Join Speedie Rewards and get 2 free washes just for signing up. Earn points every wash, unlock birthday rewards, and refer friends for bonuses. Gilmer, TX." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { jakarta: ['"Plus Jakarta Sans"', 'sans-serif'] },
-          colors: {
-            blue:  { DEFAULT: '#2563EB', dark: '#1D4ED8', light: '#DBEAFE', xlight: '#EFF6FF' },
-            ink:   { DEFAULT: '#111827' },
-            muted: '#6B7280',
-            orange:{ DEFAULT: '#F47920', dark: '#C4580A', light: '#FEF3C7' },
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .btn { transition: all 0.15s cubic-bezier(0.16,1,0.3,1); }
-    .btn:active { transform: scale(0.97) translateY(1px); }
-    .star-card { transition: transform 0.2s, box-shadow 0.2s; }
-    .star-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.09); }
-    input:focus, select:focus { outline: none; border-color: #2563EB !important; box-shadow: 0 0 0 3px #DBEAFE; }
-    .reward-ring { background: conic-gradient(#F47920 0deg, #F47920 calc(var(--pct) * 3.6deg), #E5E7EB calc(var(--pct) * 3.6deg)); }
-    @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
-    .fade-up { animation: fadeUp 0.5s ease forwards; }
-    .success-panel { display: none; }
-    .success-panel.show { display: block; }
-    .form-panel.hide { display: none; }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Speedie Rewards | Free Washes and Member Perks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portal.css">
 </head>
-<body class="bg-white font-jakarta antialiased text-ink">
-
-<!-- NAV -->
-<nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8 h-[70px] flex items-center justify-between">
-    <a href="index.html" class="flex items-center shrink-0">
-      <img src="https://assets.cdn.filesafe.space/e4notYo5fJyoxSgPxQkh/media/67408b03d6b97efd8da073c4.png"
-           alt="Speedie D's Car Wash" class="h-11 w-auto object-contain" />
-    </a>
-    <ul class="hidden md:flex items-center gap-7 text-sm font-medium text-gray-500">
-      <li><a href="index.html#plans" class="hover:text-ink transition-colors">Wash Plans</a></li>
-      <li><a href="membership.html" class="hover:text-ink transition-colors">Memberships</a></li>
-      <li><a href="corporate.html" class="hover:text-ink transition-colors">Corporate</a></li>
-      <li><a href="loyalty.html" class="text-ink font-semibold">Rewards</a></li>
-      <li><a href="account.html" class="hover:text-ink transition-colors">My Account</a></li>
-    </ul>
-    <a href="account.html" class="btn hidden md:inline-flex items-center gap-2 bg-blue text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-dark">
-      <i class="ph-bold ph-user-circle text-base"></i> My Account
-    </a>
-    <a href="index.html" class="md:hidden text-sm text-gray-500 font-medium">← Home</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="bg-ink overflow-hidden relative py-20 px-5">
-  <div class="absolute inset-0 opacity-10" style="background: radial-gradient(ellipse at 70% 50%, #F47920 0%, transparent 65%), radial-gradient(ellipse at 20% 80%, #2563EB 0%, transparent 55%);"></div>
-  <div class="relative z-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-    <div>
-      <span class="inline-flex items-center gap-2 bg-orange/10 text-orange border border-orange/20 text-xs font-bold px-3 py-1.5 rounded-full mb-5">
-        <i class="ph-bold ph-star text-orange"></i> Speedie Rewards Program
-      </span>
-      <h1 class="text-white font-extrabold leading-none tracking-tight mb-5" style="font-size:clamp(2.8rem,5.5vw,4.5rem)">
-        Join Rewards.<br/><span style="color:#F47920">Get 2 Free Washes.</span>
-      </h1>
-      <p class="text-gray-400 text-lg leading-relaxed mb-4 max-w-md">Sign up for Speedie Rewards and earn free washes, birthday perks, and referral bonuses — just for being a loyal member.</p>
-      <div class="flex items-start gap-2 bg-orange/10 border border-orange/20 rounded-xl px-4 py-3 mb-6 max-w-md">
-        <i class="ph-bold ph-star-four text-[#F47920] text-sm mt-0.5 shrink-0"></i>
-        <p class="text-gray-300 text-sm leading-relaxed"><strong class="text-white">Your 1st wash is free</strong> when you join. <strong class="text-white">Your 5th wash is free</strong> as a loyalty milestone — our way of saying thanks for coming back.</p>
-      </div>
-      <div class="flex flex-wrap gap-3 mb-8">
-        <span class="flex items-center gap-1.5 bg-white/5 text-gray-300 text-sm px-4 py-2 rounded-xl border border-white/10">
-          <i class="ph-bold ph-gift text-orange"></i> 1st &amp; 5th wash free
-        </span>
-        <span class="flex items-center gap-1.5 bg-white/5 text-gray-300 text-sm px-4 py-2 rounded-xl border border-white/10">
-          <i class="ph-bold ph-cake text-orange"></i> Birthday wash every year
-        </span>
-        <span class="flex items-center gap-1.5 bg-white/5 text-gray-300 text-sm px-4 py-2 rounded-xl border border-white/10">
-          <i class="ph-bold ph-users text-orange"></i> Refer friends for bonuses
-        </span>
-      </div>
-      <a href="#signup" class="btn inline-flex items-center gap-2 text-white font-bold px-8 py-4 rounded-xl text-base" style="background:#F47920;">
-        Sign Up Free <i class="ph-bold ph-arrow-down text-sm"></i>
-      </a>
+<body>
+  <nav class="portal-nav">
+    <a href="index.html"><img src="https://storage.googleapis.com/msgsndr/e4notYo5fJyoxSgPxQkh/media/67587a0e3c5cd5e4ffb06a16.png" alt="Speedie D's"></a>
+    <div class="portal-nav-links">
+      <a href="index.html#plans">Wash Plans</a>
+      <a href="membership.html">Memberships</a>
+      <a href="corporate.html">Corporate</a>
+      <a href="account.html">My Account</a>
     </div>
+    <a class="portal-btn blue" href="account.html">My Account</a>
+  </nav>
 
-    <!-- Points visual -->
-    <div class="hidden md:flex flex-col items-center gap-6">
-      <div class="relative w-56 h-56">
-        <div class="absolute inset-0 rounded-full border-8 border-white/5"></div>
-        <div class="absolute inset-0 rounded-full border-8 border-[#F47920] opacity-20 animate-pulse"></div>
-        <div class="absolute inset-4 rounded-full bg-white/5 flex flex-col items-center justify-center">
-          <i class="ph-bold ph-star-four text-[#F47920] text-5xl mb-1"></i>
-          <p class="text-white font-extrabold text-3xl">2</p>
-          <p class="text-gray-400 text-xs">Free Washes</p>
-        </div>
-      </div>
-      <div class="grid grid-cols-3 gap-4 w-full max-w-sm">
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 text-center">
-          <p class="text-white font-extrabold text-2xl">10</p>
-          <p class="text-gray-500 text-xs mt-0.5">pts = 1 free wash</p>
-        </div>
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 text-center">
-          <p class="text-[#F47920] font-extrabold text-2xl">$0</p>
-          <p class="text-gray-500 text-xs mt-0.5">to join</p>
-        </div>
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 text-center">
-          <p class="text-white font-extrabold text-2xl">∞</p>
-          <p class="text-gray-500 text-xs mt-0.5">points never expire</p>
-        </div>
-      </div>
+  <header class="portal-hero orange">
+    <div class="inner">
+      <p class="kicker">Speedie Rewards Program</p>
+      <h1>Join rewards. Get your first free wash.</h1>
+      <p>Sign up for Speedie Rewards and earn free washes, birthday perks, and referral bonuses — just for being a loyal member.</p>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- HOW IT WORKS -->
-<section class="py-20 px-5 bg-gray-50">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-14">
-      <h2 class="font-extrabold tracking-tight leading-none mb-3" style="font-size:clamp(2rem,4vw,3rem)">How It Works.</h2>
-      <p class="text-muted max-w-md mx-auto">Three steps to cleaner cars and free washes.</p>
+  <section class="portal-section">
+    <h2>How it works.</h2>
+    <div class="feature-grid">
+      <article class="feature-card">
+        <h3>1. Sign Up Free</h3>
+        <p>Create your account with your name, phone, and email. No credit card required.</p>
+      </article>
+      <article class="feature-card">
+        <h3>2. Wash and Earn</h3>
+        <p>Rewards members earn 1 point per wash. Fast Pass members earn 2 points per visit.</p>
+      </article>
+      <article class="feature-card">
+        <h3>3. Redeem</h3>
+        <p>Use 10 points for a free Basic wash from your account dashboard.</p>
+      </article>
     </div>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="star-card bg-white rounded-2xl p-8 border border-gray-200 text-center">
-        <div class="w-16 h-16 rounded-2xl bg-orange/10 flex items-center justify-center mx-auto mb-5">
-          <i class="ph-bold ph-user-plus text-[#F47920] text-3xl"></i>
-        </div>
-        <div class="w-7 h-7 rounded-full bg-ink text-white text-xs font-bold flex items-center justify-center mx-auto mb-3">1</div>
-        <h3 class="font-extrabold text-xl mb-2">Sign Up Free</h3>
-        <p class="text-muted text-sm leading-relaxed">Create your Speedie Rewards account with your name, phone, and email. No credit card required.</p>
-        <p class="mt-4 text-[#F47920] font-bold text-sm">1st wash free on signup</p>
-      </div>
-      <div class="star-card bg-white rounded-2xl p-8 border border-gray-200 text-center">
-        <div class="w-16 h-16 rounded-2xl bg-blue-xlight flex items-center justify-center mx-auto mb-5">
-          <i class="ph-bold ph-car-wash text-blue text-3xl"></i>
-        </div>
-        <div class="w-7 h-7 rounded-full bg-ink text-white text-xs font-bold flex items-center justify-center mx-auto mb-3">2</div>
-        <h3 class="font-extrabold text-xl mb-2">Wash &amp; Earn</h3>
-        <p class="text-muted text-sm leading-relaxed">Every wash earns you points. Members earn 1 point per wash. Fast Pass members earn 2 points per visit.</p>
-        <p class="mt-4 text-blue font-bold text-sm">1-2 pts per wash</p>
-      </div>
-      <div class="star-card bg-white rounded-2xl p-8 border border-gray-200 text-center">
-        <div class="w-16 h-16 rounded-2xl bg-green-50 flex items-center justify-center mx-auto mb-5">
-          <i class="ph-bold ph-gift text-green-600 text-3xl"></i>
-        </div>
-        <div class="w-7 h-7 rounded-full bg-ink text-white text-xs font-bold flex items-center justify-center mx-auto mb-3">3</div>
-        <h3 class="font-extrabold text-xl mb-2">Redeem Rewards</h3>
-        <p class="text-muted text-sm leading-relaxed">Rack up 10 points and redeem a completely free wash of your choice at the kiosk or in your account.</p>
-        <p class="mt-4 text-green-600 font-bold text-sm">10 pts = 1 free wash</p>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- PERKS -->
-<section class="py-20 px-5 bg-white">
-  <div class="max-w-7xl mx-auto">
-    <div class="mb-12">
-      <h2 class="font-extrabold tracking-tight leading-none mb-3" style="font-size:clamp(2rem,4vw,3rem)">Member Perks.</h2>
-      <p class="text-muted">More than just points — being a Speedie Rewards member has its privileges.</p>
-    </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      <div class="star-card bg-gray-50 rounded-2xl p-6 border border-gray-100">
-        <div class="w-10 h-10 rounded-xl bg-orange/10 flex items-center justify-center mb-4">
-          <i class="ph-bold ph-gift text-[#F47920] text-xl"></i>
-        </div>
-        <h3 class="font-bold mb-1">1st &amp; 5th Wash Free</h3>
-        <p class="text-muted text-sm leading-relaxed">Your <strong class="text-ink">1st wash is free</strong> when you join. Come back and your <strong class="text-ink">5th wash is also free</strong> — automatically applied at the kiosk.</p>
-      </div>
-      <div class="star-card bg-gray-50 rounded-2xl p-6 border border-gray-100">
-        <div class="w-10 h-10 rounded-xl bg-pink-50 flex items-center justify-center mb-4">
-          <i class="ph-bold ph-cake text-pink-500 text-xl"></i>
-        </div>
-        <h3 class="font-bold mb-1">Birthday Wash</h3>
-        <p class="text-muted text-sm leading-relaxed">Every year on your birthday month, you'll receive a free Deluxe wash as our gift to you.</p>
-      </div>
-      <div class="star-card bg-gray-50 rounded-2xl p-6 border border-gray-100">
-        <div class="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center mb-4">
-          <i class="ph-bold ph-users text-purple-500 text-xl"></i>
-        </div>
-        <h3 class="font-bold mb-1">Refer-a-Friend</h3>
-        <p class="text-muted text-sm leading-relaxed">When a friend signs up using your referral code, you both get a free wash. No limit on referrals.</p>
-      </div>
-      <div class="star-card bg-gray-50 rounded-2xl p-6 border border-gray-100">
-        <div class="w-10 h-10 rounded-xl bg-blue-xlight flex items-center justify-center mb-4">
-          <i class="ph-bold ph-lightning text-blue text-xl"></i>
-        </div>
-        <h3 class="font-bold mb-1">Early Access Deals</h3>
-        <p class="text-muted text-sm leading-relaxed">Rewards members get first access to flash sales, seasonal promotions, and exclusive pricing events.</p>
-      </div>
-    </div>
-  </div>
-</section>
+  <section class="portal-section" id="signup">
+    <h2>Create your account.</h2>
+    <p class="section-intro">Your first free wash code will be sent to your phone by text right after you sign up.</p>
 
-<!-- SIGN UP FORM -->
-<section id="signup" class="py-20 px-5 bg-gray-50">
-  <div class="max-w-2xl mx-auto">
-
-    <!-- Success panel -->
-    <div class="success-panel" id="success-panel">
-      <div class="bg-white rounded-2xl border border-green-100 p-10 text-center max-w-lg mx-auto">
-        <div class="w-20 h-20 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-5">
-          <i class="ph-bold ph-check-circle text-green-500 text-4xl"></i>
-        </div>
-        <h2 class="font-extrabold text-2xl mb-2">You're Registered, <span id="success-name"></span>!</h2>
-        <p class="text-muted text-sm mb-6">Your Speedie Rewards account is all set. You can now sign in to your member portal anytime.</p>
-
-        <div class="bg-orange-50 border border-orange-200 rounded-xl px-6 py-5 mb-6 text-left">
-          <p class="font-bold text-[#F47920] text-sm mb-1">📱 Check Your Phone</p>
-          <p class="text-sm text-gray-700 leading-relaxed">We just sent a welcome text to your number. <strong>Reply to that message</strong> to confirm your phone number is active — this keeps your account in good standing and ensures you receive your free wash codes and reward updates.</p>
-        </div>
-
-        <div class="bg-green-50 border border-green-100 rounded-xl px-6 py-4 mb-8">
-          <p class="text-green-700 font-bold">🎉 Free Wash Unlocked</p>
-          <p class="text-green-600 text-sm mt-0.5">1st wash free · 5th wash free after your 4th visit</p>
-        </div>
-
-        <div class="flex flex-col sm:flex-row gap-3 justify-center">
-          <a href="account.html" class="btn text-white font-semibold px-6 py-3 rounded-xl text-sm" style="background:#F47920;">Go to My Account</a>
-          <a href="index.html" class="btn border border-gray-200 text-ink font-semibold px-6 py-3 rounded-xl hover:border-gray-400 text-sm">Back to Home</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Form panel -->
-    <div class="form-panel" id="form-panel">
-      <div class="text-center mb-10">
-        <span class="inline-flex items-center gap-2 bg-orange/10 text-[#F47920] text-xs font-bold px-3 py-1.5 rounded-full mb-4">
-          <i class="ph-bold ph-star-four"></i> Free to Join
-        </span>
-        <h2 class="font-extrabold tracking-tight leading-none mb-3" style="font-size:clamp(2rem,4vw,2.75rem)">Create Your Rewards Account.</h2>
-        <p class="text-muted">Takes less than a minute. Your 1st free wash is confirmed by text right away.</p>
-      </div>
-
-      <form id="rewards-form" onsubmit="submitRewards(event)" class="bg-white border border-gray-200 rounded-2xl p-8 space-y-5">
-        <div class="grid sm:grid-cols-2 gap-5">
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">First Name</label>
-            <input type="text" id="r-first" required placeholder="John"
-              class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Last Name</label>
-            <input type="text" id="r-last" required placeholder="Smith"
-              class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
-          </div>
-        </div>
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Mobile Phone <span class="text-[#F47920]">*</span></label>
-          <input type="tel" id="r-phone" required placeholder="(903) 555-1234"
-            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
-          <p class="text-xs text-muted mt-1.5">Your free wash codes will be sent here by SMS.</p>
-        </div>
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Email Address</label>
-          <input type="email" id="r-email" required placeholder="john@example.com"
-            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
-        </div>
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Birthday Month (for birthday wash)</label>
-          <select id="r-bday" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white appearance-none transition-all">
-            <option value="">— Select month —</option>
-            <option>January</option><option>February</option><option>March</option>
-            <option>April</option><option>May</option><option>June</option>
-            <option>July</option><option>August</option><option>September</option>
-            <option>October</option><option>November</option><option>December</option>
+    <form class="form-card" id="rewards-form">
+      <div class="form-grid">
+        <label class="field">First Name<input name="firstName" required placeholder="John"></label>
+        <label class="field">Last Name<input name="lastName" required placeholder="Smith"></label>
+        <label class="field">Mobile Phone<input name="phone" type="tel" required placeholder="(903) 555-1234"></label>
+        <label class="field">Email Address<input name="email" type="email" required placeholder="john@example.com"></label>
+        <label class="field">Birthday Month
+          <select name="birthday">
+            <option value="">Select month</option>
+            <option>January</option><option>February</option><option>March</option><option>April</option>
+            <option>May</option><option>June</option><option>July</option><option>August</option>
+            <option>September</option><option>October</option><option>November</option><option>December</option>
           </select>
-        </div>
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Referral Code (optional)</label>
-          <input type="text" id="r-ref" placeholder="Enter a friend's code"
-            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
-        </div>
-        <div class="grid sm:grid-cols-2 gap-5">
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Create Password <span class="text-[#F47920]">*</span></label>
-            <input type="password" id="r-pw" required minlength="6" placeholder="Min 6 characters"
-              class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Confirm Password <span class="text-[#F47920]">*</span></label>
-            <input type="password" id="r-pw2" required placeholder="Repeat password"
-              class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
-          </div>
-        </div>
+        </label>
+        <label class="field">Referral Code<input name="referral" placeholder="Optional — enter a friend's code"></label>
+        <label class="field">Create Password<input name="password" type="password" minlength="6" required placeholder="Min 6 characters"></label>
+        <label class="field">Confirm Password<input name="confirmPassword" type="password" minlength="6" required placeholder="Repeat password"></label>
+      </div>
+      <label class="check-field">
+        <input name="consent" type="checkbox" required>
+        <span>I agree to receive Speedie Rewards SMS messages including reward updates, offers, and wash codes. Message and data rates may apply. Text STOP to unsubscribe. See <a href="terms.html" style="color:var(--blue);">Terms</a> and <a href="privacy.html" style="color:var(--blue);">Privacy Policy</a>.</span>
+      </label>
+      <button class="portal-btn full" type="submit" id="submit-btn">Join Speedie Rewards — Get Your 1st Wash Free</button>
+      <p class="form-message" id="form-msg"></p>
+    </form>
 
-        <div class="border-t border-gray-100 pt-5">
-          <label class="flex items-start gap-3 cursor-pointer">
-            <input type="checkbox" id="r-sms" required class="mt-0.5 shrink-0 accent-blue w-4 h-4" />
-            <span class="text-xs text-muted leading-relaxed">By joining Speedie Rewards, I agree to receive SMS messages from Speedie D's Car Wash including reward updates, offers, and wash codes. Msg &amp; data rates may apply. Text STOP to unsubscribe. See <a href="terms.html" class="text-blue underline">Terms</a> and <a href="privacy.html" class="text-blue underline">Privacy Policy</a>.</span>
-          </label>
-        </div>
-
-        <button type="submit" class="btn w-full text-white font-bold py-4 rounded-xl text-base" style="background:#F47920;">
-          Join Speedie Rewards — Get Your 1st Wash Free
-        </button>
-
-        <div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
-          <p class="text-xs font-bold uppercase tracking-widest text-muted mb-2">Free Wash Terms &amp; Conditions</p>
-          <ul class="text-xs text-muted space-y-1 leading-relaxed">
-            <li>· <strong class="text-gray-600">1st Wash Free:</strong> Valid on any Basic wash only. Redeemable on your first visit after joining. One per new member.</li>
-            <li>· <strong class="text-gray-600">5th Wash Free:</strong> Automatically applied after your 4th paid wash. Valid on any Basic wash. No cash value.</li>
-            <li>· Free washes have no expiration date but are non-transferable and cannot be combined with other offers or discounts.</li>
-            <li>· Speedie D's Car Wash reserves the right to modify or discontinue the Speedie Rewards program at any time with notice.</li>
-          </ul>
-        </div>
-
-        <p class="text-center text-xs text-muted">Already a member? <a href="account.html" class="text-blue font-semibold hover:underline">Sign in to your account →</a></p>
-      </form>
+    <div class="success-box" id="rewards-success" hidden>
+      <h2>Welcome to Speedie Rewards!</h2>
+      <p style="color:var(--muted);margin-bottom:18px;">Your account is ready. <strong>Check your phone</strong> — we just sent a welcome text. Reply to that message to receive your free car wash code.</p>
+      <p style="color:var(--muted);margin-bottom:24px;">Once you've replied, sign in to your member portal to view your rewards and referral code.</p>
+      <a class="portal-btn" href="account.html">Go to My Account</a>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer class="bg-ink text-gray-400 py-14 px-5">
-  <div class="max-w-7xl mx-auto">
-    <div class="grid md:grid-cols-[2fr_1fr_1fr] gap-10 mb-12">
-      <div>
-        <a href="index.html" class="inline-block mb-4">
-          <img src="https://assets.cdn.filesafe.space/e4notYo5fJyoxSgPxQkh/media/67408b03d6b97efd8da073c4.png"
-               alt="Speedie D's Car Wash" class="h-12 w-auto object-contain brightness-0 invert" />
-        </a>
-        <p class="text-sm leading-relaxed max-w-xs">East Texas's car wash. Unlimited memberships from $19/month. Gilmer, TX.</p>
-      </div>
-      <div>
-        <p class="text-white text-sm font-semibold mb-4">Quick Links</p>
-        <ul class="space-y-2.5 text-sm">
-          <li><a href="index.html#plans" class="hover:text-white transition-colors">Wash Plans</a></li>
-          <li><a href="membership.html" class="hover:text-white transition-colors">Memberships</a></li>
-          <li><a href="loyalty.html" class="hover:text-white transition-colors">Speedie Rewards</a></li>
-          <li><a href="account.html" class="hover:text-white transition-colors">My Account</a></li>
-          <li><a href="corporate.html" class="hover:text-white transition-colors">Corporate Accounts</a></li>
-        </ul>
-      </div>
-      <div>
-        <p class="text-white text-sm font-semibold mb-4">Contact</p>
-        <ul class="space-y-2.5 text-sm">
-          <li><a href="tel:+19036806688" class="hover:text-white transition-colors">(903) 680-6688</a></li>
-          <li class="text-gray-500 leading-relaxed">657 US HWY 271 N<br/>Gilmer, TX 75644</li>
-          <li class="text-gray-500 text-xs mt-1">Mon-Sat 8am-7pm<br/>Sun 9am-6pm</li>
-        </ul>
-      </div>
-    </div>
-    <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-      <p>2025 Speedie D's East Texas Car Wash. All rights reserved.</p>
-      <div class="flex gap-5">
-        <a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
-        <a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a>
-      </div>
-    </div>
-  </div>
-</footer>
+  <footer class="portal-footer">
+    Speedie D's Car Wash &nbsp;|&nbsp; <a href="privacy.html">Privacy</a> &nbsp;|&nbsp; <a href="terms.html">Terms</a>
+  </footer>
 
-<script>
-  const API = 'https://speediedeecarwash.saket-golf.workers.dev';
+  <script>
+    const API = 'https://speediedeecarwash.saket-golf.workers.dev';
 
-  async function submitRewards(e) {
-    e.preventDefault();
-    const btn = e.submitter;
+    document.getElementById('rewards-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const btn  = document.getElementById('submit-btn');
+      const msg  = document.getElementById('form-msg');
+      const data = new FormData(form);
 
-    let errEl = document.getElementById('signup-error');
-    if (!errEl) {
-      errEl = document.createElement('p');
-      errEl.id = 'signup-error';
-      errEl.className = 'text-red-500 text-sm font-semibold text-center';
-      btn.parentNode.insertBefore(errEl, btn);
-    }
-    errEl.textContent = '';
+      msg.textContent = '';
+      msg.className   = 'form-message';
 
-    const pw  = document.getElementById('r-pw').value;
-    const pw2 = document.getElementById('r-pw2').value;
-    if (pw.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; return; }
-    if (pw !== pw2)    { errEl.textContent = 'Passwords do not match.'; return; }
+      const pw  = data.get('password');
+      const pw2 = data.get('confirmPassword');
+      if (pw.length < 6) { msg.textContent = 'Password must be at least 6 characters.'; msg.classList.add('error'); return; }
+      if (pw !== pw2)    { msg.textContent = 'Passwords do not match.'; msg.classList.add('error'); return; }
 
-    btn.disabled = true;
-    btn.textContent = 'Creating account…';
+      btn.disabled    = true;
+      btn.textContent = 'Creating account…';
 
-    const body = {
-      firstName:     document.getElementById('r-first').value.trim(),
-      lastName:      document.getElementById('r-last').value.trim(),
-      phone:         document.getElementById('r-phone').value.trim(),
-      email:         document.getElementById('r-email').value.trim(),
-      birthdayMonth: document.getElementById('r-bday').value || null,
-      referralCode:  document.getElementById('r-ref').value.trim() || null,
-      password:      pw,
-    };
+      const body = {
+        firstName:     data.get('firstName').trim(),
+        lastName:      data.get('lastName').trim(),
+        phone:         data.get('phone').trim(),
+        email:         data.get('email').trim(),
+        birthdayMonth: data.get('birthday') || null,
+        referralCode:  data.get('referral').trim() || null,
+        password:      pw,
+      };
 
-    try {
-      const res  = await fetch(`${API}/api/members/register`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
-      const data = await res.json();
+      try {
+        const res  = await fetch(`${API}/api/members/register`, {
+          method: 'POST',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+        const json = await res.json();
 
-      if (data.ok) {
-        document.getElementById('success-name').textContent = body.firstName;
-        document.getElementById('form-panel').classList.add('hide');
-        document.getElementById('success-panel').classList.add('show');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        errEl.textContent = data.error || 'Something went wrong. Please try again.';
-        btn.disabled = false;
+        if (json.ok) {
+          form.hidden = true;
+          document.getElementById('rewards-success').hidden = false;
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          msg.textContent = json.error || 'Something went wrong. Please try again.';
+          msg.classList.add('error');
+          btn.disabled    = false;
+          btn.textContent = 'Join Speedie Rewards — Get Your 1st Wash Free';
+        }
+      } catch (_) {
+        msg.textContent = 'Network error. Please check your connection and try again.';
+        msg.classList.add('error');
+        btn.disabled    = false;
         btn.textContent = 'Join Speedie Rewards — Get Your 1st Wash Free';
       }
-    } catch (_) {
-      errEl.textContent = 'Network error. Please try again.';
-      btn.disabled = false;
-      btn.textContent = 'Join Speedie Rewards — Get Your 1st Wash Free';
-    }
-  }
-</script>
-
+    });
+  </script>
 </body>
 </html>

@@ -1,877 +1,409 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>My Account | Speedie D's Car Wash</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { jakarta: ['"Plus Jakarta Sans"', 'sans-serif'] },
-          colors: {
-            blue:  { DEFAULT: '#2563EB', dark: '#1D4ED8', light: '#DBEAFE', xlight: '#EFF6FF' },
-            ink:   { DEFAULT: '#111827' },
-            muted: '#6B7280',
-            orange:{ DEFAULT: '#F47920' },
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .btn { transition: all 0.15s cubic-bezier(0.16,1,0.3,1); }
-    .btn:active { transform: scale(0.97) translateY(1px); }
-    input:focus, select:focus { outline: none; border-color: #2563EB !important; box-shadow: 0 0 0 3px #DBEAFE; }
-    #login-view, #dashboard-view { transition: opacity 0.3s; }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-    .dash-tab { transition: all 0.15s; }
-    .dash-tab.active { background: #EFF6FF; color: #2563EB; font-weight: 700; }
-    .wash-row:nth-child(even) { background: #F9FAFB; }
-    .points-bar { transition: width 0.8s cubic-bezier(0.16,1,0.3,1); }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portal.css">
 </head>
-<body class="bg-gray-50 font-jakarta antialiased text-ink min-h-screen">
-
-<!-- NAV -->
-<nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8 h-[70px] flex items-center justify-between">
-    <a href="index.html" class="flex items-center shrink-0">
-      <img src="https://assets.cdn.filesafe.space/e4notYo5fJyoxSgPxQkh/media/67408b03d6b97efd8da073c4.png"
-           alt="Speedie D's Car Wash" class="h-11 w-auto object-contain" />
-    </a>
-    <ul class="hidden md:flex items-center gap-7 text-sm font-medium text-gray-500">
-      <li><a href="index.html#plans" class="hover:text-ink transition-colors">Wash Plans</a></li>
-      <li><a href="membership.html" class="hover:text-ink transition-colors">Memberships</a></li>
-      <li><a href="loyalty.html" class="hover:text-ink transition-colors">Rewards</a></li>
-      <li><a href="account.html" class="text-ink font-semibold">My Account</a></li>
-    </ul>
-    <button id="logout-btn" onclick="doLogout()" class="hidden btn border border-gray-200 text-sm font-semibold px-4 py-2 rounded-xl hover:border-red-300 hover:text-red-500 transition-colors">
-      <i class="ph-bold ph-sign-out mr-1"></i> Sign Out
-    </button>
-    <a href="index.html" class="md:hidden text-sm text-gray-500 font-medium">← Home</a>
-  </div>
-</nav>
-
-
-<!-- ============================================================
-     LOGIN VIEW
-     ============================================================ -->
-<div id="login-view" class="min-h-[calc(100dvh-70px)] flex items-center justify-center px-5 py-16">
-  <div class="w-full max-w-md">
-
-    <div class="text-center mb-8">
-      <div class="w-16 h-16 rounded-2xl bg-blue-xlight flex items-center justify-center mx-auto mb-4">
-        <i class="ph-bold ph-user-circle text-blue text-3xl"></i>
-      </div>
-      <h1 class="font-extrabold text-2xl mb-1">Sign In to Your Account</h1>
-      <p class="text-muted text-sm">Enter the phone number linked to your Speedie D's membership.</p>
+<body>
+  <nav class="portal-nav">
+    <a href="index.html"><img src="https://storage.googleapis.com/msgsndr/e4notYo5fJyoxSgPxQkh/media/67587a0e3c5cd5e4ffb06a16.png" alt="Speedie D's"></a>
+    <div class="portal-nav-links">
+      <a href="index.html#plans">Wash Plans</a>
+      <a href="membership.html">Memberships</a>
+      <a href="loyalty.html">Rewards</a>
     </div>
+    <button class="portal-btn ghost" type="button" data-logout hidden>Sign Out</button>
+  </nav>
 
-    <form id="login-form" onsubmit="doLogin(event)" class="bg-white border border-gray-200 rounded-2xl p-7 space-y-5 shadow-sm">
-      <div>
-        <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Mobile Phone Number</label>
-        <input type="tel" id="login-phone" required placeholder="(903) 555-1234"
-          class="w-full border border-gray-200 rounded-xl px-4 py-3.5 text-sm bg-white transition-all text-base" />
+  <!-- LOGIN VIEW -->
+  <main class="auth-wrap" data-login-view>
+    <section class="auth-card">
+      <p class="kicker">Member Portal</p>
+      <h1>Sign in to your account.</h1>
+      <p>Use the phone number and password connected to your Speedie D's membership or rewards account.</p>
+      <form id="login-form">
+        <label class="field">Mobile Phone<input name="phone" type="tel" placeholder="(903) 555-1234" required></label>
+        <label class="field">Password<input name="password" type="password" required></label>
+        <button class="portal-btn full" type="submit">Sign In</button>
+        <p class="form-message" data-login-message></p>
+      </form>
+      <p style="margin-top:16px;"><a href="#" data-forgot-toggle><strong>Forgot password? Reset via SMS</strong></a></p>
+      <div class="forgot-panel" data-forgot-panel>
+        <form id="forgot-form">
+          <label class="field">Mobile Phone<input name="phone" type="tel" required placeholder="(903) 555-1234"></label>
+          <button class="portal-btn blue full" type="submit">Send Reset Link</button>
+          <p class="form-message" data-forgot-message></p>
+        </form>
       </div>
-      <div>
-        <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Password</label>
-        <input type="password" id="login-password" required placeholder="Enter your password"
-          class="w-full border border-gray-200 rounded-xl px-4 py-3.5 text-sm bg-white transition-all text-base" />
+      <p style="margin-top:20px;color:var(--muted);font-size:14px;">Not a member? <a href="membership.html"><strong>Join a plan</strong></a> or <a href="loyalty.html"><strong>join Rewards</strong></a>.</p>
+    </section>
+  </main>
+
+  <!-- DASHBOARD VIEW -->
+  <main class="dashboard" data-dashboard>
+    <aside class="dash-sidebar">
+      <div class="member-mini">
+        <strong data-member-name></strong>
+        <span data-member-meta></span>
       </div>
-      <button type="submit" class="btn w-full bg-blue text-white font-bold py-3.5 rounded-xl hover:bg-blue-dark text-sm">
-        Sign In <i class="ph-bold ph-arrow-right ml-1"></i>
-      </button>
-      <p class="text-center text-xs text-muted">Forgot your password? <a href="#" onclick="showForgotPassword(event)" class="text-blue font-semibold hover:underline">Reset via SMS</a></p>
-    </form>
-
-    <!-- Forgot password inline form -->
-    <div id="forgot-panel" class="hidden bg-white border border-gray-200 rounded-2xl p-7 space-y-4 shadow-sm mt-4">
-      <p class="font-semibold text-sm">Enter your phone number and we'll text you a reset link.</p>
-      <input type="tel" id="forgot-phone" placeholder="(903) 555-1234"
-        class="w-full border border-gray-200 rounded-xl px-4 py-3.5 text-sm bg-white transition-all" />
-      <p id="forgot-msg" class="hidden text-sm"></p>
-      <div class="flex gap-3">
-        <button onclick="doForgotPassword()" class="btn bg-blue text-white font-bold px-5 py-3 rounded-xl hover:bg-blue-dark text-sm">Send Reset Link</button>
-        <button onclick="hideForgotPassword()" class="btn border border-gray-200 text-muted font-semibold px-5 py-3 rounded-xl text-sm">Cancel</button>
+      <div class="dash-tabs">
+        <button class="dash-tab active" data-tab="overview">Overview</button>
+        <button class="dash-tab" data-tab="plan">My Plan</button>
+        <button class="dash-tab" data-tab="rewards">Rewards</button>
+        <button class="dash-tab" data-tab="history">Wash History</button>
+        <button class="dash-tab" data-tab="profile">Profile</button>
+        <button class="dash-tab cancel" data-tab="cancel">Cancel Membership</button>
       </div>
-    </div>
+    </aside>
 
-    <p class="text-center text-xs text-muted mt-6">
-      Not a member yet?
-      <a href="membership.html" class="text-blue font-semibold hover:underline">Join a plan</a> or
-      <a href="loyalty.html" class="text-blue font-semibold hover:underline">sign up for Rewards</a>
-    </p>
-  </div>
-</div>
+    <section class="dash-content">
 
-
-<!-- ============================================================
-     DASHBOARD VIEW  (hidden until login)
-     ============================================================ -->
-<div id="dashboard-view" class="hidden">
-
-  <!-- Member header bar -->
-  <div class="bg-blue text-white px-5 py-5">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-      <div class="flex items-center gap-4">
-        <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center shrink-0">
-          <i class="ph-bold ph-user text-white text-xl"></i>
+      <!-- OVERVIEW -->
+      <div class="tab-panel active" data-panel="overview">
+        <h2>Account overview.</h2>
+        <div class="stat-grid">
+          <div class="stat"><span>Current Plan</span><strong data-overview-plan>—</strong></div>
+          <div class="stat"><span>Rewards Points</span><strong data-overview-points>—</strong></div>
+          <div class="stat"><span>Total Washes</span><strong data-overview-washes>—</strong></div>
         </div>
-        <div>
-          <p class="font-extrabold text-lg leading-tight" id="dash-member-name">—</p>
-          <p class="text-blue-light text-sm" id="dash-member-meta">—</p>
+        <div class="panel"><h3>Recent Washes</h3><div data-recent-washes><p class="muted">Loading…</p></div></div>
+        <div class="panel" id="rewards-banner" hidden>
+          <p style="color:var(--orange);font-weight:900;" data-banner-text></p>
         </div>
       </div>
-      <div class="flex items-center gap-3">
-        <span class="bg-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
-          <i class="ph-bold ph-star-four text-yellow-300"></i> Speedie Rewards Member
-        </span>
-        <span id="dash-plan-badge" class="bg-white text-blue text-xs font-bold px-3 py-1.5 rounded-full">—</span>
-      </div>
-    </div>
-  </div>
 
-  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-8">
-    <div class="grid lg:grid-cols-[240px_1fr] gap-7">
-
-      <!-- Sidebar nav -->
-      <aside>
-        <nav class="bg-white border border-gray-200 rounded-2xl overflow-hidden sticky top-24">
-          <button onclick="showTab('overview')"  class="dash-tab active w-full text-left flex items-center gap-3 px-5 py-4 text-sm text-gray-600 border-b border-gray-100">
-            <i class="ph-bold ph-house-line w-4"></i> Overview
-          </button>
-          <button onclick="showTab('plan')"       class="dash-tab w-full text-left flex items-center gap-3 px-5 py-4 text-sm text-gray-600 border-b border-gray-100">
-            <i class="ph-bold ph-lightning w-4"></i> My Plan
-          </button>
-          <button onclick="showTab('rewards')"   class="dash-tab w-full text-left flex items-center gap-3 px-5 py-4 text-sm text-gray-600 border-b border-gray-100">
-            <i class="ph-bold ph-star-four w-4"></i> Rewards
-          </button>
-          <button onclick="showTab('history')"   class="dash-tab w-full text-left flex items-center gap-3 px-5 py-4 text-sm text-gray-600 border-b border-gray-100">
-            <i class="ph-bold ph-clock-clockwise w-4"></i> Wash History
-          </button>
-          <button onclick="showTab('billing')"   class="dash-tab w-full text-left flex items-center gap-3 px-5 py-4 text-sm text-gray-600 border-b border-gray-100">
-            <i class="ph-bold ph-credit-card w-4"></i> Billing
-          </button>
-          <button onclick="showTab('profile')"   class="dash-tab w-full text-left flex items-center gap-3 px-5 py-4 text-sm text-gray-600 border-b border-gray-100">
-            <i class="ph-bold ph-user-gear w-4"></i> Profile
-          </button>
-          <button onclick="showTab('cancel')"    class="dash-tab w-full text-left flex items-center gap-3 px-5 py-4 text-sm text-red-400">
-            <i class="ph-bold ph-x-circle w-4"></i> Cancel Membership
-          </button>
-        </nav>
-      </aside>
-
-      <!-- Main content area -->
-      <main>
-
-        <!-- ── OVERVIEW ── -->
-        <div id="tab-overview" class="tab-content active space-y-5">
-          <div class="grid sm:grid-cols-3 gap-4">
-            <div class="bg-white border border-gray-200 rounded-2xl p-6">
-              <p class="text-xs font-bold uppercase tracking-widest text-muted mb-2">Current Plan</p>
-              <p class="font-extrabold text-xl" id="ov-plan">—</p>
-              <p class="text-muted text-sm mt-0.5" id="ov-billing">—</p>
-            </div>
-            <div class="bg-white border border-gray-200 rounded-2xl p-6">
-              <p class="text-xs font-bold uppercase tracking-widest text-muted mb-2">Rewards Points</p>
-              <p class="font-extrabold text-xl text-[#F47920]" id="ov-points">— pts</p>
-              <p class="text-muted text-sm mt-0.5" id="ov-points-sub">—</p>
-            </div>
-            <div class="bg-white border border-gray-200 rounded-2xl p-6">
-              <p class="text-xs font-bold uppercase tracking-widest text-muted mb-2">Total Washes</p>
-              <p class="font-extrabold text-xl" id="ov-washes">—</p>
-              <p class="text-muted text-sm mt-0.5" id="ov-washes-sub">—</p>
-            </div>
-          </div>
-
-          <!-- Recent washes -->
-          <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
-            <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
-              <p class="font-bold">Recent Washes</p>
-              <button onclick="showTab('history')" class="text-blue text-xs font-semibold hover:underline">View all</button>
-            </div>
-            <div id="recent-washes">
-              <p class="px-6 py-4 text-sm text-muted">Loading…</p>
-            </div>
-          </div>
-
-          <!-- Free wash banner -->
-          <div id="fw-banner" class="bg-gradient-to-r from-[#F47920] to-[#C4580A] rounded-2xl p-6 flex items-center justify-between gap-4">
+      <!-- MY PLAN -->
+      <div class="tab-panel" data-panel="plan">
+        <h2>My plan.</h2>
+        <div class="panel">
+          <div class="list-row">
             <div>
-              <p class="text-white font-extrabold text-lg" id="fw-banner-text">Almost there!</p>
-              <p class="text-white/70 text-sm mt-0.5" id="fw-banner-sub">Keep washing to earn a free wash.</p>
+              <h3 data-plan-name style="margin:0 0 4px;"></h3>
+              <p class="muted" data-plan-price style="margin:0;"></p>
             </div>
-            <i class="ph-bold ph-star-four text-white/30 text-5xl shrink-0"></i>
+            <span class="tag" data-plan-status>active</span>
+          </div>
+          <p class="muted" style="margin-top:14px;">To change or upgrade your plan, call or text us at <strong>(903) 680-6688</strong>.</p>
+        </div>
+        <div class="panel">
+          <h3>Vehicles on Account</h3>
+          <p class="muted">Up to 4 vehicles per membership.</p>
+          <div data-vehicles><p class="muted">Loading…</p></div>
+          <form class="vehicle-form" id="vehicle-form">
+            <input name="description" placeholder="Year, make, model" required>
+            <input name="plate" placeholder="License plate" required>
+            <select name="state"><option>TX</option><option>LA</option><option>AR</option><option>OK</option></select>
+            <button class="portal-btn blue" type="submit">Add</button>
+          </form>
+          <p class="form-message" data-vehicle-message></p>
+        </div>
+      </div>
+
+      <!-- REWARDS -->
+      <div class="tab-panel" data-panel="rewards">
+        <h2>Speedie rewards.</h2>
+        <div class="panel">
+          <div class="list-row">
+            <h3 style="margin:0;"><span data-reward-points>0</span> / 10 points</h3>
+            <strong data-reward-remaining>— more points</strong>
+          </div>
+          <div class="progress"><span data-reward-progress style="width:0%"></span></div>
+          <button class="portal-btn" type="button" data-redeem>Redeem Free Wash</button>
+          <p class="form-message" data-reward-message></p>
+        </div>
+        <div class="panel">
+          <h3>Your Referral Code</h3>
+          <div class="list-row">
+            <strong data-referral>—</strong>
+            <button class="portal-btn ghost" type="button" data-copy-referral>Copy</button>
           </div>
         </div>
+        <div class="panel"><h3>Reward Codes</h3><div data-reward-codes><p class="muted">No reward codes yet.</p></div></div>
+      </div>
 
-        <!-- ── MY PLAN ── -->
-        <div id="tab-plan" class="tab-content space-y-5">
-          <div class="bg-white border border-gray-200 rounded-2xl p-7">
-            <div class="flex items-start justify-between mb-6">
-              <div>
-                <p class="text-xs font-bold uppercase tracking-widest text-muted mb-1">Active Plan</p>
-                <h2 class="font-extrabold text-2xl" id="plan-name">—</h2>
-                <p class="text-muted text-sm mt-1" id="plan-billing">—</p>
-              </div>
-              <span class="bg-blue-xlight text-blue text-xs font-bold px-3 py-1.5 rounded-full">Active</span>
-            </div>
-            <ul class="space-y-2.5 text-sm text-gray-600 mb-7 border-t border-gray-100 pt-5">
-              <li class="flex gap-2.5"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Soft touch wash</li>
-              <li class="flex gap-2.5"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Spot-free rinse · Pre-soak · Free vacuums</li>
-              <li class="flex gap-2.5"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Tire shine · Triple foam · Clear coat · Wheel Brite</li>
-              <li class="flex gap-2.5"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Ceramic coating · Lava shine · Bug prep</li>
-              <li class="flex gap-2.5"><i class="ph-bold ph-check text-blue mt-0.5 shrink-0"></i>Total shine finish · Undercarriage wash</li>
-            </ul>
-            <div class="flex flex-wrap gap-3">
-              <button onclick="showUpgrade()" class="btn bg-blue text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-dark text-sm">Change Plan</button>
-              <a href="tel:+19036806688" class="btn border border-gray-200 text-ink font-semibold px-5 py-2.5 rounded-xl hover:border-blue hover:text-blue text-sm">Call Us to Change</a>
-            </div>
-          </div>
+      <!-- WASH HISTORY -->
+      <div class="tab-panel" data-panel="history">
+        <h2>Wash history.</h2>
+        <div class="panel" data-wash-history><p class="muted">Loading…</p></div>
+      </div>
 
-          <!-- Plan upgrade panel -->
-          <div id="upgrade-panel" class="hidden bg-gray-50 border border-gray-200 rounded-2xl p-6">
-            <p class="font-bold mb-4">Switch to a Different Plan</p>
-            <div class="grid sm:grid-cols-3 gap-4 mb-5">
-              <div class="bg-white border-2 border-gray-200 rounded-xl p-5 cursor-pointer hover:border-blue transition-colors" onclick="selectPlan(this,'Basic Fast Pass','$19')">
-                <p class="font-bold mb-1">Basic</p>
-                <p class="text-2xl font-extrabold">$19<span class="text-sm font-normal text-muted">/mo</span></p>
-                <p class="text-xs text-muted mt-1">Soft touch, spot-free, vacuums</p>
-              </div>
-              <div class="bg-white border-2 border-gray-200 rounded-xl p-5 cursor-pointer hover:border-blue transition-colors" onclick="selectPlan(this,'Deluxe Fast Pass','$29')">
-                <p class="font-bold mb-1">Deluxe</p>
-                <p class="text-2xl font-extrabold">$29<span class="text-sm font-normal text-muted">/mo</span></p>
-                <p class="text-xs text-muted mt-1">Basic + tire shine, triple foam</p>
-              </div>
-              <div class="bg-white border-2 border-blue rounded-xl p-5 cursor-pointer" onclick="selectPlan(this,'Ultimate Fast Pass','$39')">
-                <p class="font-bold mb-1">Ultimate <span class="text-xs text-blue font-bold">(current)</span></p>
-                <p class="text-2xl font-extrabold text-blue">$39<span class="text-sm font-normal text-muted">/mo</span></p>
-                <p class="text-xs text-muted mt-1">Everything + ceramic, undercarriage</p>
-              </div>
-            </div>
-            <div class="flex gap-3">
-              <button onclick="confirmPlanChange()" class="btn bg-blue text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-dark text-sm">Confirm Change</button>
-              <button onclick="document.getElementById('upgrade-panel').classList.add('hidden')" class="btn border border-gray-200 text-muted font-semibold px-5 py-2.5 rounded-xl text-sm">Cancel</button>
-            </div>
-          </div>
-
-          <div class="bg-white border border-gray-200 rounded-2xl p-6">
-            <div class="flex items-center justify-between mb-4">
-              <div>
-                <p class="font-bold">Vehicles on Account</p>
-                <p class="text-muted text-sm mt-0.5">Up to 4 vehicles per membership. Each gets its own kiosk access code.</p>
-              </div>
-              <span id="vehicle-slot" class="text-xs font-bold text-muted bg-gray-100 px-2.5 py-1 rounded-lg">— / 4 slots</span>
-            </div>
-            <div id="vehicles-container" class="space-y-3 mb-5">
-              <p class="text-sm text-muted">Loading…</p>
-            </div>
-
-            <!-- Add car form (hidden) -->
-            <div id="add-car-form" class="hidden bg-blue-xlight border border-blue-light rounded-xl p-5 space-y-3">
-              <p class="font-bold text-sm text-blue">Add New Vehicle</p>
-              <div class="grid sm:grid-cols-2 gap-3">
-                <input type="text" id="car-ymm" placeholder="Year, Make, Model (e.g. 2021 Honda CR-V)"
-                  class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white col-span-2" />
-                <input type="text" id="car-plate" placeholder="License Plate"
-                  class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white" />
-                <select id="car-state" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white appearance-none">
-                  <option>TX</option><option>LA</option><option>AR</option><option>OK</option>
-                </select>
-              </div>
-              <div class="flex gap-3">
-                <button onclick="submitAddCar()" class="btn bg-blue text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-dark text-sm">Add Vehicle</button>
-                <button onclick="document.getElementById('add-car-form').classList.add('hidden')" class="btn border border-gray-200 bg-white text-muted font-semibold px-5 py-2.5 rounded-xl text-sm">Cancel</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ── REWARDS ── -->
-        <div id="tab-rewards" class="tab-content space-y-5">
-          <div class="bg-white border border-gray-200 rounded-2xl p-7">
-            <div class="flex items-center gap-4 mb-6">
-              <div class="w-14 h-14 rounded-2xl bg-orange/10 flex items-center justify-center">
-                <i class="ph-bold ph-star-four text-[#F47920] text-2xl"></i>
-              </div>
-              <div>
-                <p class="text-xs font-bold uppercase tracking-widest text-muted">Speedie Rewards</p>
-                <p class="font-extrabold text-3xl text-[#F47920]" id="rw-points">— <span class="text-lg font-semibold text-muted">/ 10 points</span></p>
-              </div>
-            </div>
-            <!-- Progress bar -->
-            <div class="h-3 bg-gray-100 rounded-full overflow-hidden mb-2">
-              <div id="rw-bar" class="points-bar h-full rounded-full" style="width:0%; background:#F47920;"></div>
-            </div>
-            <p class="text-xs text-muted mb-6" id="rw-points-sub">— more washes to earn a free Basic wash</p>
-            <div class="flex flex-wrap gap-3">
-              <button id="rw-redeem-btn" onclick="doRedeem()" class="btn bg-[#F47920] text-white font-semibold px-5 py-2.5 rounded-xl text-sm opacity-50 cursor-not-allowed">Redeem Free Wash (need 10 pts)</button>
-            </div>
-            <div id="rw-code-box" class="hidden mt-4 bg-green-50 border border-green-200 rounded-xl p-4">
-              <p class="text-green-700 font-bold text-sm mb-1">Free wash code generated!</p>
-              <p class="text-green-900 font-extrabold text-xl tracking-widest" id="rw-code"></p>
-              <p class="text-green-600 text-xs mt-1">Show this code at the kiosk to redeem your free Basic wash.</p>
-            </div>
-          </div>
-
-          <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
-            <div class="px-6 py-4 border-b border-gray-100"><p class="font-bold">Points History</p></div>
-            <div id="points-history-list">
-              <p class="px-6 py-4 text-sm text-muted">Loading…</p>
-            </div>
-          </div>
-
-          <!-- Referral code -->
-          <div class="bg-white border border-gray-200 rounded-2xl p-6">
-            <p class="font-bold mb-1">Your Referral Code</p>
-            <p class="text-muted text-sm mb-4">Share this code with friends. When they join, you both get a free wash.</p>
-            <div class="flex items-center gap-3">
-              <div id="rw-referral-code" class="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 font-bold tracking-widest text-lg text-center">—</div>
-              <button onclick="copyCode()" class="btn bg-ink text-white font-semibold px-4 py-3 rounded-xl hover:bg-gray-800 text-sm shrink-0">
-                <i class="ph-bold ph-copy mr-1"></i> Copy
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- ── WASH HISTORY ── -->
-        <div id="tab-history" class="tab-content">
-          <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
-            <div class="px-6 py-4 border-b border-gray-100"><p class="font-bold" id="wh-header">All Washes</p></div>
-            <div id="wash-history-rows" class="divide-y divide-gray-100 text-sm">
-              <p class="px-6 py-4 text-sm text-muted">Loading…</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- ── BILLING ── -->
-        <div id="tab-billing" class="tab-content space-y-5">
-          <div class="bg-white border border-gray-200 rounded-2xl p-7">
-            <p class="font-bold mb-1">Payment Method</p>
-            <p class="text-muted text-sm mb-5">Used for your monthly membership billing.</p>
-            <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200 mb-5">
-              <div class="w-10 h-7 bg-blue rounded flex items-center justify-center shrink-0">
-                <i class="ph-bold ph-credit-card text-white text-sm"></i>
-              </div>
-              <div class="flex-1">
-                <p class="font-semibold text-sm">•••• •••• •••• 4242</p>
-                <p class="text-xs text-muted">Visa · Expires 09/27</p>
-              </div>
-              <span class="text-green-600 text-xs font-bold bg-green-50 px-2.5 py-1 rounded-lg">Active</span>
-            </div>
-            <button class="btn border border-gray-200 text-sm font-semibold px-5 py-2.5 rounded-xl hover:border-blue hover:text-blue transition-colors">
-              <i class="ph-bold ph-credit-card mr-1"></i> Update Card
-            </button>
-          </div>
-
-          <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
-            <div class="px-6 py-4 border-b border-gray-100"><p class="font-bold">Billing History</p></div>
-            <div class="divide-y divide-gray-100 text-sm">
-              <div class="flex items-center justify-between px-6 py-3.5"><span class="text-muted">Jun 15, 2025</span><span class="font-medium">Ultimate Fast Pass</span><span class="font-bold">$39.00</span></div>
-              <div class="flex items-center justify-between px-6 py-3.5"><span class="text-muted">May 15, 2025</span><span class="font-medium">Ultimate Fast Pass</span><span class="font-bold">$39.00</span></div>
-              <div class="flex items-center justify-between px-6 py-3.5"><span class="text-muted">Apr 15, 2025</span><span class="font-medium">Ultimate Fast Pass</span><span class="font-bold">$39.00</span></div>
-              <div class="flex items-center justify-between px-6 py-3.5"><span class="text-muted">Mar 15, 2025</span><span class="font-medium">Deluxe → Ultimate upgrade</span><span class="font-bold">$39.00</span></div>
-              <div class="flex items-center justify-between px-6 py-3.5"><span class="text-muted">Feb 15, 2025</span><span class="font-medium">Deluxe Fast Pass</span><span class="font-bold">$29.00</span></div>
-              <div class="flex items-center justify-between px-6 py-3.5"><span class="text-muted">Jan 15, 2025</span><span class="font-medium">Deluxe Fast Pass · First month</span><span class="font-bold text-green-600">$14.50</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ── PROFILE ── -->
-        <div id="tab-profile" class="tab-content">
-          <div class="bg-white border border-gray-200 rounded-2xl p-7 space-y-5">
-            <p class="font-bold text-lg">Your Information</p>
-            <div class="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">First Name</label>
-                <input type="text" id="prof-first" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
-              </div>
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Last Name</label>
-                <input type="text" id="prof-last" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
-              </div>
-            </div>
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Mobile Phone</label>
-              <input type="tel" id="prof-phone" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
-            </div>
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Email Address</label>
-              <input type="email" id="prof-email" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-all" />
-            </div>
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-widest text-muted mb-1.5">Birthday Month</label>
-              <select id="prof-bday" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white appearance-none transition-all">
+      <!-- PROFILE -->
+      <div class="tab-panel" data-panel="profile">
+        <h2>Your information.</h2>
+        <form class="form-card" id="profile-form" style="margin:0;">
+          <div class="form-grid">
+            <label class="field">First Name<input name="firstName" required></label>
+            <label class="field">Last Name<input name="lastName" required></label>
+            <label class="field">Mobile Phone<input name="phone" type="tel" required></label>
+            <label class="field">Email<input name="email" type="email" required></label>
+            <label class="field">Birthday Month
+              <select name="birthday">
                 <option value="">— Select month —</option>
                 <option>January</option><option>February</option><option>March</option><option>April</option>
                 <option>May</option><option>June</option><option>July</option><option>August</option>
                 <option>September</option><option>October</option><option>November</option><option>December</option>
               </select>
-            </div>
-            <button onclick="saveProfile()" class="btn bg-blue text-white font-semibold px-6 py-2.5 rounded-xl hover:bg-blue-dark text-sm">Save Changes</button>
+            </label>
           </div>
-        </div>
+          <button class="portal-btn" type="submit">Save Changes</button>
+          <p class="form-message" data-profile-message></p>
+        </form>
+      </div>
 
-        <!-- ── CANCEL ── -->
-        <div id="tab-cancel" class="tab-content">
-          <div class="bg-white border border-red-100 rounded-2xl p-7">
-            <div class="flex items-center gap-3 mb-5">
-              <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center shrink-0">
-                <i class="ph-bold ph-warning text-red-500 text-lg"></i>
-              </div>
-              <h2 class="font-extrabold text-xl">Cancel Membership</h2>
-            </div>
-            <p class="text-muted text-sm leading-relaxed mb-2">Before you go — you can also <strong class="text-ink">pause your membership</strong> if you're away for a while or call us at <a href="tel:+19036806688" class="text-blue font-semibold">(903) 680-6688</a> and we'll help.</p>
-            <p class="text-muted text-sm leading-relaxed mb-6">If you cancel, your <strong class="text-ink">Ultimate Fast Pass</strong> remains active through <strong class="text-ink">July 15, 2025</strong>. No refunds for unused days.</p>
-            <div class="bg-red-50 border border-red-100 rounded-xl p-5 mb-6">
-              <p class="text-red-700 text-sm font-semibold mb-1">You'll lose:</p>
-              <ul class="text-red-600 text-sm space-y-1">
-                <li>· Unlimited washes through your billing period end</li>
-                <li>· Your 7 Speedie Rewards points</li>
-                <li>· Your referral link and member perks</li>
-              </ul>
-            </div>
-            <div class="flex flex-wrap gap-3">
-              <button onclick="showTab('overview')" class="btn bg-blue text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-dark text-sm">Keep My Membership</button>
-              <a href="tel:+19036806688" class="btn border border-gray-200 text-ink font-semibold px-5 py-2.5 rounded-xl hover:border-blue hover:text-blue text-sm">Call to Cancel</a>
-              <a href="mailto:speediedscarwash@gmail.com?subject=Cancel%20Membership&body=Hi%2C%20I%20would%20like%20to%20cancel%20my%20membership.%20My%20name%20is%20%5Byour%20name%5D%20and%20my%20phone%20number%20is%20%5Byour%20phone%5D." class="btn border border-gray-200 text-ink font-semibold px-5 py-2.5 rounded-xl hover:border-blue hover:text-blue text-sm">Email to Cancel</a>
-              <button onclick="confirmCancel()" class="btn border border-red-200 text-red-500 font-semibold px-5 py-2.5 rounded-xl hover:bg-red-50 text-sm">Confirm Cancellation</button>
-            </div>
+      <!-- CANCEL -->
+      <div class="tab-panel" data-panel="cancel">
+        <h2>Cancel membership.</h2>
+        <div class="panel">
+          <p>Before you cancel, you can also <strong>pause your membership</strong> or just call us — we'll help find the right option.</p>
+          <p class="muted">To cancel your membership, please contact us directly:</p>
+          <div style="display:grid;gap:10px;margin-top:18px;">
+            <a class="portal-btn" href="tel:+19036806688" style="text-align:center;">Call (903) 680-6688</a>
+            <a class="portal-btn blue" href="mailto:speediedscarwash@gmail.com?subject=Cancel%20Membership" style="text-align:center;">Email to Cancel</a>
           </div>
+          <p class="form-message" data-cancel-message></p>
         </div>
+      </div>
 
-      </main>
-    </div>
-  </div>
-</div>
+    </section>
+  </main>
 
-<!-- Toast notification -->
-<div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-ink text-white text-sm font-semibold px-5 py-3 rounded-xl shadow-xl opacity-0 transition-opacity pointer-events-none z-50">
-  ✓ Changes saved
-</div>
+  <script>
+    const API = 'https://speediedeecarwash.saket-golf.workers.dev';
+    let _member = null;
 
-<script>
-  const API = 'https://speediedeecarwash.saket-golf.workers.dev';
-  let _member = null;
+    // ── Boot ─────────────────────────────────────────────────────────────────
+    (async () => {
+      try {
+        const res  = await fetch(`${API}/api/auth/me`, { credentials: 'include' });
+        const data = await res.json();
+        if (data.ok && data.member) { _member = data.member; renderDashboard(); }
+      } catch (_) {}
+    })();
 
-  // ── Boot: check existing session ────────────────────────────────────────────
-  (async () => {
-    try {
-      const res  = await fetch(`${API}/api/auth/me`, { credentials: 'include' });
-      const data = await res.json();
-      if (data.ok && data.member) {
-        _member = data.member;
-        await showDashboard();
+    // ── Login ─────────────────────────────────────────────────────────────────
+    document.getElementById('login-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      const btn  = event.submitter;
+      const msg  = document.querySelector('[data-login-message]');
+      btn.disabled = true; btn.textContent = 'Signing in…';
+      try {
+        const res  = await fetch(`${API}/api/auth/login`, {
+          method: 'POST', credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone: data.get('phone'), password: data.get('password') }),
+        });
+        const json = await res.json();
+        if (json.ok) { _member = json.member; renderDashboard(); }
+        else { msg.textContent = json.error || 'Sign in failed.'; msg.classList.add('error'); btn.disabled = false; btn.textContent = 'Sign In'; }
+      } catch (_) {
+        msg.textContent = 'Network error. Please try again.'; msg.classList.add('error'); btn.disabled = false; btn.textContent = 'Sign In';
       }
-    } catch (_) {}
-  })();
+    });
 
-  // ── Login ────────────────────────────────────────────────────────────────────
-  async function doLogin(e) {
-    e.preventDefault();
-    const btn = e.submitter;
-    btn.disabled = true;
-    btn.textContent = 'Signing in…';
+    // ── Forgot password ───────────────────────────────────────────────────────
+    document.querySelector('[data-forgot-toggle]').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelector('[data-forgot-panel]').classList.toggle('open');
+    });
 
-    try {
-      const res  = await fetch(`${API}/api/auth/login`, {
-        method: 'POST',
-        credentials: 'include',
+    document.getElementById('forgot-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const phone = new FormData(event.currentTarget).get('phone');
+      const msg   = document.querySelector('[data-forgot-message]');
+      try {
+        const res  = await fetch(`${API}/api/auth/forgot-password`, {
+          method: 'POST', credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone }),
+        });
+        const data = await res.json();
+        msg.textContent = data.message || 'If that number is on file, a reset link is on its way via SMS.';
+      } catch (_) { msg.textContent = 'Network error.'; }
+    });
+
+    // ── Logout ────────────────────────────────────────────────────────────────
+    document.querySelector('[data-logout]').addEventListener('click', async () => {
+      await fetch(`${API}/api/auth/logout`, { method: 'POST', credentials: 'include' }).catch(() => {});
+      location.reload();
+    });
+
+    // ── Dashboard ─────────────────────────────────────────────────────────────
+    async function renderDashboard() {
+      document.querySelector('[data-login-view]').style.display = 'none';
+      document.querySelector('[data-dashboard]').classList.add('active');
+      document.querySelector('[data-logout]').hidden = false;
+      populateBasic(_member);
+
+      try {
+        const [acct, history] = await Promise.all([
+          fetch(`${API}/api/account`, { credentials: 'include' }).then(r => r.json()).catch(() => ({})),
+          fetch(`${API}/api/account/history`, { credentials: 'include' }).then(r => r.json()).catch(() => ({})),
+        ]);
+        if (acct.ok) { _member = acct.member; populateBasic(_member); renderRecentWashes(acct.recentWashes || []); }
+        if (history.ok) renderWashHistory(history.washes || []);
+      } catch (_) {}
+
+      renderVehicles();
+    }
+
+    function populateBasic(m) {
+      const plan  = planLabel(m.plan);
+      const since = m.memberSince ? new Date(m.memberSince).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '';
+      qs('[data-member-name]').textContent   = `${m.firstName} ${m.lastName}`;
+      qs('[data-member-meta]').textContent   = `${m.phone} | Member since ${since}`;
+      qs('[data-overview-plan]').textContent = plan;
+      qs('[data-overview-points]').textContent = m.points || 0;
+      qs('[data-overview-washes]').textContent = m.washCount || 0;
+      qs('[data-plan-name]').textContent     = plan;
+      qs('[data-plan-price]').textContent    = m.plan === 'rewards' ? 'Free membership' : `${planPrice(m.plan)}/month`;
+      qs('[data-plan-status]').textContent   = m.status || 'active';
+
+      const pts = m.points || 0;
+      qs('[data-reward-points]').textContent   = pts;
+      qs('[data-reward-remaining]').textContent = pts >= 10 ? 'Reward ready!' : `${10 - pts} more points to go`;
+      qs('[data-reward-progress]').style.width  = `${Math.min(pts * 10, 100)}%`;
+      qs('[data-referral]').textContent         = m.referralCode || '—';
+      qs('[data-redeem]').disabled              = pts < 10;
+
+      const profile = document.getElementById('profile-form');
+      ['firstName', 'lastName', 'phone', 'email'].forEach(k => { if (profile.elements[k]) profile.elements[k].value = m[k] || ''; });
+      const bday = profile.elements['birthday'];
+      if (bday && m.birthdayMonth) {
+        for (const opt of bday.options) { if (opt.value === m.birthdayMonth || opt.text === m.birthdayMonth) { opt.selected = true; break; } }
+      }
+
+      const banner = document.getElementById('rewards-banner');
+      if (pts >= 10) {
+        banner.hidden = false;
+        qs('[data-banner-text]').textContent = `You have a free wash ready! Go to the Rewards tab to redeem your ${pts} points.`;
+      } else {
+        banner.hidden = true;
+      }
+    }
+
+    function qs(sel) { return document.querySelector(sel); }
+
+    function rows(items, render, emptyText) {
+      return items.length ? items.map(render).join('') : `<p class="muted">${emptyText}</p>`;
+    }
+
+    function renderRecentWashes(washes) {
+      qs('[data-recent-washes]').innerHTML = rows(washes.slice(0, 5), w => `
+        <div class="list-row">
+          <p><strong>${w.wash_type || '—'}</strong><br><span class="muted">${fmtDate(w.created_at)}</span></p>
+          ${(w.points_earned > 0) ? `<span>+${w.points_earned} pts</span>` : ''}
+        </div>`, 'No washes recorded yet.');
+    }
+
+    function renderWashHistory(washes) {
+      qs('[data-wash-history]').innerHTML = rows(washes, w => `
+        <div class="list-row">
+          <p><strong>${w.wash_type || '—'}</strong><br><span class="muted">Gilmer, TX</span></p>
+          <div style="text-align:right;"><span>${fmtDate(w.created_at)}</span>${w.points_earned > 0 ? `<br><span style="color:var(--green);font-weight:900;font-size:12px;">+${w.points_earned} pts</span>` : ''}</div>
+        </div>`, 'No washes recorded yet.');
+    }
+
+    // ── Vehicles ──────────────────────────────────────────────────────────────
+    async function renderVehicles() {
+      try {
+        const res  = await fetch(`${API}/api/account/vehicles`, { credentials: 'include' });
+        const data = await res.json();
+        if (!data.ok) return;
+        qs('[data-vehicles]').innerHTML = rows(data.vehicles || [], v => `
+          <div class="list-row">
+            <p><strong>${v.year_make_model}</strong><br><span class="muted">${v.license_plate} · ${v.state}</span></p>
+            <button class="portal-btn ghost" type="button" data-remove-vehicle="${v.id}">Remove</button>
+          </div>`, 'No vehicles added yet.');
+        document.querySelectorAll('[data-remove-vehicle]').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            if (!confirm('Remove this vehicle from your account?')) return;
+            const r = await fetch(`${API}/api/account/vehicles/${btn.dataset.removeVehicle}`, { method: 'DELETE', credentials: 'include' });
+            const d = await r.json();
+            if (d.ok) renderVehicles();
+          });
+        });
+      } catch (_) {}
+    }
+
+    document.getElementById('vehicle-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      const msg  = qs('[data-vehicle-message]');
+      const res  = await fetch(`${API}/api/account/vehicles`, {
+        method: 'POST', credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          phone:    document.getElementById('login-phone').value,
-          password: document.getElementById('login-password').value,
-        }),
+        body: JSON.stringify({ yearMakeModel: data.get('description'), licensePlate: data.get('plate'), state: data.get('state') }),
       });
+      const json = await res.json();
+      if (json.ok) { event.currentTarget.reset(); msg.textContent = 'Vehicle added!'; renderVehicles(); }
+      else { msg.textContent = json.error || 'Could not add vehicle.'; msg.classList.add('error'); }
+    });
+
+    // ── Rewards redemption ────────────────────────────────────────────────────
+    qs('[data-redeem]').addEventListener('click', async () => {
+      if (!_member || (_member.points || 0) < 10) return;
+      const msg  = qs('[data-reward-message]');
+      const res  = await fetch(`${API}/api/rewards/redeem`, { method: 'POST', credentials: 'include' });
       const data = await res.json();
       if (data.ok) {
-        _member = data.member;
-        await showDashboard();
+        _member.points = (_member.points || 0) - 10;
+        populateBasic(_member);
+        const codes = qs('[data-reward-codes]');
+        codes.innerHTML = `<div class="list-row"><strong style="letter-spacing:.1em;">${data.code}</strong><span class="tag">Ready to use</span></div>` + codes.innerHTML;
+        msg.textContent = `Free wash code generated: ${data.code}`;
       } else {
-        btn.disabled = false;
-        btn.innerHTML = 'Sign In <i class="ph-bold ph-arrow-right ml-1"></i>';
-        showLoginError(data.error || 'Sign in failed. Please try again.');
+        msg.textContent = data.error || 'Could not redeem.'; msg.classList.add('error');
       }
-    } catch (_) {
-      btn.disabled = false;
-      btn.innerHTML = 'Sign In <i class="ph-bold ph-arrow-right ml-1"></i>';
-      showLoginError('Network error. Please try again.');
-    }
-  }
+    });
 
-  function showLoginError(msg) {
-    let el = document.getElementById('login-error');
-    if (!el) {
-      el = document.createElement('p');
-      el.id = 'login-error';
-      el.className = 'text-center text-xs text-red-500 font-semibold';
-      document.getElementById('login-form').appendChild(el);
-    }
-    el.textContent = msg;
-  }
+    // ── Copy referral ─────────────────────────────────────────────────────────
+    qs('[data-copy-referral]').addEventListener('click', async () => {
+      await navigator.clipboard.writeText(qs('[data-referral]').textContent).catch(() => {});
+      qs('[data-reward-message]').textContent = 'Referral code copied to clipboard!';
+    });
 
-  // ── Logout ───────────────────────────────────────────────────────────────────
-  async function doLogout() {
-    await fetch(`${API}/api/auth/logout`, { method: 'POST', credentials: 'include' }).catch(() => {});
-    _member = null;
-    document.getElementById('dashboard-view').classList.add('hidden');
-    document.getElementById('login-view').classList.remove('hidden');
-    document.getElementById('logout-btn').classList.add('hidden');
-    document.getElementById('login-phone').value    = '';
-    document.getElementById('login-password').value = '';
-    window.scrollTo({ top: 0 });
-  }
-
-  // ── Show dashboard & populate data ───────────────────────────────────────────
-  async function showDashboard() {
-    document.getElementById('login-view').classList.add('hidden');
-    document.getElementById('dashboard-view').classList.remove('hidden');
-    document.getElementById('logout-btn').classList.remove('hidden');
-    window.scrollTo({ top: 0 });
-    populateHeader(_member);
-    populateOverview(_member);
-    populateRewards(_member);
-    populatePlanTab(_member);
-    populateProfile(_member);
-
-    // Load full account data in parallel
-    const [acct, history, ptHistory] = await Promise.all([
-      fetch(`${API}/api/account`, { credentials: 'include' }).then(r => r.json()).catch(() => ({})),
-      fetch(`${API}/api/account/history`, { credentials: 'include' }).then(r => r.json()).catch(() => ({})),
-      fetch(`${API}/api/account/points-history`, { credentials: 'include' }).then(r => r.json()).catch(() => ({})),
-    ]);
-
-    if (acct.ok) {
-      _member = acct.member;
-      populateHeader(_member);
-      populateOverview(_member);
-      populateRewards(_member);
-      renderRecentWashes(acct.recentWashes || []);
-      renderVehicles();
-    }
-    if (history.ok) renderWashHistory(history.washes || []);
-    if (ptHistory.ok) renderPointsHistory(ptHistory.history || []);
-  }
-
-  // ── Header ───────────────────────────────────────────────────────────────────
-  function populateHeader(m) {
-    const since = m.memberSince ? new Date(m.memberSince).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '';
-    document.getElementById('dash-member-name').textContent = `${m.firstName} ${m.lastName}`;
-    document.getElementById('dash-member-meta').textContent = `Member since ${since} · ${m.phone}`;
-    document.getElementById('dash-plan-badge').textContent  = planLabel(m.plan);
-  }
-
-  // ── Overview tab ─────────────────────────────────────────────────────────────
-  function populateOverview(m) {
-    const pts      = m.points || 0;
-    const needed   = Math.max(0, 10 - (pts % 10));
-    const since    = m.memberSince ? new Date(m.memberSince).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : '—';
-
-    document.getElementById('ov-plan').textContent       = planLabel(m.plan);
-    document.getElementById('ov-billing').textContent    = m.plan === 'rewards' ? 'Free rewards membership' : `${planPrice(m.plan)}/mo`;
-    document.getElementById('ov-points').textContent     = `${pts} pts`;
-    document.getElementById('ov-points-sub').textContent = pts >= 10 ? 'You have a free wash ready!' : `${needed} more for a free wash`;
-    document.getElementById('ov-washes').textContent     = m.washCount || 0;
-    document.getElementById('ov-washes-sub').textContent = `since ${since}`;
-
-    const bannerText = pts >= 10
-      ? `You have a free wash! ${pts} points — click Rewards to redeem.`
-      : `Almost there! ${needed} more wash${needed === 1 ? '' : 'es'} for a free Basic wash.`;
-    const bannerSub  = pts >= 10
-      ? 'Head to the Rewards tab to generate your wash code.'
-      : 'Keep washing to reach 10 points and redeem any Basic wash free.';
-    document.getElementById('fw-banner-text').textContent = bannerText;
-    document.getElementById('fw-banner-sub').textContent  = bannerSub;
-  }
-
-  // ── Recent washes (overview) ──────────────────────────────────────────────────
-  function renderRecentWashes(washes) {
-    const el = document.getElementById('recent-washes');
-    if (!washes.length) { el.innerHTML = '<p class="px-6 py-4 text-sm text-muted">No washes on record yet.</p>'; return; }
-    el.innerHTML = washes.slice(0, 5).map(w => `
-      <div class="wash-row flex items-center justify-between px-6 py-3.5 text-sm">
-        <span class="text-muted">${fmtDate(w.created_at)}</span>
-        <span class="font-medium">${w.wash_type}</span>
-        ${w.points_earned > 0 ? `<span class="text-green-600 text-xs font-bold bg-green-50 px-2.5 py-1 rounded-lg">+${w.points_earned} pts</span>` : '<span class="text-xs text-muted">—</span>'}
-      </div>`).join('');
-  }
-
-  // ── Rewards tab ───────────────────────────────────────────────────────────────
-  function populateRewards(m) {
-    const pts    = m.points || 0;
-    const needed = Math.max(0, 10 - (pts % 10));
-    const pct    = Math.min(100, (pts % 10) / 10 * 100);
-
-    const rwPts = document.getElementById('rw-points');
-    rwPts.innerHTML = `${pts} <span class="text-lg font-semibold text-muted">/ 10 points</span>`;
-    document.getElementById('rw-bar').style.width        = `${pct}%`;
-    document.getElementById('rw-points-sub').textContent = pts >= 10 ? 'You can redeem a free wash now!' : `${needed} more wash${needed === 1 ? '' : 'es'} to earn a free Basic wash`;
-    document.getElementById('rw-referral-code').textContent = m.referralCode || '—';
-
-    const btn = document.getElementById('rw-redeem-btn');
-    if (pts >= 10) {
-      btn.textContent = 'Redeem Free Wash';
-      btn.classList.remove('opacity-50', 'cursor-not-allowed');
-    } else {
-      btn.textContent = `Redeem Free Wash (need 10 pts, you have ${pts})`;
-      btn.classList.add('opacity-50', 'cursor-not-allowed');
-    }
-  }
-
-  function renderPointsHistory(history) {
-    const el = document.getElementById('points-history-list');
-    if (!history.length) { el.innerHTML = '<p class="px-6 py-4 text-sm text-muted">No points history yet.</p>'; return; }
-    el.innerHTML = history.map(h => `
-      <div class="wash-row flex items-center justify-between px-6 py-3.5 text-sm">
-        <div><p class="font-medium">${h.description}</p><p class="text-xs text-muted">${fmtDate(h.created_at)}</p></div>
-        <span class="${h.points > 0 ? 'text-green-600' : 'text-red-400'} font-bold">${h.points > 0 ? '+' : ''}${h.points} pt${Math.abs(h.points) !== 1 ? 's' : ''}</span>
-      </div>`).join('');
-  }
-
-  // ── Wash history tab ──────────────────────────────────────────────────────────
-  function renderWashHistory(washes) {
-    document.getElementById('wh-header').textContent = `All Washes (${washes.length} total)`;
-    const el = document.getElementById('wash-history-rows');
-    if (!washes.length) { el.innerHTML = '<p class="px-6 py-4 text-sm text-muted">No washes on record yet.</p>'; return; }
-    el.innerHTML = washes.map(w => `
-      <div class="wash-row flex items-center justify-between px-6 py-3.5">
-        <span class="text-muted w-32">${fmtDate(w.created_at)}</span>
-        <span class="flex-1 font-medium">${w.wash_type}</span>
-        <span class="text-green-600 font-bold text-xs bg-green-50 px-2.5 py-1 rounded-lg">Member</span>
-      </div>`).join('');
-  }
-
-  // ── Plan tab ──────────────────────────────────────────────────────────────────
-  function populatePlanTab(m) {
-    document.getElementById('plan-name').textContent    = planLabel(m.plan);
-    document.getElementById('plan-billing').textContent = m.plan === 'rewards' ? 'Free membership' : `${planPrice(m.plan)}/month · Contact us to change`;
-  }
-
-  // ── Vehicles ──────────────────────────────────────────────────────────────────
-  async function renderVehicles() {
-    try {
-      const res  = await fetch(`${API}/api/account/vehicles`, { credentials: 'include' });
-      const data = await res.json();
-      if (!data.ok) return;
-      const vehicles = data.vehicles || [];
-      const cnt = vehicles.length;
-      document.getElementById('vehicle-slot').textContent = `${cnt} / 4 slots`;
-      const container = document.getElementById('vehicles-container');
-      const slots = [];
-      vehicles.forEach(v => {
-        slots.push(`
-          <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
-            <div class="w-10 h-10 bg-blue-xlight rounded-xl flex items-center justify-center shrink-0">
-              <i class="ph-bold ph-car text-blue text-lg"></i>
-            </div>
-            <div class="flex-1">
-              <p class="font-semibold text-sm">${v.year_make_model}</p>
-              <p class="text-xs text-muted">License: ${v.license_plate} · ${v.state}${v.is_primary ? ' · Primary vehicle' : ''}</p>
-            </div>
-            <button onclick="removeVehicle(${v.id})" class="text-xs text-red-400 font-semibold hover:underline">Remove</button>
-          </div>`);
+    // ── Profile save ──────────────────────────────────────────────────────────
+    document.getElementById('profile-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      const msg  = qs('[data-profile-message]');
+      const res  = await fetch(`${API}/api/account/profile`, {
+        method: 'PATCH', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: data.get('firstName'), lastName: data.get('lastName'),
+          phone: data.get('phone'), email: data.get('email'), birthdayMonth: data.get('birthday'),
+        }),
       });
-      for (let i = cnt; i < 4; i++) {
-        slots.push(`
-          <div class="flex items-center gap-4 p-4 rounded-xl border-2 border-dashed border-gray-200 cursor-pointer hover:border-blue transition-colors" onclick="showAddCar()">
-            <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center shrink-0">
-              <i class="ph-bold ph-plus text-gray-400 text-lg"></i>
-            </div>
-            <p class="text-sm text-muted font-medium">Add a vehicle (slot ${i + 1} of 4)</p>
-          </div>`);
-      }
-      container.innerHTML = slots.join('');
-    } catch (_) {}
-  }
-
-  async function removeVehicle(vid) {
-    if (!confirm('Remove this vehicle from your account?')) return;
-    const res  = await fetch(`${API}/api/account/vehicles/${vid}`, { method: 'DELETE', credentials: 'include' });
-    const data = await res.json();
-    if (data.ok) { showToast('Vehicle removed.'); renderVehicles(); }
-    else showToast(data.error || 'Could not remove vehicle.');
-  }
-
-  async function submitAddCar() {
-    const ymm   = document.getElementById('car-ymm').value.trim();
-    const plate = document.getElementById('car-plate').value.trim();
-    const state = document.getElementById('car-state').value;
-    if (!ymm || !plate) { showToast('Please fill in all vehicle fields.'); return; }
-    const res  = await fetch(`${API}/api/account/vehicles`, {
-      method: 'POST', credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ yearMakeModel: ymm, licensePlate: plate, state }),
+      const json = await res.json();
+      if (json.ok) { _member = json.member; populateBasic(_member); msg.textContent = 'Changes saved!'; }
+      else { msg.textContent = json.error || 'Could not save.'; msg.classList.add('error'); }
     });
-    const data = await res.json();
-    if (data.ok) {
-      showToast('Vehicle added!');
-      document.getElementById('add-car-form').classList.add('hidden');
-      renderVehicles();
-    } else {
-      showToast(data.error || 'Could not add vehicle.');
+
+    // ── Tabs ──────────────────────────────────────────────────────────────────
+    document.querySelectorAll('[data-tab]').forEach(btn => btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-tab]').forEach(t => t.classList.toggle('active', t === btn));
+      document.querySelectorAll('[data-panel]').forEach(p => p.classList.toggle('active', p.dataset.panel === btn.dataset.tab));
+      if (btn.dataset.tab === 'plan') renderVehicles();
+    }));
+
+    // ── Helpers ───────────────────────────────────────────────────────────────
+    function planLabel(plan) {
+      return { rewards: 'Speedie Rewards', basic: 'Basic Fast Pass', deluxe: 'Deluxe Fast Pass', ultimate: 'Ultimate Fast Pass' }[plan] || plan || '—';
     }
-  }
-
-  // ── Profile save ──────────────────────────────────────────────────────────────
-  async function saveProfile() {
-    const body = {
-      firstName:     document.getElementById('prof-first').value.trim(),
-      lastName:      document.getElementById('prof-last').value.trim(),
-      phone:         document.getElementById('prof-phone').value.trim(),
-      email:         document.getElementById('prof-email').value.trim(),
-      birthdayMonth: document.getElementById('prof-bday').value,
-    };
-    if (!body.firstName || !body.lastName || !body.phone || !body.email) {
-      showToast('Please fill in all fields.'); return;
+    function planPrice(plan) {
+      return { basic: '$19', deluxe: '$29', ultimate: '$39' }[plan] || '';
     }
-    const res  = await fetch(`${API}/api/account/profile`, {
-      method: 'PATCH', credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-    const data = await res.json();
-    if (data.ok) {
-      _member = data.member;
-      populateHeader(_member);
-      showToast('Profile updated!');
-    } else {
-      showToast(data.error || 'Could not save profile.');
+    function fmtDate(iso) {
+      if (!iso) return '—';
+      return new Date(iso + (iso.endsWith('Z') ? '' : 'Z')).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     }
-  }
-
-  function populateProfile(m) {
-    document.getElementById('prof-first').value  = m.firstName  || '';
-    document.getElementById('prof-last').value   = m.lastName   || '';
-    document.getElementById('prof-phone').value  = m.phone      || '';
-    document.getElementById('prof-email').value  = m.email      || '';
-    const bdaySel = document.getElementById('prof-bday');
-    if (m.birthdayMonth) {
-      for (const opt of bdaySel.options) {
-        if (opt.value === m.birthdayMonth || opt.text === m.birthdayMonth) { opt.selected = true; break; }
-      }
-    }
-  }
-
-  // ── Rewards redemption ────────────────────────────────────────────────────────
-  async function doRedeem() {
-    if (!_member || _member.points < 10) return;
-    const res  = await fetch(`${API}/api/rewards/redeem`, { method: 'POST', credentials: 'include' });
-    const data = await res.json();
-    if (data.ok) {
-      _member.points -= 10;
-      populateRewards(_member);
-      populateOverview(_member);
-      document.getElementById('rw-code').textContent = data.code;
-      document.getElementById('rw-code-box').classList.remove('hidden');
-      showToast('Free wash code generated!');
-    } else {
-      showToast(data.error || 'Could not redeem.');
-    }
-  }
-
-  // ── Forgot password ───────────────────────────────────────────────────────────
-  function showForgotPassword(e) {
-    e.preventDefault();
-    document.getElementById('forgot-panel').classList.remove('hidden');
-    document.getElementById('forgot-phone').focus();
-  }
-  function hideForgotPassword() {
-    document.getElementById('forgot-panel').classList.add('hidden');
-    const msg = document.getElementById('forgot-msg');
-    msg.textContent = '';
-    msg.classList.add('hidden');
-  }
-  async function doForgotPassword() {
-    const phone = document.getElementById('forgot-phone').value.trim();
-    const msg   = document.getElementById('forgot-msg');
-    if (!phone) { msg.textContent = 'Please enter your phone number.'; msg.className = 'text-sm text-red-500'; msg.classList.remove('hidden'); return; }
-    const res  = await fetch(`${API}/api/auth/forgot-password`, {
-      method: 'POST', credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phone }),
-    });
-    const data = await res.json();
-    msg.textContent = data.message || 'If that number is on file, a reset link is on its way via SMS.';
-    msg.className   = 'text-sm text-green-600 font-semibold';
-    msg.classList.remove('hidden');
-  }
-
-  // ── Copy referral code ────────────────────────────────────────────────────────
-  function copyCode() {
-    const code = document.getElementById('rw-referral-code').textContent;
-    navigator.clipboard.writeText(code).catch(() => {});
-    showToast('Referral code copied!');
-  }
-
-  // ── Add car form toggle ───────────────────────────────────────────────────────
-  function showAddCar() {
-    document.getElementById('add-car-form').classList.remove('hidden');
-  }
-
-  // ── Sidebar tabs ──────────────────────────────────────────────────────────────
-  function showTab(name) {
-    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('.dash-tab').forEach(el => el.classList.remove('active'));
-    document.getElementById('tab-' + name).classList.add('active');
-    event.currentTarget.classList.add('active');
-    // Lazy-load vehicles when plan tab opens
-    if (name === 'plan') renderVehicles();
-  }
-
-  // ── Plan upgrade ──────────────────────────────────────────────────────────────
-  function showUpgrade() {
-    document.getElementById('upgrade-panel').classList.remove('hidden');
-  }
-  function selectPlan(el, name, price) {
-    document.querySelectorAll('#upgrade-panel [onclick^="selectPlan"]').forEach(c => {
-      c.classList.remove('border-blue');
-      c.classList.add('border-gray-200');
-    });
-    el.classList.remove('border-gray-200');
-    el.classList.add('border-blue');
-  }
-  function confirmPlanChange() {
-    document.getElementById('upgrade-panel').classList.add('hidden');
-    showToast("Plan change requested! We'll confirm by text.");
-  }
-
-  // ── Cancel ────────────────────────────────────────────────────────────────────
-  function confirmCancel() {
-    if (confirm('Are you sure you want to cancel? Your plan stays active until the end of the billing period.')) {
-      showToast('Cancellation request sent. Sorry to see you go!');
-      setTimeout(() => doLogout(), 2000);
-    }
-  }
-
-  // ── Toast ─────────────────────────────────────────────────────────────────────
-  function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = '✓ ' + msg;
-    t.style.opacity = '1';
-    setTimeout(() => { t.style.opacity = '0'; }, 3500);
-  }
-
-  // ── Helpers ───────────────────────────────────────────────────────────────────
-  function planLabel(plan) {
-    return { rewards: 'Speedie Rewards', basic: 'Basic Fast Pass', deluxe: 'Deluxe Fast Pass', ultimate: 'Ultimate Fast Pass' }[plan] || plan || '—';
-  }
-  function planPrice(plan) {
-    return { basic: '$19', deluxe: '$29', ultimate: '$39' }[plan] || '';
-  }
-  function fmtDate(iso) {
-    if (!iso) return '—';
-    return new Date(iso + (iso.endsWith('Z') ? '' : 'Z')).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-  }
-</script>
-
+  </script>
 </body>
 </html>
